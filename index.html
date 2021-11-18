@@ -9,12 +9,16 @@
     <link rel="icon" type="image/png" href="picsfolder/favicon.png">
 </head>
 <style>
+  @font-face {
+  font-family: Scout;
+  src: url(sansation_light.woff);
+  }
   .p1 {
     font-family: "Helvetica";
     font-weight: 300;
   }
   h1 {
-    font-family: "Helvetica";
+    font-family: "NYTKarnak";
     font-size: 30px;
     font-weight: 300;
   }
@@ -30,6 +34,10 @@
     font-family: "Helvetica";
     font-weight: 300;
   }
+  body {
+    background-color: #eeeefe
+  }
+
   </style>
 
 <body>
@@ -107,11 +115,13 @@ Contact Info: "rishigurjar2000" [at] "gmail" [dot] "com"</p>
     
     <!-- Header -->
     <div class="header" id="myHeader">
-      <p>Some of my photos:</p>
-      <p>Click on the buttons to change the grid view.</p>
+      <p><b>Some of my photos:</b></p>
+      <p> <b>Click on the buttons to change the grid view.</b></p>
+      <p>
       <button class="btn" onclick="one()">1</button>
       <button class="btn active" onclick="two()">2</button>
       <button class="btn" onclick="four()">4</button>
+     </p>
     </div>
 
     <!-- Photo Grid -->
