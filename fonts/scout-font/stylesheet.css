@@ -1,0 +1,312 @@
+@font-face {
+    font-family: 'Scout';
+    src: url('Scout-Thin.eot');
+    src: local('Scout Thin'), local('Scout-Thin'),
+        url('Scout-Thin.eot?#iefix') format('embedded-opentype'),
+        url('Scout-Thin.woff2') format('woff2'),
+        url('Scout-Thin.woff') format('woff'),
+        url('Scout-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Scout';
+    src: url('Scout-ThinItalic.eot');
+    src: local('Scout Thin Italic'), local('Scout-ThinItalic'),
+        url('Scout-ThinItalic.eot?#iefix') format('embedded-opentype'),
+        url('Scout-ThinItalic.woff2') format('woff2'),
+        url('Scout-ThinItalic.woff') format('woff'),
+        url('Scout-ThinItalic.ttf') format('truetype');
+    font-weight: 100;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Scout Text';
+    src: url('ScoutText-Light.eot');
+    src: local('Scout Text Light'), local('ScoutText-Light'),
+        url('ScoutText-Light.eot?#iefix') format('embedded-opentype'),
+        url('ScoutText-Light.woff2') format('woff2'),
+        url('ScoutText-Light.woff') format('woff'),
+        url('ScoutText-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Scout';
+    src: url('Scout-BoldItalic.eot');
+    src: local('Scout Bold Italic'), local('Scout-BoldItalic'),
+        url('Scout-BoldItalic.eot?#iefix') format('embedded-opentype'),
+        url('Scout-BoldItalic.woff2') format('woff2'),
+        url('Scout-BoldItalic.woff') format('woff'),
+        url('Scout-BoldItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Scout RE';
+    src: url('ScoutRE-Regular.eot');
+    src: local('Scout RE Regular'), local('ScoutRE-Regular'),
+        url('ScoutRE-Regular.eot?#iefix') format('embedded-opentype'),
+        url('ScoutRE-Regular.woff2') format('woff2'),
+        url('ScoutRE-Regular.woff') format('woff'),
+        url('ScoutRE-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Scout Text';
+    src: url('ScoutText-Italic.eot');
+    src: local('Scout Text Italic'), local('ScoutText-Italic'),
+        url('ScoutText-Italic.eot?#iefix') format('embedded-opentype'),
+        url('ScoutText-Italic.woff2') format('woff2'),
+        url('ScoutText-Italic.woff') format('woff'),
+        url('ScoutText-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Scout';
+    src: url('Scout-Light.eot');
+    src: local('Scout Light'), local('Scout-Light'),
+        url('Scout-Light.eot?#iefix') format('embedded-opentype'),
+        url('Scout-Light.woff2') format('woff2'),
+        url('Scout-Light.woff') format('woff'),
+        url('Scout-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Scout';
+    src: url('Scout-Regular.eot');
+    src: local('Scout Regular'), local('Scout-Regular'),
+        url('Scout-Regular.eot?#iefix') format('embedded-opentype'),
+        url('Scout-Regular.woff2') format('woff2'),
+        url('Scout-Regular.woff') format('woff'),
+        url('Scout-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Scout RE';
+    src: url('ScoutRE-Bold.eot');
+    src: local('Scout RE Bold'), local('ScoutRE-Bold'),
+        url('ScoutRE-Bold.eot?#iefix') format('embedded-opentype'),
+        url('ScoutRE-Bold.woff2') format('woff2'),
+        url('ScoutRE-Bold.woff') format('woff'),
+        url('ScoutRE-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Scout Text';
+    src: url('ScoutText-LightItalic.eot');
+    src: local('Scout Text Light Italic'), local('ScoutText-LightItalic'),
+        url('ScoutText-LightItalic.eot?#iefix') format('embedded-opentype'),
+        url('ScoutText-LightItalic.woff2') format('woff2'),
+        url('ScoutText-LightItalic.woff') format('woff'),
+        url('ScoutText-LightItalic.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Scout Text';
+    src: url('ScoutText-Bold.eot');
+    src: local('Scout Text Bold'), local('ScoutText-Bold'),
+        url('ScoutText-Bold.eot?#iefix') format('embedded-opentype'),
+        url('ScoutText-Bold.woff2') format('woff2'),
+        url('ScoutText-Bold.woff') format('woff'),
+        url('ScoutText-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Scout RE';
+    src: url('ScoutRE-BoldItalic.eot');
+    src: local('Scout RE Bold Italic'), local('ScoutRE-BoldItalic'),
+        url('ScoutRE-BoldItalic.eot?#iefix') format('embedded-opentype'),
+        url('ScoutRE-BoldItalic.woff2') format('woff2'),
+        url('ScoutRE-BoldItalic.woff') format('woff'),
+        url('ScoutRE-BoldItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Scout';
+    src: url('Scout-LightItalic.eot');
+    src: local('Scout Light Italic'), local('Scout-LightItalic'),
+        url('Scout-LightItalic.eot?#iefix') format('embedded-opentype'),
+        url('Scout-LightItalic.woff2') format('woff2'),
+        url('Scout-LightItalic.woff') format('woff'),
+        url('Scout-LightItalic.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Scout';
+    src: url('Scout-ExtraLightItalic.eot');
+    src: local('Scout ExtraLight Italic'), local('Scout-ExtraLightItalic'),
+        url('Scout-ExtraLightItalic.eot?#iefix') format('embedded-opentype'),
+        url('Scout-ExtraLightItalic.woff2') format('woff2'),
+        url('Scout-ExtraLightItalic.woff') format('woff'),
+        url('Scout-ExtraLightItalic.ttf') format('truetype');
+    font-weight: 200;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Scout Text';
+    src: url('ScoutText-BoldItalic.eot');
+    src: local('Scout Text Bold Italic'), local('ScoutText-BoldItalic'),
+        url('ScoutText-BoldItalic.eot?#iefix') format('embedded-opentype'),
+        url('ScoutText-BoldItalic.woff2') format('woff2'),
+        url('ScoutText-BoldItalic.woff') format('woff'),
+        url('ScoutText-BoldItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Scout Text';
+    src: url('ScoutText-Regular.eot');
+    src: local('Scout Text Regular'), local('ScoutText-Regular'),
+        url('ScoutText-Regular.eot?#iefix') format('embedded-opentype'),
+        url('ScoutText-Regular.woff2') format('woff2'),
+        url('ScoutText-Regular.woff') format('woff'),
+        url('ScoutText-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Scout RE';
+    src: url('ScoutRE-Italic.eot');
+    src: local('Scout RE Italic'), local('ScoutRE-Italic'),
+        url('ScoutRE-Italic.eot?#iefix') format('embedded-opentype'),
+        url('ScoutRE-Italic.woff2') format('woff2'),
+        url('ScoutRE-Italic.woff') format('woff'),
+        url('ScoutRE-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Scout Text';
+    src: url('ScoutText-BlackItalic.eot');
+    src: local('Scout Text Black Italic'), local('ScoutText-BlackItalic'),
+        url('ScoutText-BlackItalic.eot?#iefix') format('embedded-opentype'),
+        url('ScoutText-BlackItalic.woff2') format('woff2'),
+        url('ScoutText-BlackItalic.woff') format('woff'),
+        url('ScoutText-BlackItalic.ttf') format('truetype');
+    font-weight: 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Scout';
+    src: url('Scout-BlackItalic.eot');
+    src: local('Scout Black Italic'), local('Scout-BlackItalic'),
+        url('Scout-BlackItalic.eot?#iefix') format('embedded-opentype'),
+        url('Scout-BlackItalic.woff2') format('woff2'),
+        url('Scout-BlackItalic.woff') format('woff'),
+        url('Scout-BlackItalic.ttf') format('truetype');
+    font-weight: 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Scout';
+    src: url('Scout-ExtraLight.eot');
+    src: local('Scout ExtraLight'), local('Scout-ExtraLight'),
+        url('Scout-ExtraLight.eot?#iefix') format('embedded-opentype'),
+        url('Scout-ExtraLight.woff2') format('woff2'),
+        url('Scout-ExtraLight.woff') format('woff'),
+        url('Scout-ExtraLight.ttf') format('truetype');
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Scout';
+    src: url('Scout-Black.eot');
+    src: local('Scout Black'), local('Scout-Black'),
+        url('Scout-Black.eot?#iefix') format('embedded-opentype'),
+        url('Scout-Black.woff2') format('woff2'),
+        url('Scout-Black.woff') format('woff'),
+        url('Scout-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Scout Text';
+    src: url('ScoutText-Black.eot');
+    src: local('Scout Text Black'), local('ScoutText-Black'),
+        url('ScoutText-Black.eot?#iefix') format('embedded-opentype'),
+        url('ScoutText-Black.woff2') format('woff2'),
+        url('ScoutText-Black.woff') format('woff'),
+        url('ScoutText-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Scout';
+    src: url('Scout-RegularItalic.eot');
+    src: local('Scout Regular Italic'), local('Scout-RegularItalic'),
+        url('Scout-RegularItalic.eot?#iefix') format('embedded-opentype'),
+        url('Scout-RegularItalic.woff2') format('woff2'),
+        url('Scout-RegularItalic.woff') format('woff'),
+        url('Scout-RegularItalic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Scout';
+    src: url('Scout-Bold.eot');
+    src: local('Scout Bold'), local('Scout-Bold'),
+        url('Scout-Bold.eot?#iefix') format('embedded-opentype'),
+        url('Scout-Bold.woff2') format('woff2'),
+        url('Scout-Bold.woff') format('woff'),
+        url('Scout-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
