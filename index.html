@@ -1,58 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Rishi Gurjar</title>
     <link rel="icon" type="image/png" href="picsfolder/favicon.png">
 </head>
 <style>
   @font-face {
-  font-family: Scout;
-  src: url(sansation_light.woff);
+  font-family: ScoutB;
+  src: url(fonts/scout-font/Scout-Bold.ttf);
   }
-  .p1 {
+  @font-face {
+  font-family: ScoutR;
+  src: url(fonts/scout-font/Scout-Regular.ttf);
+  }
+  
+  p {
     font-family: "Helvetica";
-    font-weight: 300;
+    font-size: 20px;
+    font-weight: 400;
+    margin-left: 20em;
+    margin-right: 20em;
   }
   h1 {
-    font-family: "NYTKarnak";
-    font-size: 30px;
-    font-weight: 300;
-  }
-  marquee{
     font-family: "Helvetica";
-    font-weight: 300;
+    font-size: 50px;
+    font-weight: 400;
   }
   a {
     font-family: "Helvetica";
+    font-size: 30px;
     font-weight: 300;
   }
   b {
     font-family: "Helvetica";
+    font-size: 20px;
     font-weight: 300;
   }
   body {
     background-color: #eeeefe
   }
-
+ 
   </style>
 
 <body>
   <center> 
-    <marquee behavior="" direction="">Rishi Gurjar</marquee>
-    <img src="picsfolder/favicon.png" alt="Profile Pic" width="150" height="150">
+    <svg height="350" width="100%" background="black">
+      <circle cx="50%" cy="170" r="150" stroke="white" stroke-width="10" fill="black" alpha="50%"></circle>
+      </svg>
     <h1> Rishi Gurjar</h1>
 <p class="p1">SF Bay Area, California</p>
+<p><span id="datetime"></span></p><script>var dt = new Date();
+  document.getElementById("datetime").innerHTML=dt.toLocaleString();</script>  
+
+  <p>
+Contact Info: "rishigurjar2000" [at] "gmail" [dot] "com"</p>
 
 <p>
-  <a href="https://beyondterra.org">Beyond Terra</a> 
-  </p>
-
-  <b <p>
-Contact Info: "rishigurjar2000" [at] "gmail" [dot] "com"</p>
+  I like taking photos, changing climate policy, coding, eating food, restoring habitats, biking, gardening, and sleeping.</p>
 </center> 
 
 <style>
