@@ -22,19 +22,19 @@
   
   p {
     font-family: "Helvetica";
-    font-size: 20px;
+    font-size: 15px;
     font-weight: 400;
     margin-left: 20em;
     margin-right: 20em;
   }
   h1 {
     font-family: "Helvetica";
-    font-size: 50px;
+    font-size: 40px;
     font-weight: 400;
   }
   a {
     font-family: "Helvetica";
-    font-size: 20px;
+    font-size: 15px;
     font-weight: 400;
     color: black
   }
@@ -43,20 +43,25 @@
     font-size: 20px;
     font-weight: 300;
   }
-  body {
-    background-color: linear-gradient(to right, red , yellow);
+  h2 {
+    font-family: "Helvetica";
+    font-size: 20px;
+    font-weight: 400;
   }
-  <!-- #eeeefe -->
-</style>
+  body {
+    background-image: linear-gradient(to right, #ffbfbf ,#eeeefe);
+  }
 
+</style>
+<!-- -- #eeeefe -->
 <body>
   <center> 
     <svg height="350" width="100%" background="black">
-      <circle cx="50%" cy="170" r="150" stroke="white" stroke-width="10" fill="black" alpha="50%"></circle>
+      <circle cx="50%" cy="170" r="150" fill="black" alpha="50%"></circle>
       </svg>
     <h1> Rishi Gurjar</h1>
-<p class="p1">SF Bay Area, California</p>
-<p><span id="datetime"></span></p><script>var dt = new Date();
+<h2 class="p1">SF Bay Area, California</h2>
+<h2><span id="datetime"></span></h2><script>var dt = new Date();
   document.getElementById("datetime").innerHTML=dt.toLocaleString();</script>  
 
   <p> Contact Info:
@@ -67,4 +72,5 @@
   I occasionally take <a href="photos.html"> photos</a> and <a href="garden.html"> garden</a> </p>
 </center> 
   </body>
+  
 </html>
