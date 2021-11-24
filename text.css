@@ -1,0 +1,57 @@
+@font-face {
+    font-family: ScoutB;
+    src: url(fonts/scout-font/Scout-Bold.ttf);
+    }
+    @font-face {
+    font-family: ScoutR;
+    src: url(fonts/scout-font/Scout-Regular.ttf);
+    }
+    
+    p {
+      font-family: "Helvetica";
+      font-size: 15px;
+      font-weight: 400;
+      color: red;
+      min-width: 200px;
+      text-align: center
+    }
+    h1 {
+      font-family: "Helvetica";
+      font-size: 40px;
+      font-weight: 400;
+      color: red;
+      min-width: 200px;
+      text-align: center
+    }
+    a {
+      font-family: "Helvetica";
+      font-size: 15px;
+      font-weight: 400;
+      color: red;
+      min-width: 200px;
+      text-align: center
+    }
+    b {
+      font-family: "Helvetica";
+      font-size: 20px;
+      font-weight: 300;
+      color: red;
+      min-width: 200px;
+      text-align: center
+    }
+    h2 {
+      font-family: "Helvetica";
+      font-size: 20px;
+      font-weight: 400;
+      color: red;
+      min-width: 200px;
+      text-align: center
+    }
+    body {
+      background-color: white
+    }
+    marquee {
+      font-size: 50px;
+      color: red;
+      font-family: Helvetica;
+    }
