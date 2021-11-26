@@ -6,9 +6,14 @@
     font-family: ScoutR;
     src: url(fonts/scout-font/Scout-Regular.ttf);
     }
-    
+    @font-face {
+      font-family: Graphik;
+      src: url(fonts/Graphik-Regular.ttf
+      );
+      }
+
     p {
-      font-family: "Helvetica";
+      font-family: "Graphik";
       font-size: 15px;
       font-weight: 400;
       color: red;
@@ -16,7 +21,7 @@
       text-align: center
     }
     h1 {
-      font-family: "Helvetica";
+      font-family: "Graphik";
       font-size: 40px;
       font-weight: 400;
       color: red;
@@ -24,7 +29,7 @@
       text-align: center
     }
     a {
-      font-family: "Helvetica";
+      font-family: "Graphik";
       font-size: 15px;
       font-weight: 400;
       color: red;
@@ -32,7 +37,7 @@
       text-align: center
     }
     b {
-      font-family: "Helvetica";
+      font-family: "Graphik";
       font-size: 20px;
       font-weight: 300;
       color: red;
@@ -40,7 +45,7 @@
       text-align: center
     }
     h2 {
-      font-family: "Helvetica";
+      font-family: "Graphik";
       font-size: 20px;
       font-weight: 400;
       color: red;
