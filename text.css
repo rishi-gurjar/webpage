@@ -8,9 +8,12 @@
     }
     @font-face {
       font-family: Graphik;
-      src: url(fonts/Graphik-Regular.ttf
-      );
+      src: url(fonts/Graphik-Regular.ttf);
       }
+    @font-face {
+      font-family: Neue Machina;
+      src: url(fonts/Neue-Machina/NeueMachina-Light.otf);
+        }
 
     p {
       font-family: "Graphik";
@@ -34,7 +37,7 @@
       font-weight: 400;
       color: red;
       min-width: 200px;
-      text-align: center
+      text-align: center;
     }
     b {
       font-family: "Graphik";
@@ -56,7 +59,9 @@
       background-color: white
     }
     marquee {
-      font-size: 50px;
+      font-family: "Neue Machina";
       color: red;
-      font-family: Helvetica;
+      text-align: center;
+      padding-left: 20px;
+      font-size: 30px;
     }
