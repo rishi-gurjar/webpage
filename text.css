@@ -2,20 +2,20 @@
     font-family: ScoutB;
     src: url(fonts/scout-font/Scout-Bold.ttf);
     }
-    @font-face {
+@font-face {
     font-family: ScoutR;
     src: url(fonts/scout-font/Scout-Regular.ttf);
     }
-    @font-face {
+@font-face {
       font-family: Graphik;
       src: url(fonts/Graphik-Regular.ttf);
       }
-    @font-face {
+@font-face {
       font-family: Neue Machina;
       src: url(fonts/Neue-Machina/NeueMachina-Light.otf);
         }
 
-    p {
+p {
       font-family: "Graphik";
       font-size: 15px;
       font-weight: 400;
@@ -23,7 +23,7 @@
       min-width: 200px;
       text-align: center
     }
-    h1 {
+h1 {
       font-family: "Graphik";
       font-size: 40px;
       font-weight: 400;
@@ -31,7 +31,7 @@
       min-width: 200px;
       text-align: center
     }
-    a {
+a {
       font-family: "Graphik";
       font-size: 15px;
       font-weight: 400;
@@ -39,7 +39,7 @@
       min-width: 200px;
       text-align: center;
     }
-    b {
+b {
       font-family: "Graphik";
       font-size: 20px;
       font-weight: 300;
@@ -47,7 +47,7 @@
       min-width: 200px;
       text-align: center
     }
-    h2 {
+h2 {
       font-family: "Graphik";
       font-size: 20px;
       font-weight: 400;
@@ -55,13 +55,41 @@
       min-width: 200px;
       text-align: center
     }
-    body {
+body {
       background-color: white
     }
-    marquee {
+marquee {
       font-family: "Neue Machina";
       color: red;
       text-align: center;
       padding-left: 20px;
       font-size: 30px;
     }
+/*** Works on common browsers ***/
+::selection {
+  background-color: #352e7e;
+  color: #fff;
+}
+
+/*** Mozilla based browsers ***/
+::-moz-selection {
+  background-color: #352e7e;
+  color: #fff;
+}
+
+/***For Other Browsers ***/
+::-o-selection {
+  background-color: #352e7e;
+  color: #fff;
+}
+
+::-ms-selection {
+  background-color: #352e7e;
+  color: #fff;
+}
+
+/*** For Webkit ***/
+::-webkit-selection {
+  background-color: #352e7e;
+  color: #fff;
+}
