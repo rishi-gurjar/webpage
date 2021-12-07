@@ -55,6 +55,14 @@ h2 {
       min-width: 200px;
       text-align: center
     }
+h3 {
+      font-family: "Graphik";
+      font-size: 15px;
+      font-weight: 400;
+      color: rgb(45, 153, 90);
+      min-width: 200px;
+      text-align: center
+    }
 body {
       background-color: white
     }
@@ -92,4 +100,15 @@ marquee {
 ::-webkit-selection {
   background-color: #352e7e;
   color: #fff;
+}
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+.cover {
+  object-fit: cover;
+  width: 50px;
+  height: 100px;
 }
