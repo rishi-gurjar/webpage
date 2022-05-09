@@ -64,7 +64,9 @@ h3 {
       text-align: center
     }
 body {
-      background-color: white
+      background-color: white;
+      padding-right: 450px;
+      padding-left: 450px;
     }
 marquee {
       font-family: "Neue Machina";
