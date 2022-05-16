@@ -15,58 +15,71 @@
       src: url(fonts/Neue-Machina/NeueMachina-Light.otf);
         }
 
+@font-face {
+      font-family: Hiragino;
+      src: url(fonts/HiraginoKakuGothicProW3/Hiragino.otf);
+        }
+
+        @font-face {
+          font-family: HiraginoKaku;
+          src: url(fonts/HiraginoKakuGothicProW6/HiraginoKaku.otf);
+            }
+
 p {
-      font-family: "Graphik";
-      font-size: 15px;
-      font-weight: 400;
-      color: red;
+      font-family: "HiraginoKaku";
+      font-size: 18px;
+      font-weight: 1000;
+      color: black;
       min-width: 200px;
-      text-align: center
+      text-align: left
     }
 h1 {
-      font-family: "Graphik";
-      font-size: 40px;
-      font-weight: 400;
-      color: red;
+      font-family: "HiraginoKaku";
+      font-size: 38px;
+      font-weight: 700;
+      color: rgb(255, 18, 18);
       min-width: 200px;
-      text-align: center
+      text-align: left
     }
 a {
-      font-family: "Graphik";
-      font-size: 15px;
+      font-family: "HiraginoKaku";
+      font-size: 18px;
       font-weight: 400;
-      color: red;
+      color: black;
       min-width: 200px;
-      text-align: center;
+      text-align: left;
     }
 b {
-      font-family: "Graphik";
-      font-size: 20px;
+      font-family: "HiraginoKaku";
+      font-size: 18px;
       font-weight: 300;
-      color: red;
+      color: black;
       min-width: 200px;
-      text-align: center
+      text-align: left
     }
 h2 {
-      font-family: "Graphik";
-      font-size: 20px;
+      font-family: "HiraginoKaku";
+      font-size: 18px;
       font-weight: 400;
-      color: red;
+      color: black;
       min-width: 200px;
-      text-align: center
+      text-align: left;
+      margin : 0
     }
 h3 {
-      font-family: "Graphik";
-      font-size: 15px;
+      font-family: "HiraginoKaku";
+      font-size: 18px;
       font-weight: 400;
       color: rgb(45, 153, 90);
       min-width: 200px;
-      text-align: center
+      text-align: left
     }
 body {
       background-color: white;
-      padding-right: 450px;
-      padding-left: 450px;
+      padding-left: 20px;
+      padding-right: 850px;
+
+
     }
 marquee {
       font-family: "Neue Machina";
