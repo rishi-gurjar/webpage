@@ -26,67 +26,61 @@
             }
 
 p {
-      font-family: "Graphik";
+      font-family: "HiraginoKaku";
       font-size: 18px;
       font-weight: 1000;
-      color: rgb(36, 42, 165);
+      color: black;
       min-width: 200px;
       text-align: left
     }
 h1 {
-      font-family: "Graphik";
-      font-size: 28px;
-      font-weight: 1000;
-      color: rgb(36, 42, 165);
+      font-family: "HiraginoKaku";
+      font-size: 38px;
+      font-weight: 700;
+      color: rgb(255, 18, 18);
       min-width: 200px;
       text-align: left
     }
 a {
-      font-family: "Graphik";
+      font-family: "HiraginoKaku";
       font-size: 18px;
-      font-weight: 1000;
-      color: rgb(36, 42, 165);
+      font-weight: 400;
+      color: black;
       min-width: 200px;
       text-align: left;
     }
 b {
-      font-family: "Graphik";
+      font-family: "HiraginoKaku";
       font-size: 18px;
-      font-weight: 1000;
-      color: rgb(36, 42, 165);
+      font-weight: 300;
+      color: black;
       min-width: 200px;
       text-align: left
     }
 h2 {
-      font-family: "Graphik";
+      font-family: "HiraginoKaku";
       font-size: 18px;
-      font-weight: 1000;
-      color: rgb(36, 42, 165);
+      font-weight: 400;
+      color: black;
       min-width: 200px;
       text-align: left;
       margin : 0
     }
 h3 {
-      font-family: "Graphik";
+      font-family: "HiraginoKaku";
       font-size: 18px;
-      font-weight: 1000;
+      font-weight: 400;
       color: rgb(45, 153, 90);
       min-width: 200px;
       text-align: left
     }
 body {
-      background-color: rgb(255, 255, 255);
+      background-color: white;
       padding-left: 20px;
       padding-right: 850px;
 
 
     }
-    a:hover {
-      color: rgb(0, 82, 0);
-      }
-      .module {
-        cursor: url('path-to-image.png'), auto;	
-      }
 marquee {
       font-family: "Neue Machina";
       color: red;
