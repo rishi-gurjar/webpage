@@ -34,19 +34,19 @@ p {
     }
 h1 {
       font-family: "Graphik";
-      font-size: 40px;
+      font-size: 30px;
       font-weight: 400;
       color: red;
       min-width: 200px;
       text-align: center
     }
 a {
-      font-family: "Graphik";
-      font-size: 15px;
+  font-family: "Graphik";
+      font-size: 20px;
       font-weight: 400;
       color: red;
       min-width: 200px;
-      text-align: center;
+      text-align: center
     }
 b {
       font-family: "Graphik";
@@ -126,11 +126,20 @@ marquee {
 </style>
     <link rel="stylesheet" href="footer.php">
     <style>
+    .parent{
+
+display: grid;
+
+grid-template-columns: 1fr 1fr;
+padding-left:200px;
+padding-right:200px;
+column-gap: 10px;
+row-gap: 10px;
+
+}
+
         img {
-            display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
+  width: 100%;
         }
         p {
             color: green;
@@ -146,41 +155,83 @@ marquee {
     </style>
 </head>
 <body>
+  <h2><a href="index.html">Back</a></h2>
   <h1>Selected photos:</h1>
-  <img src="images/large/28C1F2D5-F927-468B-BCD1-0305370016A4_1_105_c.jpeg" alt="">
-  <p>Battleboro, NC; 2018</p>
-  <br>
-  <img src="images/large/DSC_1165.jpg" alt="">
-  <p>Madrid, ESP; 2019</p>
-  <br>
-  <img src="images/large/DSC_0125.jpg" alt="">
-  <p>Barcelona, ESP; 2019</p>
-  <img src="images/large/DSC_0502.jpg" alt="">
-  <p>Interlaken, CHE; 2019</p>
-  <br>
-  <img src="images/large/DSCF0566.jpg" alt="">
-  <p>San Francisco, CA; 2021</p>
-  <br>
-  <img src="images/large/DSCF0592.jpg" alt="">
-  <p>San Francisco, CA; 2021</p>
-  <br>
-  <img src="images/large/DSCF0340-2.jpg" alt="">
-  <p>Olympic Peninsula, WA; 2021</p>
-  <br>
-  <img src="images/large/DSCF0250.jpg" alt="">
-  <p>Port Angeles, WA; 2021</p>
-  <br>
-  <img src="images/large/898B5DA5-BCEB-4316-81C8-04E66BD301E5.jpg" alt="">
-  <p>Yosemite, CA; 2021</p>
-  <br>
-  <img src="images/large/DSCF0707.jpg" alt="">
-  <p>New York, NY; 2022</p>
+
+  <div class="parent">
+
+    <div>
+      <img src="images/large/28C1F2D5-F927-468B-BCD1-0305370016A4_1_105_c.jpeg">
+      <p>NC 2018</p>
+    </div>
+
+    <div>
+      <img src="images/large/DSC_1165.jpg">
+      <p>Madrid 2019</p>
+    </div>
+
+    <div>
+      <img src="images/large/DSC_0125.jpg">
+      <p>Barcelona 2019</p>
+    </div>
+
+    <div>
+      <img src="images/large/DSC_0502.jpg">
+      <p>Switzerland 2019</p>
+    </div>
+
+    <div>
+      <img src="images/large/DSCF0566.jpg">
+      <p>SF 2021</p>
+    </div>
+
+    <div>
+      <img src="images/large/DSCF0592.jpg">
+      <p>SF 2021</p>
+    </div>
+
+    <div>
+      <img src="images/large/DSCF0340-2.jpg">
+      <p>WA 2021</p>
+    </div>
+
+    <div>
+      <img src="images/large/DSCF0250.jpg">
+      <p>WA 2021</p>
+    </div>
+
+    <div>
+      <img src="images/large/898B5DA5-BCEB-4316-81C8-04E66BD301E5.jpg">
+      <p>Yosemite 2021</p>
+    </div>
+    
+    <div>
+      <img src="images/large/DSCF0707.jpg">
+      <p>NYC 2022</p>
+    </div>
+
+    <div>
+      <img src="images/DSCF0750-2.jpg">
+      <p>NYC 2022</p>
+    </div>
+
+    <div>
+      <img src="  images/DSCF0720-2.jpg">
+      <p>NYC 2022</p>
+    </div>
+
+    <div>
+      <img src="  images/DSCF0858-2.jpg      ">
+      <p>NYC 2022</p>
+    </div>
+    <div>
+      <img src="images/large/DSCF0939-2.jpg">
+      <p>SF 2023</p>
+    </div>
+
+  </div>
 </body>
-
-
-
-
 <br>
-<p>Most photos taken on Fujifilm X-T4</p>
+<p>Most photos taken on Fujifilm X-T4 16-80mm f/4-22</p>
 
 </html>
