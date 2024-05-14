@@ -22,7 +22,7 @@ export default function Home() {
   
 
   return (
-    <main className="container grid flex flex-col items-center mt-[calc(100vh/5.5)] lg:w-[calc(100vw/3)] md:w-[calc(100vw/3)] md:px-0">
+    <main className="container grid flex flex-col items-center mt-[60px] lg:mt-[calc(100vh/5.5)] lg:w-[calc(100vw/3)] md:w-[calc(100vw/3)] md:px-0">
 
       <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         <AspectRatio ratio={16 / 7.5}>
