@@ -47,7 +47,7 @@ export default function Home() {
       </div>
       <br />
 
-      <h2>Recent projects</h2>
+      <h2 className="leading-7 [&:not(:first-child)]:mt-1">Recent projects</h2>
       <div>
         <a className="hover:text-green-500" href="https://coldcraft.ai" target="_blank" rel="noopener noreferrer"><h4>ColdCraft</h4></a>
         <a className="hover:text-green-500" href="https://x.com/cornellarmada" target="_blank" rel="noopener noreferrer"><h4>Armada</h4></a>
