@@ -53,10 +53,11 @@ export default function Home() {
         </div>
         <br />
 
-        <h2 className="leading-7 [&:not(:first-child)]:mt-1">Recent projects</h2>
+        <h2 className="leading-7 [&:not(:first-child)]:mt-1">Side projects</h2>
         <div>
           <a className="hover:text-green-500" href="https://verduslabs.com/" target="_blank" rel="noopener noreferrer"><h4>Verdus Labs</h4></a>
           <a className="hover:text-green-500" href="https://coldcraft.ai" target="_blank" rel="noopener noreferrer"><h4>ColdCraft</h4></a>
+          <a className="hover:text-green-500" href="https://codexfund.vercel.app/" target="_blank" rel="noopener noreferrer"><h4>Codex Fund</h4></a>
           <a className="hover:text-green-500" href="https://x.com/cornellarmada" target="_blank" rel="noopener noreferrer"><h4>Armada</h4></a>
           <a className="hover:text-green-500" href="https://beyondterra.org" target="_blank" rel="noopener noreferrer"><h4>Beyond Terra</h4></a>
         </div>
