@@ -1,40 +1,45 @@
-'use client'
-
-import { useState, useEffect } from 'react'
-import { useParams } from 'next/navigation'
+import { Metadata, ResolvingMetadata } from 'next'
+import { notFound } from 'next/navigation'
 import ReactMarkdown from 'react-markdown'
 
-export default function Page() {
-  const { slug } = useParams()
-  const [content, setContent] = useState<string | null>(null)
-  const [error, setError] = useState<string | null>(null)
+// This function generates the static params at build time
+export async function generateStaticParams() {
+  const res = await fetch('https://api.github.com/repos/rishi-gurjar/webpage/contents/writings')
+  const files = await res.json()
+  
+  return files
+    .filter((file: any) => file.name.endsWith('.md'))
+    .map((file: any) => ({
+      slug: file.name.replace(/\.md$/, '')
+    }))
+}
 
-  useEffect(() => {
-    const fetchContent = async () => {
-      const download_url = `https://raw.githubusercontent.com/rishi-gurjar/webpage/main/writings/${slug}.md`
-      
-      try {
-        const response = await fetch(download_url)
-        if (!response.ok) {
-          throw new Error('Network response was not ok')
-        }
-        const data = await response.text()
-        setContent(data)
-      } catch (error) {
-        console.error('Error fetching Markdown content:', error)
-        setError('Failed to load content')
-      }
-    }
-
-    fetchContent()
-  }, [slug])
-
-  if (error) {
-    return <div>Error: {error}</div>
+// This function generates metadata for the page
+export async function generateMetadata(
+  { params }: { params: { slug: string } },
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  return {
+    title: params.slug,
   }
+}
 
-  if (!content) {
-    return <div>Loading...</div>
+// The page component
+export default async function Page({ params }: { params: { slug: string } }) {
+  const { slug } = params
+  const download_url = `https://raw.githubusercontent.com/rishi-gurjar/webpage/main/writings/${slug}.md`
+
+  let content: string
+
+  try {
+    const res = await fetch(download_url)
+    if (!res.ok) {
+      throw new Error('Failed to fetch content')
+    }
+    content = await res.text()
+  } catch (error) {
+    console.error('Error fetching Markdown content:', error)
+    notFound()
   }
 
   return (
