@@ -1,4 +1,4 @@
-`How Gradient Boost is used for Regression
+How Gradient Boost is used for Regression
 - when it is used to predict a continuous value, like weight
 
 [[Decision Trees]]
