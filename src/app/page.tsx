@@ -40,7 +40,6 @@ export default function Home() {
         <div >
           <h4>SF Bay Area & Ithaca, NY</h4>
           <h4>Email: x@y | x = rrg85, y = cornell.edu</h4>
-          <h4>Gardening and crafting</h4>
         </div>
         <br />
 
