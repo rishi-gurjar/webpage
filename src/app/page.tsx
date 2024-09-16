@@ -40,6 +40,7 @@ export default function Home() {
         <div >
           <h4>SF Bay Area & Ithaca, NY</h4>
           <h4>Email: x@y | x = rrg85, y = cornell.edu</h4>
+          <a className="hover:text-blue-500" href="/blog" target="_blank" rel="noopener noreferrer"><h4>Blog</h4></a>
         </div>
         <br />
 
