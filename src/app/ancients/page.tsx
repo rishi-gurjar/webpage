@@ -1,6 +1,6 @@
-"use client"
+'use client'
 import React, { useState } from 'react'
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 const philosophers = [
   { 
@@ -52,13 +52,13 @@ function Test() {
   };
 
   return (
-    <main className="container grid flex flex-col items-center mt-[60px] lg:mt-[calc(100vh/5.5)] lg:w-[calc(100vw/3)] md:w-[calc(100vw/3)] md:px-0">
+    <main className='container grid flex flex-col items-center mt-[60px] lg:mt-[calc(100vh/5.5)] lg:w-[calc(100vw/3)] md:w-[calc(100vw/3)] md:px-0'>
       <div>
-      <h1>* "Hey, what would Aristotle <span className="underline"><a href="https://www.youtube.com/watch?v=2YzLMPm3Jgw" target="_blank" rel="noopener noreferrer">have said</a></span>?"</h1>
+      <h1>* 'Hey, what would Aristotle <span className='underline'><a href='https://www.youtube.com/watch?v=2YzLMPm3Jgw' target='_blank' rel='noopener noreferrer'>have said</a></span>?'</h1>
         <br />
-        <div className="flex gap-5">
+        <div className='flex gap-5'>
           {philosophers.map((philosopher) => (
-            <Avatar key={philosopher.name} onClick={() => handleAvatarClick(philosopher)} className="cursor-pointer">
+            <Avatar key={philosopher.name} onClick={() => handleAvatarClick(philosopher)} className='cursor-pointer'>
               <AvatarImage src={philosopher.image} />
               <AvatarFallback>{philosopher.initials}</AvatarFallback>
             </Avatar>
@@ -66,27 +66,27 @@ function Test() {
         </div>
       </div>
       {selectedPhilosopher && (
-        <div className="mt-6 w-full">
-          <h2 className="text-xl mb-4">{selectedPhilosopher.name}</h2>
+        <div className='mt-6 w-full'>
+          <h2 className='text-xl mb-4'>{selectedPhilosopher.name}</h2>
           <p>{selectedPhilosopher.bio}</p>
           <br />
-          <div className="bg-gray-100 p-4 rounded-lg h-64 overflow-y-auto mb-4">
+          <div className='bg-gray-100 p-4 rounded-lg h-64 overflow-y-auto mb-4'>
             {chatMessages.map((message, index) => (
               <div key={index} className={`mb-2 ${message.sender === 'User' ? 'text-right' : 'text-left'}`}>
-                <span className="font-bold">{message.sender}: </span>
+                <span className='font-bold'>{message.sender}: </span>
                 {message.text}
               </div>
             ))}
           </div>
-          <form onSubmit={handleSendMessage} className="flex gap-2">
+          <form onSubmit={handleSendMessage} className='flex gap-2'>
             <input
-              type="text"
+              type='text'
               value={userInput}
               onChange={(e) => setUserInput(e.target.value)}
-              className="flex-grow border rounded p-2"
-              placeholder="Type your message..."
+              className='flex-grow border rounded p-2'
+              placeholder='Type your message...'
             />
-            <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">Send</button>
+            <button type='submit' className='bg-blue-500 text-white px-4 py-2 rounded'>Send</button>
           </form>
         </div>
       )}
