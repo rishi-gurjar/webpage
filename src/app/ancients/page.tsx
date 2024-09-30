@@ -54,7 +54,7 @@ function Test() {
   return (
     <main className='container grid flex flex-col items-center mt-[60px] lg:mt-[calc(100vh/5.5)] lg:w-[calc(100vw/3)] md:w-[calc(100vw/3)] md:px-0'>
       <div>
-      <h1>* 'Hey, what would Aristotle <span className='underline'><a href='https://www.youtube.com/watch?v=2YzLMPm3Jgw' target='_blank' rel='noopener noreferrer'>have said</a></span>?'</h1>
+      <h1>* &apos;&apos;Hey, what would Aristotle <span className='underline'><a href='https://www.youtube.com/watch?v=2YzLMPm3Jgw' target='_blank' rel='noopener noreferrer'>have said</a></span>?&apos;</h1>
         <br />
         <div className='flex gap-5'>
           {philosophers.map((philosopher) => (
