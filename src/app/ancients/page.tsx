@@ -6,24 +6,24 @@ const philosophers = [
   { 
     name: 'Socrates', 
     initials: 'SC', 
-    image: "https://freedomandcitizenship.columbia.edu/sites/default/files/styles/cu_crop/public/content/Syllabus/Socrates.jpeg?itok=aWO3SPEk", 
-    bio: "A classical Greek philosopher known for his contributions to ethics and epistemology.", 
+    image: 'https://freedomandcitizenship.columbia.edu/sites/default/files/styles/cu_crop/public/content/Syllabus/Socrates.jpeg?itok=aWO3SPEk', 
+    bio: 'A classical Greek philosopher known for his contributions to ethics and epistemology.', 
     studentOf: null, 
     teacherOf: ['Plato'] 
   },
   { 
     name: 'Plato', 
     initials: 'PL', 
-    image: "https://cdn.britannica.com/88/149188-050-DC34842F/Plato-portrait-bust-original-Capitoline-Museums-Rome.jpg", 
-    bio: "An influential philosopher who founded the Academy in Athens and wrote philosophical dialogues.", 
+    image: 'https://cdn.britannica.com/88/149188-050-DC34842F/Plato-portrait-bust-original-Capitoline-Museums-Rome.jpg', 
+    bio: 'An influential philosopher who founded the Academy in Athens and wrote philosophical dialogues.', 
     studentOf: 'Socrates', 
     teacherOf: ['Aristotle'] 
   },
   { 
     name: 'Aristotle', 
     initials: 'AT', 
-    image: "https://ethics.org.au/wp-content/uploads/2021/03/Aristotle_sq.jpg", 
-    bio: "A prominent Greek philosopher and polymath who made significant contributions to various fields of knowledge.", 
+    image: 'https://ethics.org.au/wp-content/uploads/2021/03/Aristotle_sq.jpg', 
+    bio: 'A prominent Greek philosopher and polymath who made significant contributions to various fields of knowledge.', 
     studentOf: 'Plato', 
     teacherOf: [] 
   }
