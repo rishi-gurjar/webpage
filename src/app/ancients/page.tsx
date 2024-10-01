@@ -2,7 +2,21 @@
 import React, { useState } from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
-const philosophers = [
+interface Philosopher {
+  name: string;
+  initials: string;
+  image: string;
+  bio: string;
+  studentOf: string | null;
+  teacherOf: string[];
+}
+
+interface ChatMessage {
+  sender: string;
+  text: string;
+}
+
+const philosophers: Philosopher[] = [
   { 
     name: 'Socrates', 
     initials: 'SC', 
@@ -30,18 +44,18 @@ const philosophers = [
 ];
 
 function Test() {
-  const [selectedPhilosopher, setSelectedPhilosopher] = useState(null);
-  const [chatMessages, setChatMessages] = useState([]);
+  const [selectedPhilosopher, setSelectedPhilosopher] = useState<Philosopher | null>(null);
+  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
   const [userInput, setUserInput] = useState('');
 
-  const handleAvatarClick = (philosopher) => {
+  const handleAvatarClick = (philosopher: Philosopher) => {
     setSelectedPhilosopher(philosopher);
     setChatMessages([]);
   };
 
-  const handleSendMessage = (e) => {
+  const handleSendMessage = (e: React.FormEvent) => {
     e.preventDefault();
-    if (userInput.trim()) {
+    if (userInput.trim() && selectedPhilosopher) {
       setChatMessages([...chatMessages, { sender: 'User', text: userInput }]);
       setUserInput('');
       // Simulate philosopher's response (you can replace this with actual AI-generated responses)
@@ -54,12 +68,12 @@ function Test() {
   return (
     <main className='container grid flex flex-col items-center mt-[60px] lg:mt-[calc(100vh/5.5)] lg:w-[calc(100vw/3)] md:w-[calc(100vw/3)] md:px-0'>
       <div>
-      <h1>* &apos;&apos;Hey, what would Aristotle <span className='underline'><a href='https://www.youtube.com/watch?v=2YzLMPm3Jgw' target='_blank' rel='noopener noreferrer'>have said</a></span>?&apos;</h1>
+        <h1>* &quot;Hey, what would Aristotle <span className='underline'><a href='https://www.youtube.com/watch?v=2YzLMPm3Jgw' target='_blank' rel='noopener noreferrer'>have said</a></span>?&quot;</h1>
         <br />
         <div className='flex gap-5'>
           {philosophers.map((philosopher) => (
             <Avatar key={philosopher.name} onClick={() => handleAvatarClick(philosopher)} className='cursor-pointer'>
-              <AvatarImage src={philosopher.image} />
+              <AvatarImage src={philosopher.image} alt={philosopher.name} />
               <AvatarFallback>{philosopher.initials}</AvatarFallback>
             </Avatar>
           ))}
