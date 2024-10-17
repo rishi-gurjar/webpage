@@ -42,10 +42,16 @@ export default async function BlogPost({ params }: { params: { slug: string } })
     notFound();
   }
 
+  const prefix = process.env.NODE_ENV === 'production' ? '/blog' : '';
+  const transformedContent = post.content.replace(
+    /!\[([^\]]*)\]\(\/public\/([^)]+)\)/g,
+    `![$1](${prefix}/$2)`
+  );
+
   // Process the Markdown content
   const processedContent = await remark()
     .use(html)
-    .process(post.content);
+    .process(transformedContent);
   const contentHtml = processedContent.toString();
 
   return (
@@ -54,6 +60,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
       <p>{new Date(post.date).toLocaleDateString()}</p>
       <br />
       <div className="blog-content" dangerouslySetInnerHTML={{ __html: contentHtml }} />
+      <br />
     </main>
   );
 }
