@@ -42,16 +42,10 @@ export default async function BlogPost({ params }: { params: { slug: string } })
     notFound();
   }
 
-  const prefix = process.env.NODE_ENV === 'production' ? '/blog' : '';
-  const transformedContent = post.content.replace(
-    /!\[([^\]]*)\]\(\/public\/([^)]+)\)/g,
-    `![$1](${prefix}/$2)`
-  );
-
   // Process the Markdown content
   const processedContent = await remark()
     .use(html)
-    .process(transformedContent);
+    .process(post.content);
   const contentHtml = processedContent.toString();
 
   return (
