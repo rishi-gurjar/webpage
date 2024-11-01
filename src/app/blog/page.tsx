@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import Link from 'next/link';
+import { generateSlug } from '@/lib/blog';
 
 export default function Blog() {
   const blogDir = path.join(process.cwd(), 'src/blog-content');
@@ -12,7 +13,7 @@ export default function Blog() {
     const fileContents = fs.readFileSync(filePath, 'utf8');
     const { data } = matter(fileContents);
     return {
-      slug: data.title.toLowerCase().replace(/\s+/g, '-'),
+      slug: generateSlug(data.title),
       title: data.title,
       date: data.date,
     };

@@ -6,6 +6,7 @@ import html from 'remark-html';
 import { notFound } from 'next/navigation';
 import './blogPost.css';
 import Link from 'next/link';
+import { generateSlug } from '@/lib/blog';
 
 export async function generateStaticParams() {
   const blogDir = path.join(process.cwd(), 'src/blog-content');
@@ -16,7 +17,7 @@ export async function generateStaticParams() {
     const fileContents = fs.readFileSync(filePath, 'utf8');
     const { data } = matter(fileContents);
     return {
-      slug: data.title.toLowerCase().replace(/\s+/g, '-'),
+      slug: generateSlug(data.title),
     };
   });
 }
@@ -31,7 +32,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
       const fileContents = fs.readFileSync(filePath, 'utf8');
       const { data, content } = matter(fileContents);
       return {
-        slug: data.title.toLowerCase().replace(/\s+/g, '-'),
+        slug: generateSlug(data.title),
         title: data.title,
         date: data.date,
         content,
