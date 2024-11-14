@@ -25,7 +25,8 @@ app.use(cors({
     origin: 'https://rishigurjar.com',  // Only allow your domain
     methods: ['GET', 'POST', 'OPTIONS'], // Specify allowed HTTP methods
     allowedHeaders: ['Content-Type', 'Accept', 'Authorization'], // Include headers that clients may send
-    optionsSuccessStatus: 200 // Some legacy browsers choke on 204 status for OPTIONS
+    optionsSuccessStatus: 200, // Some legacy browsers choke on 204 status for OPTIONS
+    credentials: false
 }));
 
 app.use(express.json());

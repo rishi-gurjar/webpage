@@ -18,13 +18,13 @@ export async function trackPageView(path: string) {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
-            mode: 'no-cors'
+            mode: 'cors'
         });
 
-        // console.log('Track response status:', response.status);
-        // if (!response.ok) {
-        //     throw new Error(`HTTP error! status: ${response.status}`);
-        // }
+        console.log('Track response status:', response.status);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
     } catch (error) {
         console.error('Error tracking page view:', error);
     }
@@ -47,7 +47,7 @@ export async function subscribeEmail(formData: FormData) {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
-            mode: 'cors',
+            mode: 'no-cors',
             body: JSON.stringify({ email })
         });
 
