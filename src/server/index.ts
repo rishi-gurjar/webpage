@@ -1,5 +1,5 @@
 import express, { Request, Response, NextFunction } from 'express';
-import cors from 'cors';
+import cors, { CorsCallback } from 'cors';
 import { google } from 'googleapis';
 import dotenv from 'dotenv';
 
@@ -20,19 +20,29 @@ app.use((req: Request, res: Response, next: NextFunction) => {
     next();
 });
 
-// Define CORS options
+// Define allowed origins
+const allowedOrigins = [
+    'https://rishigurjar.com',
+    'http://localhost:3001',
+    'https://9ivizlis6cv5.share.zrok.io'
+];
+
+// Define CORS options with proper types
 const corsOptions = {
-    origin: [
-        'https://rishigurjar.com', 
-        'http://localhost:3000', 
-        'https://9ivizlis6cv5.share.zrok.io'
-    ],
+    origin: (origin: string | undefined, callback: CorsCallback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true); // Allow the request
+        } else {
+            callback(new Error('Not allowed by CORS')); // Deny the request
+        }
+    },
     methods: ['GET', 'POST', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Accept', 'Authorization'],
     credentials: true,
     optionsSuccessStatus: 200
 };
 
+app.use(cors(corsOptions));
 app.use(express.json());
 
 const credentials = require('../../blog-441622-f450efc783d0.json');
@@ -80,10 +90,10 @@ const subscribeHandler = async (
     }
 };
 
-app.post('/api/subscribe', cors(corsOptions), subscribeHandler);
+app.post('/api/subscribe', subscribeHandler);
 
 // Enhanced tracking endpoint
-app.get('/api/track', cors(corsOptions), (req: Request, res: Response) => {
+app.get('/api/track', (req: Request, res: Response) => {
     console.log('\n=== Track Request ===');
     console.log('Query:', req.query);
     console.log('Headers:', req.headers);
