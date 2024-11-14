@@ -20,20 +20,12 @@ app.use((req: Request, res: Response, next: NextFunction) => {
     next();
 });
 
-// CORS configuration with debug logs
+// Updated CORS configuration
 app.use(cors({
-    origin: [
-        'https://rishigurjar.com',
-        'https://www.rishigurjar.com',
-        'http://localhost:3000',
-        'http://localhost:3001',
-        'https://wp7tdwguie65.share.zrok.io'
-    ],
+    origin: true,
     methods: ['GET', 'POST', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Accept'],
-    credentials: false,
-    preflightContinue: false,
-    optionsSuccessStatus: 204
+    optionsSuccessStatus: 200
 }));
 
 app.use(express.json());
