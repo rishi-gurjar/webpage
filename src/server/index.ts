@@ -10,7 +10,7 @@ app.use(cors({
     origin: [
         'https://rishigurjar.com',
         'http://localhost:3001',
-        'https://5wh58pwpkqmg.share.zrok.io'
+        'https://wrctkehcvd0y.share.zrok.io'
     ],
     credentials: true
 }));
