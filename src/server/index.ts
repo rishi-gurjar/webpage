@@ -7,21 +7,47 @@ dotenv.config();
 
 const app = express();
 
-// Updated CORS configuration
+// Debug middleware - log all requests
+app.use((req: Request, res: Response, next: NextFunction) => {
+    console.log('\n=== CORS Debug ===');
+    console.log('Origin:', req.headers.origin);
+    console.log('Method:', req.method);
+    console.log('Headers:', JSON.stringify(req.headers, null, 2));
+    console.log('URL:', req.url);
+    console.log('Query:', req.query);
+    console.log('Body:', req.body);
+    console.log('==================\n');
+    next();
+});
+
+// CORS configuration with debug logs
 app.use(cors({
-    origin: [
-        'https://rishigurjar.com',
-        'https://www.rishigurjar.com',
-        'http://localhost:3000',
-        'http://localhost:3001',
-        'https://ke4d1zh4v12a.share.zrok.io'
-    ],
+    origin: function (origin, callback) {
+        const allowedOrigins = [
+            'https://rishigurjar.com',
+            'https://www.rishigurjar.com',
+            'http://localhost:3000',
+            'http://localhost:3001',
+            'https://wp7tdwguie65.share.zrok.io'
+        ];
+        console.log('Incoming origin:', origin);
+        console.log('Allowed origins:', allowedOrigins);
+
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            console.log('Origin rejected:', origin);
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     methods: ['GET', 'POST', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Accept'],
     credentials: false
 }));
 
 app.use(express.json());
+
+// Handle OPTIONS requests explicitly
 app.options('*', cors());
 
 // Enhanced request logging middleware
@@ -64,6 +90,10 @@ const subscribeHandler = async (
     req: Request<{}, {}, SubscribeRequest>,
     res: Response
 ): Promise<void> => {
+    console.log('\n=== Subscribe Request ===');
+    console.log('Body:', req.body);
+    console.log('Headers:', req.headers);
+
     const { email } = req.body;
 
     if (!email || !email.includes('@')) {
@@ -93,6 +123,10 @@ app.post('/api/subscribe', subscribeHandler);
 
 // Enhanced tracking endpoint
 app.get('/api/track', (req: Request, res: Response) => {
+    console.log('\n=== Track Request ===');
+    console.log('Query:', req.query);
+    console.log('Headers:', req.headers);
+
     const page = req.query.page || 'unknown';
     console.log(`Page view tracked: ${page}`);
     res.status(200).json({ success: true });
@@ -110,6 +144,6 @@ app.listen(PORT, () => {
     console.log('- https://www.rishigurjar.com');
     console.log('- http://localhost:3000');
     console.log('- http://localhost:3001');
-    console.log('- https://ke4d1zh4v12a.share.zrok.io');
+    console.log('- https://wp7tdwguie65.share.zrok.io');
     console.log('===================\n');
 }); 
