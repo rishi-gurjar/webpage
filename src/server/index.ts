@@ -7,21 +7,24 @@ dotenv.config();
 
 const app = express();
 
-// Broader CORS setup for no-cors requests
+// CORS setup
 app.use(cors({
     origin: '*',  // Allow all origins since client is using no-cors
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type']
 }));
 
-app.use(express.text());
-app.use(express.json());
+// Add text parser before json parser
+app.use(express.text());  // This will handle text/plain requests
 
 // Debug logging
 app.use((req, res, next) => {
     console.log(`\n[${new Date().toISOString()}] ${req.method} ${req.url}`);
     console.log('Headers:', req.headers);
-    if (req.method === 'POST') console.log('Body:', req.body);
+    if (req.method === 'POST') {
+        console.log('Content-Type:', req.headers['content-type']);
+        console.log('Body:', req.body);  // Will be plain text
+    }
     next();
 });
 
@@ -48,25 +51,38 @@ async function saveEmailToSheets(email: string): Promise<void> {
 // Test endpoint for CORS
 app.get('/api/test', (req: Request, res: Response) => {
     console.log('Test endpoint hit');
-    res.status(200).send('CORS is working!');  // Simplified response for no-cors
+    res.status(200).send('CORS is working!');
 });
 
 // Single endpoint for email subscriptions
 app.post('/api/subscribe', async (req: Request, res: Response) => {
-    const email = req.body;
+    console.log('Raw request body:', req.body);
+    
+    // Handle both text and JSON formats
+    let email: string;
+    if (typeof req.body === 'string') {
+        email = req.body;
+    } else if (typeof req.body === 'object' && req.body.email) {
+        email = req.body.email;
+    } else {
+        console.log('Invalid body format:', req.body);
+        res.status(200).send('Invalid format');
+        return;
+    }
 
-    if (!email || !email.includes('@')) {
-        res.status(200).send('Invalid email');  // Plain text response
+    if (!email || typeof email !== 'string' || !email.includes('@')) {
+        console.log('Invalid email:', email);
+        res.status(200).send('Invalid email');
         return;
     }
 
     try {
         await saveEmailToSheets(email);
         console.log(`Subscribed: ${email}`);
-        res.status(200).send('Success');  // Plain text response
+        res.status(200).send('Success');
     } catch (error) {
         console.error('Error:', error);
-        res.status(200).send('Error');  // Plain text response
+        res.status(200).send('Error');
     }
 });
 
@@ -76,6 +92,6 @@ app.listen(PORT, () => {
     console.log(`Time: ${new Date().toISOString()}`);
     console.log(`Port: ${PORT}`);
     console.log(`CORS: Allowing all origins (no-cors mode)`);
-    console.log(`Test endpoint: http://localhost:${PORT}/api/test`);
+    console.log(`Content-Type: Expecting text/plain for POST requests`);
     console.log('===================\n');
 }); 
