@@ -54,14 +54,25 @@ export async function subscribeEmail(formData: FormData) {
         });
 
         console.log('Subscribe response status:', response.status);
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.error || 'Failed to subscribe');
+        
+        let errorData;
+        try {
+            const text = await response.text(); // Get response as text first
+            console.log('Raw response:', text);
+            
+            if (text) {
+                const data = JSON.parse(text); // Try to parse as JSON
+                if (!response.ok) {
+                    throw new Error(data.error || 'Failed to subscribe');
+                }
+                return { success: true };
+            } else {
+                throw new Error('Empty response received');
+            }
+        } catch (parseError) {
+            console.error('Error parsing response:', parseError);
+            throw new Error('Invalid response from server');
         }
-
-        const data = await response.json();
-        console.log('Subscribe response data:', data);
-        return { success: true };
     } catch (error) {
         console.error('Error saving to Google Sheets:', error);
         return { error: 'Failed to subscribe. Please try again later.' };
