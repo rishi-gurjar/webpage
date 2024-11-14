@@ -18,6 +18,7 @@ export async function trackPageView(path: string) {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
+            credentials: 'include',
             mode: 'cors'
         });
 
@@ -47,7 +48,8 @@ export async function subscribeEmail(formData: FormData) {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
-            mode: 'no-cors',
+            credentials: 'include',
+            mode: 'cors',
             body: JSON.stringify({ email })
         });
 

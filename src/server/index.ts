@@ -22,11 +22,11 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
 // CORS configuration
 app.use(cors({
-    origin: 'https://rishigurjar.com',  // Only allow your domain
+    origin: ['https://rishigurjar.com', 'http://localhost:3000'],   // Allow production domain and localhost
     methods: ['GET', 'POST', 'OPTIONS'], // Specify allowed HTTP methods
     allowedHeaders: ['Content-Type', 'Accept', 'Authorization'], // Include headers that clients may send
     optionsSuccessStatus: 200, // Some legacy browsers choke on 204 status for OPTIONS
-    credentials: false
+    credentials: true
 }));
 
 app.use(express.json());
