@@ -20,44 +20,20 @@ app.use((req: Request, res: Response, next: NextFunction) => {
     next();
 });
 
-// CORS configuration
-app.use(cors({
+// Define CORS options
+const corsOptions = {
     origin: [
         'https://rishigurjar.com', 
         'http://localhost:3000', 
         'https://9ivizlis6cv5.share.zrok.io'
-    ],   // Allow production domain and localhost
-    methods: ['GET', 'POST', 'OPTIONS'], // Specify allowed HTTP methods
-    allowedHeaders: ['Content-Type', 'Accept', 'Authorization'], // Include headers that clients may send
-    credentials: true,  // Allow credentials
-    optionsSuccessStatus: 200, // Some legacy browsers choke on 204 status for OPTIONS
-}));
+    ],
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Accept', 'Authorization'],
+    credentials: true,
+    optionsSuccessStatus: 200
+};
 
 app.use(express.json());
-
-// Enhanced request logging middleware
-app.use((req: Request, res: Response, next: NextFunction) => {
-    const timestamp = new Date().toISOString();
-    const { method, url, headers, body } = req;
-    const userAgent = headers['user-agent'] || 'Unknown';
-    const ip = req.ip || req.socket.remoteAddress || 'Unknown';
-    const referer = headers.referer || 'Direct';
-
-    // Pretty console logging with more details
-    console.log('\n=== New Request ===');
-    console.log(`Time: ${timestamp}`);
-    console.log(`Method: ${method}`);
-    console.log(`URL: ${url}`);
-    console.log(`IP: ${ip}`);
-    console.log(`Referer: ${referer}`);
-    console.log(`User Agent: ${userAgent}`);
-    if (method === 'POST') {
-        console.log('Body:', body);
-    }
-    console.log('=================\n');
-
-    next();
-});
 
 const credentials = require('../../blog-441622-f450efc783d0.json');
 const auth = new google.auth.GoogleAuth({
@@ -104,10 +80,10 @@ const subscribeHandler = async (
     }
 };
 
-app.post('/api/subscribe', subscribeHandler);
+app.post('/api/subscribe', cors(corsOptions), subscribeHandler);
 
 // Enhanced tracking endpoint
-app.get('/api/track', (req: Request, res: Response) => {
+app.get('/api/track', cors(corsOptions), (req: Request, res: Response) => {
     console.log('\n=== Track Request ===');
     console.log('Query:', req.query);
     console.log('Headers:', req.headers);
@@ -126,8 +102,6 @@ app.listen(PORT, () => {
     console.log(`Mode: ${process.env.NODE_ENV || 'development'}`);
     console.log(`CORS origins enabled for:`);
     console.log('- https://rishigurjar.com');
-    console.log('- https://www.rishigurjar.com');
-    console.log('- http://localhost:3000');
     console.log('- http://localhost:3001');
     console.log('- https://9ivizlis6cv5.share.zrok.io');
     console.log('===================\n');
