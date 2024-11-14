@@ -9,13 +9,15 @@ const app = express();
 
 // Debug middleware - log all requests
 app.use((req: Request, res: Response, next: NextFunction) => {
-    console.log('\n=== CORS Debug ===');
+    console.log('\n=== Request Debug ===');
+    console.log('Time:', new Date().toISOString());
     console.log('Origin:', req.headers.origin);
     console.log('Method:', req.method);
-    console.log('Headers:', JSON.stringify(req.headers, null, 2));
     console.log('URL:', req.url);
-    console.log('Query:', req.query);
-    console.log('Body:', req.body);
+    console.log('Headers:', JSON.stringify(req.headers, null, 2));
+    if (req.method === 'POST') {
+        console.log('Body:', req.body);
+    }
     console.log('==================\n');
     next();
 });
@@ -31,13 +33,13 @@ const allowedOrigins = [
 const corsOptions = {
     origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
         if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true); // Allow the request
+            callback(null, true);
         } else {
-            callback(new Error('Not allowed by CORS')); // Deny the request
+            callback(new Error('Not allowed by CORS'));
         }
     },
-    methods: ['GET', 'POST', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Accept', 'Authorization'],
+    methods: ['POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Accept'],
     credentials: true,
     optionsSuccessStatus: 200
 };
@@ -61,10 +63,6 @@ const subscribeHandler = async (
     req: Request<{}, {}, SubscribeRequest>,
     res: Response
 ): Promise<void> => {
-    console.log('\n=== Subscribe Request ===');
-    console.log('Body:', req.body);
-    console.log('Headers:', req.headers);
-
     const { email } = req.body;
 
     if (!email || !email.includes('@')) {
@@ -91,17 +89,6 @@ const subscribeHandler = async (
 };
 
 app.post('/api/subscribe', subscribeHandler);
-
-// Enhanced tracking endpoint
-app.get('/api/track', (req: Request, res: Response) => {
-    console.log('\n=== Track Request ===');
-    console.log('Query:', req.query);
-    console.log('Headers:', req.headers);
-
-    const page = req.query.page || 'unknown';
-    console.log(`Page view tracked: ${page}`);
-    res.status(200).json({ success: true });
-});
 
 const PORT = process.env.PORT || 3001;
 

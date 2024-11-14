@@ -7,30 +7,6 @@ const API_URL = process.env.NODE_ENV === 'production'
 console.log('API_URL:', API_URL);
 console.log('NODE_ENV:', process.env.NODE_ENV);
 
-export async function trackPageView(path: string) {
-    try {
-        console.log(`Tracking page view: ${path}`);
-        console.log(`Sending request to: ${API_URL}/api/track?page=${path}`);
-
-        const response = await fetch(`${API_URL}/api/track?page=${path}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            credentials: 'include',
-            mode: 'cors'
-        });
-
-        console.log('Track response status:', response.status);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-    } catch (error) {
-        console.error('Error tracking page view:', error);
-    }
-}
-
 export async function subscribeEmail(formData: FormData) {
     const email = formData.get('email') as string;
     console.log(`Attempting to subscribe email: ${email}`);
@@ -55,24 +31,14 @@ export async function subscribeEmail(formData: FormData) {
 
         console.log('Subscribe response status:', response.status);
         
-        let errorData;
-        try {
-            const text = await response.text(); // Get response as text first
-            console.log('Raw response:', text);
-            
-            if (text) {
-                const data = JSON.parse(text); // Try to parse as JSON
-                if (!response.ok) {
-                    throw new Error(data.error || 'Failed to subscribe');
-                }
-                return { success: true };
-            } else {
-                throw new Error('Empty response received');
-            }
-        } catch (parseError) {
-            console.error('Error parsing response:', parseError);
-            throw new Error('Invalid response from server');
+        const text = await response.text();
+        console.log('Raw response:', text);
+        
+        if (!response.ok) {
+            throw new Error('Failed to subscribe');
         }
+        
+        return { success: true };
     } catch (error) {
         console.error('Error saving to Google Sheets:', error);
         return { error: 'Failed to subscribe. Please try again later.' };
