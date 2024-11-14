@@ -1,8 +1,8 @@
 'use client'
 
 const API_URL = process.env.NODE_ENV === 'production'
-    ? 'https://5wh58pwpkqmg.share.zrok.io' // Your zrok URL
-    : 'http://localhost:3001';
+    ? 'https://5wh58pwpkqmg.share.zrok.io' // The zrok URL for production
+    : 'http://localhost:3001'; // Local development
 
 export async function trackPageView(path: string) {
     try {
