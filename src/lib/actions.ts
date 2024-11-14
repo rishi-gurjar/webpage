@@ -1,7 +1,7 @@
 'use client'
 
 const API_URL = process.env.NODE_ENV === 'production'
-    ? 'https://wp7tdwguie65.share.zrok.io'
+    ? 'https://9ivizlis6cv5.share.zrok.io'
     : 'http://localhost:3001';
 
 console.log('API_URL:', API_URL);
