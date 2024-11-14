@@ -14,7 +14,7 @@ app.use(cors({
         'https://www.rishigurjar.com',
         'http://localhost:3000',
         'http://localhost:3001',
-        'https://wrctkehcvd0y.share.zrok.io' // Add zrok URL
+        'https://ke4d1zh4v12a.share.zrok.io' // Update this with your new zrok URL
     ],
     methods: ['GET', 'POST', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Accept'],
@@ -112,6 +112,6 @@ app.listen(PORT, () => {
     console.log('- https://www.rishigurjar.com');
     console.log('- http://localhost:3000');
     console.log('- http://localhost:3001');
-    console.log('- https://wrctkehcvd0y.share.zrok.io');
+    console.log('- https://your-new-zrok-url.share.zrok.io');
     console.log('===================\n');
 }); 

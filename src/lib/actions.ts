@@ -1,7 +1,7 @@
 'use client'
 
 const API_URL = process.env.NODE_ENV === 'production'
-    ? 'https://wrctkehcvd0y.share.zrok.io'
+    ? 'https://ke4d1zh4v12a.share.zrok.io'
     : 'http://localhost:3001';
 
 export async function trackPageView(path: string) {
