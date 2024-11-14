@@ -1,5 +1,5 @@
 import express, { Request, Response, NextFunction } from 'express';
-import cors, { CorsCallback } from 'cors';
+import cors from 'cors';
 import { google } from 'googleapis';
 import dotenv from 'dotenv';
 
@@ -29,7 +29,7 @@ const allowedOrigins = [
 
 // Define CORS options with proper types
 const corsOptions = {
-    origin: (origin: string | undefined, callback: CorsCallback) => {
+    origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
         if (!origin || allowedOrigins.includes(origin)) {
             callback(null, true); // Allow the request
         } else {
