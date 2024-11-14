@@ -10,7 +10,7 @@ export default async function Blog() {
       <h1><b>Blog</b></h1>
       <br />
       
-      <BlogSubscribe />
+      {/* <BlogSubscribe /> */}
 
       <ul>
         {posts.map((post) => (
