@@ -22,33 +22,21 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
 // CORS configuration with debug logs
 app.use(cors({
-    origin: function (origin, callback) {
-        const allowedOrigins = [
-            'https://rishigurjar.com',
-            'https://www.rishigurjar.com',
-            'http://localhost:3000',
-            'http://localhost:3001',
-            'https://wp7tdwguie65.share.zrok.io'
-        ];
-        console.log('Incoming origin:', origin);
-        console.log('Allowed origins:', allowedOrigins);
-
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            console.log('Origin rejected:', origin);
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
+    origin: [
+        'https://rishigurjar.com',
+        'https://www.rishigurjar.com',
+        'http://localhost:3000',
+        'http://localhost:3001',
+        'https://wp7tdwguie65.share.zrok.io'
+    ],
     methods: ['GET', 'POST', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Accept'],
-    credentials: false
+    credentials: false,
+    preflightContinue: false,
+    optionsSuccessStatus: 204
 }));
 
 app.use(express.json());
-
-// Handle OPTIONS requests explicitly
-app.options('*', cors());
 
 // Enhanced request logging middleware
 app.use((req: Request, res: Response, next: NextFunction) => {
