@@ -7,7 +7,6 @@ import { notFound } from 'next/navigation';
 import './blogPost.css';
 import Link from 'next/link';
 import { generateSlug } from '@/lib/blog';
-import { PageTracker } from '../PageTracker';
 
 export async function generateStaticParams() {
   const blogDir = path.join(process.cwd(), 'src/blog-content');
@@ -53,7 +52,6 @@ export default async function BlogPost({ params }: { params: { slug: string } })
 
   return (
     <main className="container grid flex flex-col items-center mt-[60px] lg:mt-[calc(100vh/5.5)] lg:w-[calc(100vw/3)] md:w-[calc(100vw/3)] md:px-0">
-      <PageTracker path={`/blog/${params.slug}`} />
       <Link href="/blog" className="self-start mb-4">← Back to blog</Link>
       <h1>{post.title}</h1>
       <p>{new Date(post.date).toLocaleDateString()}</p>

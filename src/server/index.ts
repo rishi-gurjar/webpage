@@ -97,9 +97,5 @@ app.listen(PORT, () => {
     console.log(`Time: ${new Date().toISOString()}`);
     console.log(`Port: ${PORT}`);
     console.log(`Mode: ${process.env.NODE_ENV || 'development'}`);
-    console.log(`CORS origins enabled for:`);
-    console.log('- https://rishigurjar.com');
-    console.log('- http://localhost:3001');
-    console.log('- https://9ivizlis6cv5.share.zrok.io');
     console.log('===================\n');
 }); 
