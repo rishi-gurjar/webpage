@@ -20,12 +20,12 @@ app.use((req: Request, res: Response, next: NextFunction) => {
     next();
 });
 
-// Simplified CORS configuration
+// CORS configuration
 app.use(cors({
-    origin: '*',
-    methods: ['GET', 'POST', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Accept'],
-    optionsSuccessStatus: 200
+    origin: 'https://rishigurjar.com',  // Only allow your domain
+    methods: ['GET', 'POST', 'OPTIONS'], // Specify allowed HTTP methods
+    allowedHeaders: ['Content-Type', 'Accept', 'Authorization'], // Include headers that clients may send
+    optionsSuccessStatus: 200 // Some legacy browsers choke on 204 status for OPTIONS
 }));
 
 app.use(express.json());
