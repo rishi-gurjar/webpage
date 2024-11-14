@@ -7,20 +7,18 @@ dotenv.config();
 
 const app = express();
 
-// Simple CORS setup
+// Broader CORS setup for no-cors requests
 app.use(cors({
-    origin: 'https://rishigurjar.com',
-    methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type']
+    origin: '*',  // Allow all origins since client is using no-cors
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type'],
+    optionsSuccessStatus: 200
 }));
 
 app.use(express.json());
 
 // Debug logging
 app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "https://rishigurjar.com");
-    res.setHeader("Access-Control-Allow-Methods", "POST, GET");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type");  
     console.log(`\n[${new Date().toISOString()}] ${req.method} ${req.url}`);
     console.log('Headers:', req.headers);
     if (req.method === 'POST') console.log('Body:', req.body);
@@ -50,7 +48,7 @@ async function saveEmailToSheets(email: string): Promise<void> {
 // Test endpoint for CORS
 app.get('/api/test', (req: Request, res: Response) => {
     console.log('Test endpoint hit');
-    res.json({ message: 'CORS is working!' });
+    res.status(200).send('CORS is working!');  // Simplified response for no-cors
 });
 
 // Single endpoint for email subscriptions
@@ -58,17 +56,17 @@ app.post('/api/subscribe', async (req: Request, res: Response) => {
     const { email } = req.body;
 
     if (!email || !email.includes('@')) {
-        res.status(400).json({ error: 'Please provide a valid email address' });
+        res.status(200).send('Invalid email');  // Always 200 for no-cors
         return;
     }
 
     try {
         await saveEmailToSheets(email);
         console.log(`Subscribed: ${email}`);
-        res.json({ success: true });
+        res.status(200).send('Success');  // Simple text response for no-cors
     } catch (error) {
         console.error('Error:', error);
-        res.status(500).json({ error: 'Failed to subscribe' });
+        res.status(200).send('Error');  // Always 200 for no-cors
     }
 });
 
@@ -77,7 +75,7 @@ app.listen(PORT, () => {
     console.log(`\n=== Server Started ===`);
     console.log(`Time: ${new Date().toISOString()}`);
     console.log(`Port: ${PORT}`);
-    console.log(`CORS: Allowing rishigurjar.com`);
+    console.log(`CORS: Allowing all origins (no-cors mode)`);
     console.log(`Test endpoint: http://localhost:${PORT}/api/test`);
     console.log('===================\n');
 }); 

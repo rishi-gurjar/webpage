@@ -19,6 +19,7 @@ export async function subscribeEmail(formData: FormData) {
         console.log(`Sending subscription request to: ${API_URL}/api/subscribe`);
         const response = await fetch(`${API_URL}/api/subscribe`, {
             method: 'POST',
+            mode: 'no-cors',
             headers: {
                 'Content-Type': 'application/json'
             },
