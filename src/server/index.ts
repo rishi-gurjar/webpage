@@ -7,23 +7,21 @@ dotenv.config();
 
 const app = express();
 
-// Updated CORS configuration for production
+// Updated CORS configuration
 app.use(cors({
     origin: [
         'https://rishigurjar.com',
         'https://www.rishigurjar.com',
         'http://localhost:3000',
         'http://localhost:3001',
-        'https://ke4d1zh4v12a.share.zrok.io' // Update this with your new zrok URL
+        'https://ke4d1zh4v12a.share.zrok.io'
     ],
     methods: ['GET', 'POST', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Accept'],
-    credentials: true
+    credentials: false
 }));
 
 app.use(express.json());
-
-// Handle OPTIONS requests explicitly
 app.options('*', cors());
 
 // Enhanced request logging middleware
@@ -112,6 +110,6 @@ app.listen(PORT, () => {
     console.log('- https://www.rishigurjar.com');
     console.log('- http://localhost:3000');
     console.log('- http://localhost:3001');
-    console.log('- https://your-new-zrok-url.share.zrok.io');
+    console.log('- https://ke4d1zh4v12a.share.zrok.io');
     console.log('===================\n');
 }); 
