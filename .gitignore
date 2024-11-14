@@ -34,3 +34,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+*/.env
+blog-441622-f450efc783d0.json
+
+# Add these lines if they're not already there
+*.json
+!package.json
+!package-lock.json
+!tsconfig.json
+!components.json
+

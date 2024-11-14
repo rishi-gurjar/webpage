@@ -27,6 +27,7 @@ export default function RootLayout({
           data-ssr-defer
           defer
       />
+      
       </head>
       <body className={inter.className}>{children}</body>
     </html>
