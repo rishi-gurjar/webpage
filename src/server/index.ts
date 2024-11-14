@@ -10,11 +10,11 @@ const app = express();
 // Broader CORS setup for no-cors requests
 app.use(cors({
     origin: '*',  // Allow all origins since client is using no-cors
-    methods: ['GET', 'POST', 'OPTIONS'],
-    allowedHeaders: ['Content-Type'],
-    optionsSuccessStatus: 200
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type']
 }));
 
+app.use(express.text());
 app.use(express.json());
 
 // Debug logging
@@ -53,20 +53,20 @@ app.get('/api/test', (req: Request, res: Response) => {
 
 // Single endpoint for email subscriptions
 app.post('/api/subscribe', async (req: Request, res: Response) => {
-    const { email } = req.body;
+    const email = req.body;
 
     if (!email || !email.includes('@')) {
-        res.status(200).send('Invalid email');  // Always 200 for no-cors
+        res.status(200).send('Invalid email');  // Plain text response
         return;
     }
 
     try {
         await saveEmailToSheets(email);
         console.log(`Subscribed: ${email}`);
-        res.status(200).send('Success');  // Simple text response for no-cors
+        res.status(200).send('Success');  // Plain text response
     } catch (error) {
         console.error('Error:', error);
-        res.status(200).send('Error');  // Always 200 for no-cors
+        res.status(200).send('Error');  // Plain text response
     }
 });
 

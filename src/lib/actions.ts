@@ -21,20 +21,12 @@ export async function subscribeEmail(formData: FormData) {
             method: 'POST',
             mode: 'no-cors',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'text/plain'
             },
-            body: JSON.stringify({ email })
+            body: email
         });
 
         console.log('Subscribe response status:', response.status);
-        
-        const text = await response.text();
-        console.log('Raw response:', text);
-        
-        if (!response.ok) {
-            throw new Error('Failed to subscribe');
-        }
-        
         return { success: true };
     } catch (error) {
         console.error('Error saving to Google Sheets:', error);
