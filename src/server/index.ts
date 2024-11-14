@@ -1,4 +1,4 @@
-import express, { Request, Response, NextFunction } from 'express';
+import express, { Request, Response } from 'express';
 import cors from 'cors';
 import { google } from 'googleapis';
 import dotenv from 'dotenv';
@@ -7,62 +7,54 @@ dotenv.config();
 
 const app = express();
 
-// Debug middleware - log all requests
-app.use((req: Request, res: Response, next: NextFunction) => {
-    console.log('\n=== Request Debug ===');
-    console.log('Time:', new Date().toISOString());
-    console.log('Origin:', req.headers.origin);
-    console.log('Method:', req.method);
-    console.log('URL:', req.url);
-    console.log('Headers:', JSON.stringify(req.headers, null, 2));
-    if (req.method === 'POST') {
-        console.log('Body:', req.body);
-    }
-    console.log('==================\n');
+// Simple CORS setup
+app.use(cors({
+    origin: 'https://rishigurjar.com',
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type']
+}));
+
+app.use(express.json());
+
+// Debug logging
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "https://rishigurjar.com");
+    res.setHeader("Access-Control-Allow-Methods", "POST, GET");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");  
+    console.log(`\n[${new Date().toISOString()}] ${req.method} ${req.url}`);
+    console.log('Headers:', req.headers);
+    if (req.method === 'POST') console.log('Body:', req.body);
     next();
 });
 
-// Define allowed origins
-const allowedOrigins = [
-    'https://rishigurjar.com',
-    'http://localhost:3001',
-    'https://9ivizlis6cv5.share.zrok.io'
-];
-
-// Define CORS options with proper types
-const corsOptions = {
-    origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
-    methods: ['POST', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Accept'],
-    credentials: true,
-    optionsSuccessStatus: 200
-};
-
-app.use(cors(corsOptions));
-app.use(express.json());
-
+// Google Sheets setup
 const credentials = require('../../blog-441622-f450efc783d0.json');
 const auth = new google.auth.GoogleAuth({
     credentials,
     scopes: ['https://www.googleapis.com/auth/spreadsheets'],
 });
-
 const sheets = google.sheets({ version: 'v4', auth });
 
-interface SubscribeRequest {
-    email: string;
+// Helper function to save email to Google Sheets
+async function saveEmailToSheets(email: string): Promise<void> {
+    await sheets.spreadsheets.values.append({
+        spreadsheetId: process.env.SHEET_ID,
+        range: 'A:B',
+        valueInputOption: 'RAW',
+        requestBody: {
+            values: [[email, new Date().toISOString()]],
+        },
+    });
 }
 
-const subscribeHandler = async (
-    req: Request<{}, {}, SubscribeRequest>,
-    res: Response
-): Promise<void> => {
+// Test endpoint for CORS
+app.get('/api/test', (req: Request, res: Response) => {
+    console.log('Test endpoint hit');
+    res.json({ message: 'CORS is working!' });
+});
+
+// Single endpoint for email subscriptions
+app.post('/api/subscribe', async (req: Request, res: Response) => {
     const { email } = req.body;
 
     if (!email || !email.includes('@')) {
@@ -71,31 +63,21 @@ const subscribeHandler = async (
     }
 
     try {
-        await sheets.spreadsheets.values.append({
-            spreadsheetId: process.env.SHEET_ID,
-            range: 'A:B',
-            valueInputOption: 'RAW',
-            requestBody: {
-                values: [[email, new Date().toISOString()]],
-            },
-        });
-
-        console.log(`Successfully subscribed: ${email}`);
+        await saveEmailToSheets(email);
+        console.log(`Subscribed: ${email}`);
         res.json({ success: true });
     } catch (error) {
-        console.error('Error saving to Google Sheets:', error);
-        res.status(500).json({ error: 'Failed to subscribe. Please try again later.' });
+        console.error('Error:', error);
+        res.status(500).json({ error: 'Failed to subscribe' });
     }
-};
-
-app.post('/api/subscribe', subscribeHandler);
+});
 
 const PORT = process.env.PORT || 3001;
-
 app.listen(PORT, () => {
     console.log(`\n=== Server Started ===`);
     console.log(`Time: ${new Date().toISOString()}`);
     console.log(`Port: ${PORT}`);
-    console.log(`Mode: ${process.env.NODE_ENV || 'development'}`);
+    console.log(`CORS: Allowing rishigurjar.com`);
+    console.log(`Test endpoint: http://localhost:${PORT}/api/test`);
     console.log('===================\n');
 }); 

@@ -5,7 +5,6 @@ const API_URL = process.env.NODE_ENV === 'production'
     : 'http://localhost:3001';
 
 console.log('API_URL:', API_URL);
-console.log('NODE_ENV:', process.env.NODE_ENV);
 
 export async function subscribeEmail(formData: FormData) {
     const email = formData.get('email') as string;
@@ -21,11 +20,8 @@ export async function subscribeEmail(formData: FormData) {
         const response = await fetch(`${API_URL}/api/subscribe`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
+                'Content-Type': 'application/json'
             },
-            credentials: 'include',
-            mode: 'cors',
             body: JSON.stringify({ email })
         });
 
