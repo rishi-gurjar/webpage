@@ -17,8 +17,7 @@ export async function trackPageView(path: string) {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
-            },
-            mode: 'cors'
+            }
         });
 
         console.log('Track response status:', response.status);

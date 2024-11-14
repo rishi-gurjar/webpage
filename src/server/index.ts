@@ -20,9 +20,9 @@ app.use((req: Request, res: Response, next: NextFunction) => {
     next();
 });
 
-// Updated CORS configuration
+// Simplified CORS configuration
 app.use(cors({
-    origin: true,
+    origin: '*',
     methods: ['GET', 'POST', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Accept'],
     optionsSuccessStatus: 200
