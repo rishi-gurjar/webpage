@@ -21,6 +21,7 @@ export async function subscribeEmail(formData: FormData) {
             method: 'POST',
             headers: {
                 'Content-Type': 'text/plain',
+                'skip_zrok_interstitial': 'true',
             },
             body: email
         });
