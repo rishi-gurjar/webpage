@@ -36,11 +36,17 @@ async function saveEmailToSheets(email: string): Promise<void> {
     });
 }
 
-// Page view tracking endpoint - just log to console
+// Page view tracking endpoint - with detailed client info
 app.post('/api/track', async (req: Request, res: Response) => {
     const path = req.body;
     const timestamp = new Date().toLocaleString();
-    console.log(`[${timestamp}] Page View: ${path}`);
+    const ip = req.ip || req.socket.remoteAddress || 'Unknown';
+    const userAgent = req.headers['user-agent'] || 'Unknown';
+    const referer = req.headers.referer || 'Direct';
+    const device = userAgent.match(/\((.*?)\)/)?.[1]?.split(';')[0] || 'Unknown Device';
+
+    console.log(`${timestamp} | ${path} | ${ip} | ${device}`);
+
     res.status(200).send('OK');
 });
 

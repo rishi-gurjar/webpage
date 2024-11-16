@@ -1,11 +1,9 @@
 "use client";
 
-
 import Image from "next/image"
 import tileImage from '/public/tile.png';
 import promImage from '/public/prom.jpg';
 import lamb from '/public/mysticlamb.png';
-
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import React, { useState, useEffect } from 'react'
 import { PageTracker } from './blog/PageTracker';
@@ -14,7 +12,7 @@ export default function Home() {
   const [img, setImg] = useState(tileImage);
   const [caption, setCaption] = useState("DALLE-2, 2022 AD");
   const [lastY, setLastY] = useState(null);
-  
+
   const handleMouseEnter = () => {
     setImg(lamb);
     setCaption("van Eyck, 1432 AD");
@@ -24,14 +22,14 @@ export default function Home() {
     setImg(tileImage);
     setCaption("DALLE-2, 2022 AD");
   }
-  
+
 
   return (
     <main className="container grid flex flex-col items-center mt-[60px] lg:mt-[calc(100vh/5.5)] lg:w-[calc(100vw/3)] md:w-[calc(100vw/3)] md:px-0">
       <PageTracker path="/" />
       <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         <AspectRatio ratio={16 / 7.5}>
-          <Image src={img} alt="Image" className="rounded-md object-cover" width={800} height={100}/>
+          <Image src={img} alt="Image" className="rounded-md object-cover" width={800} height={100} />
           <h3 className="leading-7 text-right [&:not(:first-child)]:mt-1">{caption}</h3>
         </AspectRatio>
       </div>
