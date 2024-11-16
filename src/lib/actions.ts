@@ -1,22 +1,31 @@
 'use client'
 
 const API_URL = process.env.NODE_ENV === 'production'
-    ? 'https://xj8kkegggmew.share.zrok.io'
+    ? 'https://6b06-128-84-127-255.ngrok-free.app'
     : 'http://localhost:3001';
 
-console.log('API_URL:', API_URL);
+export async function trackPageView(path: string) {
+    try {
+        await fetch(`${API_URL}/api/track`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'text/plain',
+            },
+            body: path
+        });
+    } catch (error) {
+        // Silently fail tracking
+    }
+}
 
 export async function subscribeEmail(formData: FormData) {
     const email = formData.get('email') as string;
-    console.log(`Attempting to subscribe email: ${email}`);
 
     if (!email || !email.includes('@')) {
-        console.log('Invalid email format');
         return { error: 'Please provide a valid email address' };
     }
 
     try {
-        console.log(`Sending subscription request to: ${API_URL}/api/subscribe`);
         const response = await fetch(`${API_URL}/api/subscribe`, {
             method: 'POST',
             headers: {
@@ -26,10 +35,8 @@ export async function subscribeEmail(formData: FormData) {
             body: email
         });
 
-        console.log('Subscribe response status:', response.status);
         return { success: true };
     } catch (error) {
-        console.error('Error saving to Google Sheets:', error);
         return { error: 'Failed to subscribe. Please try again later.' };
     }
 } 

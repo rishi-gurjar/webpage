@@ -7,20 +7,13 @@ dotenv.config();
 
 const app = express();
 
-// Only use text parser since we're only accepting plaintext
+app.use(cors());
 app.use(express.text());
 
-// Debug logging
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
-    console.log(`\n[${new Date().toISOString()}] ${req.method} ${req.url}`);
-    console.log('Headers:', req.headers);
-    if (req.method === 'POST') {
-        console.log('Content-Type:', req.headers['content-type']);
-        console.log('Raw Body:', req.body);
-    }
     next();
 });
 
@@ -32,7 +25,6 @@ const auth = new google.auth.GoogleAuth({
 });
 const sheets = google.sheets({ version: 'v4', auth });
 
-// Helper function to save email to Google Sheets
 async function saveEmailToSheets(email: string): Promise<void> {
     await sheets.spreadsheets.values.append({
         spreadsheetId: process.env.SHEET_ID,
@@ -44,29 +36,30 @@ async function saveEmailToSheets(email: string): Promise<void> {
     });
 }
 
-// Test endpoint
-app.get('/api/test', (req: Request, res: Response) => {
-    console.log('Test endpoint hit');
-    res.status(200).send('OK');  // Simple text response
+// Page view tracking endpoint - just log to console
+app.post('/api/track', async (req: Request, res: Response) => {
+    const path = req.body;
+    const timestamp = new Date().toLocaleString();
+    console.log(`[${timestamp}] Page View: ${path}`);
+    res.status(200).send('OK');
 });
 
-// Email subscription endpoint - expecting plaintext only
+// Email subscription endpoint
 app.post('/api/subscribe', async (req: Request, res: Response) => {
-    const email = req.body;  // Body is already text
-    console.log('Received email:', email);
+    const email = req.body;
 
     if (!email || typeof email !== 'string' || !email.includes('@')) {
-        res.status(200).send('Invalid');  // Always 200 for no-cors
+        res.status(200).send('Invalid');
         return;
     }
 
     try {
         await saveEmailToSheets(email);
-        console.log(`Subscribed: ${email}`);
-        res.status(200).send('OK');  // Simple text response
+        console.log(`Added to Sheets: ${email}`);
+        res.status(200).send('OK');
     } catch (error) {
-        console.error('Error:', error);
-        res.status(200).send('Error');  // Always 200 for no-cors
+        console.error('Error saving to Sheets:', error);
+        res.status(200).send('Error');
     }
 });
 
@@ -75,6 +68,5 @@ app.listen(PORT, () => {
     console.log(`\n=== Server Started ===`);
     console.log(`Time: ${new Date().toISOString()}`);
     console.log(`Port: ${PORT}`);
-    console.log(`Mode: Plaintext only, no-cors responses`);
     console.log('===================\n');
 }); 

@@ -23,24 +23,24 @@ export function BlogSubscribe() {
   }
 
   return (
-    <div className="w-full max-w-md mb-8 p-4 border border-gray-200 rounded-lg">
-      <h2 className="text-lg mb-2">Subscribe for updates</h2>
-      <form id="email-form" action={handleSubmit} className="flex flex-col gap-2">
+    <div className="w-full max-w-sm mb-4 p-3 border border-gray-200 rounded-lg">
+      <h2 className="text-base mb-2">Join my very exclusive mailing list of 2 people</h2>
+      <form id="email-form" action={handleSubmit} className="flex flex-col gap-1.5">
         <input
           type="email"
           name="email"
           placeholder="Enter your email"
           required
-          className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="flex-1 px-2 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
         />
         <button
           type="submit"
-          className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="px-3 py-1.5 text-sm bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-500"
         >
           Subscribe
         </button>
         {status.type && (
-          <p className={`mt-2 text-sm ${
+          <p className={`mt-1.5 text-xs ${
             status.type === 'success' ? 'text-green-600' : 'text-red-600'
           }`}>
             {status.message}
@@ -49,4 +49,4 @@ export function BlogSubscribe() {
       </form>
     </div>
   );
-} 
+}
