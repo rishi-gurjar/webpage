@@ -5,12 +5,8 @@ import tileImage from '/public/tile.png';
 import promImage from '/public/prom.jpg';
 import lamb from '/public/mysticlamb.png';
 import { AspectRatio } from "@/components/ui/aspect-ratio"
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { PageTracker } from './blog/PageTracker';
-import Head from 'next/head'
-
-// Add blur base64 data for images
-const blurDataURL = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQrJyEwPENrLi4wPERBP0A/QUBCRVlJPUdVY1ZkYmVpZG9tgXltcW5wZGX/2wBDARUXFyAeIBohHh4hZEI8QmRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGT/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
 
 export default function Home() {
   const [img, setImg] = useState(tileImage);
@@ -28,34 +24,20 @@ export default function Home() {
 
   return (
     <main className="container grid flex flex-col items-center mt-[60px] lg:mt-[calc(100vh/5.5)] lg:w-[calc(100vw/3)] md:w-[calc(100vw/3)] md:px-0">
-      <Head>
-        <link rel="preload" as="image" href={lamb.src} />
-      </Head>
       <PageTracker path="/" />
       <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         <AspectRatio ratio={16 / 7.5}>
-          <Image
-            src={img}
-            alt="Image"
-            className="rounded-md object-cover"
+          <Image 
+            src={img} 
+            alt="Image" 
+            className="rounded-md object-cover" 
             priority={true}
-            placeholder="blur"
-            blurDataURL={blurDataURL}
-            width={800}
+            width={800} 
             height={375}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
           <h3 className="leading-7 text-right [&:not(:first-child)]:mt-1">{caption}</h3>
         </AspectRatio>
       </div>
-      <Image
-        src={lamb}
-        alt="Preloaded hover image"
-        width={1}
-        height={1}
-        className="hidden"
-        priority={true}
-      />
 
       <div className="mt-4">
         <h2 className="scroll-m-20 text-xl font-semibold tracking-tight">Rishi Gurjar</h2>
