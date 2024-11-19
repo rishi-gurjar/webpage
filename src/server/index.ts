@@ -40,7 +40,14 @@ async function saveEmailToSheets(email: string): Promise<void> {
 app.post('/api/track', async (req: Request, res: Response) => {
     const path = req.body;
     const timestamp = new Date().toLocaleString();
-    const ip = req.ip || req.socket.remoteAddress || 'Unknown';
+    
+    // Get the real IP by checking X-Forwarded-For header first
+    // This handles cases where the request comes through a proxy/load balancer
+    const ip = (req.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim() || 
+               req.ip || 
+               req.socket.remoteAddress || 
+               'Unknown';
+    
     const userAgent = req.headers['user-agent'] || 'Unknown';
     const referer = req.headers.referer || 'Direct';
     const device = userAgent.match(/\((.*?)\)/)?.[1]?.split(';')[0] || 'Unknown Device';
