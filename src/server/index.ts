@@ -126,7 +126,7 @@ async function getSubscriberList(): Promise<string[]> {
 async function testEmailSending(skipConfirmation: boolean = false, filePath?: string) {
     // Get subscriber list from Google Sheet
     const subscribers = await getSubscriberList();
-    console.log(`Found ${subscribers.length} subscribers`);
+    console.log(`Found ${subscribers.length} subscribers: ${subscribers}`);
 
     // Get blog post details if filePath is provided
     let postTitle = "New Blog Post";
@@ -170,7 +170,7 @@ async function testEmailSending(skipConfirmation: boolean = false, filePath?: st
                             You're receiving this because you subscribed to blog updates from rishigurjar.com. If you don't remember doing that, that's on you.
                         </p>
                         <p style="color: #999; font-size: 12px;">
-                            Best,<br>
+                            Ad astra per aspera,<br>
                             Jarvis
                         </p>
                     </div>
