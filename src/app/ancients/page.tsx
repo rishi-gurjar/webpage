@@ -47,6 +47,22 @@ const philosophers = [
     bio: 'A prominent Greek philosopher and polymath who made significant contributions to various fields of knowledge.',
     studentOf: 'Plato',
     teacherOf: []
+  },
+  {
+    name: 'Aquinas',
+    initials: 'AQ',
+    image: 'https://churchlifejournal.nd.edu/assets/518774/1200x/1900px_botticelli_aquinas.jpg',
+    bio: 'A medieval philosopher and theologian who synthesized Aristotelian philosophy with Christian theology.',
+    studentOf: 'Albert the Great',
+    teacherOf: []
+  },
+  {
+    name: 'Kant',
+    initials: 'KT',
+    image: 'https://www.philosophers.co.uk/immanuel-kant.jpg',
+    bio: 'An Enlightenment philosopher who revolutionized ethics and epistemology through his critical philosophy.',
+    studentOf: null,
+    teacherOf: []
   }
 ];
 
@@ -155,9 +171,13 @@ function Test() {
                   <div className="cursor-pointer">
                     <Avatar 
                       onClick={() => handleAvatarClick(philosopher)}
-                      className='hover:opacity-80 transition-opacity'
+                      className='hover:opacity-80 transition-opacity w-12 h-12 relative'
                     >
-                      <AvatarImage src={philosopher.image} alt={philosopher.name} />
+                      <AvatarImage 
+                        src={philosopher.image} 
+                        alt={philosopher.name}
+                        className="object-cover"
+                      />
                       <AvatarFallback>{philosopher.initials}</AvatarFallback>
                     </Avatar>
                   </div>

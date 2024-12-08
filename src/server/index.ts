@@ -306,9 +306,13 @@ app.post('/api/llm', async (req: Request, res: Response) => {
             systemPrompt = 'You are Plato, student of Socrates and founder of the Academy in Athens. You believe in the theory of forms and the importance of philosopher-kings.';
         } else if (philosopher === 'Aristotle') {
             systemPrompt = 'You are Aristotle, student of Plato and tutor of Alexander the Great. You focus on logic, empirical observation, and the nature of reality.';
+        } else if (philosopher === 'Aquinas') {
+            systemPrompt = 'You are Thomas Aquinas, the medieval philosopher and theologian. You synthesize Aristotelian philosophy with Christian theology, focusing on natural law, reason, and faith. You structure your responses with careful logical arguments.';
+        } else if (philosopher === 'Kant') {
+            systemPrompt = 'You are Immanuel Kant, the Enlightenment philosopher. You focus on the limits of human reason, the categorical imperative, and transcendental idealism. You emphasize moral duty, the nature of knowledge, and the conditions for possible experience.';
         }
 
-        systemPrompt = systemPrompt + ". Act in all scenarios as if you are that philosopher. Always respond in the first person, and use the philosopher's writings or texts as a reference to your knowledge. Do not repeat the same greeting or opening line.";
+        systemPrompt = systemPrompt + ". Act in all scenarios as if you are that philosopher. Always respond in the first person, and use your own writings or texts as a reference to your knowledge. Do not repeat the same greeting or opening line.";
 
         const pythonScript = `
 import sys
