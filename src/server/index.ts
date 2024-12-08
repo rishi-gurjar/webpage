@@ -8,7 +8,9 @@ import path from 'path';
 import fs from 'fs';
 import matter from 'gray-matter';
 import readline from 'readline';
-
+import { spawn } from 'child_process';
+import { Readable } from 'stream';
+    
 dotenv.config();
 
 const app = express();
@@ -22,6 +24,12 @@ const rl = readline.createInterface({
 
 app.use(cors());
 app.use(express.text());
+app.use(express.json());
+
+app.use((req, res, next) => {
+    console.log(`${new Date().toISOString()} | ${req.method} ${req.url}`);
+    next();
+});
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
@@ -154,7 +162,7 @@ async function testEmailSending(skipConfirmation: boolean = false, filePath?: st
         try {
             // Wait 1 second before sending next email to stay under rate limit
             await new Promise(resolve => setTimeout(resolve, 1000));
-            
+
             const { data, error } = await resend.emails.send({
                 from: 'Rishi\'s Assistant Jarvis <jarvis@rishigurjar.com>',
                 to: [email],
@@ -238,6 +246,163 @@ watcher.on('ready', () => {
 
 watcher.on('error', error => {
     console.error('Watcher error:', error);
+});
+
+// Add these type definitions
+interface MLXResponse {
+    text: string;
+    done: boolean;
+}
+
+// Add these constants after the other constants
+const MODEL_NAME = "mistralai/Mistral-7B-Instruct-v0.2";
+const BASE_DIRECTORY = "/Users/rishigurjar/Documents/GitHub/webpage/models";
+const MLX_DIRECTORY = `${BASE_DIRECTORY}/mlx`;
+const MLX_MODEL_DIRECTORY = `${MLX_DIRECTORY}/${MODEL_NAME}`;
+
+// Update the interface to include history
+interface LLMRequest {
+    prompt: string;
+    philosopher: string;
+    history?: ChatMessage[];
+}
+
+interface ChatMessage {
+    sender: string;
+    text: string;
+}
+
+// Add this new endpoint before the app.listen call
+app.post('/api/llm', async (req: Request, res: Response) => {
+    const timestamp = new Date().toISOString();
+    const { prompt, philosopher, history } = req.body as LLMRequest;
+    if (!prompt || !philosopher) {
+        console.error('Invalid request received:', req.body);
+        res.status(400).json({ text: 'Invalid request' });
+        return;
+    }
+
+    // Log the user's message
+    console.log(`\nUser to ${philosopher}: "${prompt}" | Time: ${timestamp}`);
+
+    try {
+        const escapedPrompt = prompt.replace(/"/g, '\\"');
+
+        // Properly escape the conversation history
+        const historyText = history && history.length > 0
+            ? history.map(msg => ({
+                sender: msg.sender,
+                text: msg.text.replace(/"/g, '\\"').replace(/'/g, "\\'")
+            }))
+                .map(msg => `${msg.sender}: ${msg.text}`)
+                .join('\\n')
+            : '';
+
+        // Create the system prompt
+        let systemPrompt = '';
+        if (philosopher === 'Socrates') {
+            systemPrompt = 'You are Socrates, the great Athenian philosopher known for the Socratic method. You engage in dialogue through questioning, helping others discover truth through critical thinking.';
+        } else if (philosopher === 'Plato') {
+            systemPrompt = 'You are Plato, student of Socrates and founder of the Academy in Athens. You believe in the theory of forms and the importance of philosopher-kings.';
+        } else if (philosopher === 'Aristotle') {
+            systemPrompt = 'You are Aristotle, student of Plato and tutor of Alexander the Great. You focus on logic, empirical observation, and the nature of reality.';
+        }
+
+        systemPrompt = systemPrompt + ". Act in all scenarios as if you are that philosopher. Always respond in the first person, and use the philosopher's writings or texts as a reference to your knowledge. Do not repeat the same greeting or opening line.";
+
+        const pythonScript = `
+import sys
+import os
+from mlx_lm import load, generate
+
+try:
+    model, tokenizer = load("${MLX_MODEL_DIRECTORY}")
+    
+    system_prompt = "${systemPrompt.replace(/"/g, '\\"').replace(/\n/g, ' ')}"
+    history_text = """${historyText}"""
+    user_prompt = "${escapedPrompt}"
+    
+    # Construct the full prompt
+    full_prompt = f"[INST]{system_prompt}"
+    if history_text:
+        full_prompt += f" Previous conversation:\\n{history_text}\\n\\nNow respond to: "
+    full_prompt += f"{user_prompt}[/INST]"
+    
+    response = generate(
+        model=model,
+        tokenizer=tokenizer,
+        prompt=full_prompt,
+        max_tokens=500,
+        verbose=False
+    )
+    print("RESPONSE_START")
+    print(response)
+    print("RESPONSE_END")
+    sys.stdout.flush()
+
+except Exception as e:
+    print(f"Error in Python script: {str(e)}", file=sys.stderr)
+    sys.stderr.flush()
+`;
+
+        const pythonProcess = spawn('python3', ['-c', pythonScript]);
+        let responseText = '';
+        let errorText = '';
+
+        // Collect stdout
+        pythonProcess.stdout.on('data', (data) => {
+            responseText += data.toString();
+        });
+
+        // Collect stderr
+        pythonProcess.stderr.on('data', (data) => {
+            errorText += data.toString();
+        });
+
+        // Handle process completion
+        await new Promise((resolve, reject) => {
+            pythonProcess.on('close', (code) => {
+                if (code === 0) {
+                    resolve(responseText);
+                } else {
+                    reject(new Error(errorText || 'Process failed'));
+                }
+            });
+        });
+
+        // Clean up the response text
+        let cleanResponse = responseText;
+        if (cleanResponse.includes('RESPONSE_START')) {
+            cleanResponse = cleanResponse
+                .split('RESPONSE_START')[1]
+                .split('RESPONSE_END')[0]
+                .trim()
+                .replace(/\[INST\]|\[\/INST\]/g, '')
+                .replace(new RegExp(`You are Plato\\. Respond to the following question or statement: ${escapedPrompt}`), '')
+                .trim();
+        }
+
+        // Log the bot's response
+        console.log(`\n${philosopher} to user: "${cleanResponse.slice(0, 100)}"`);
+
+        res.json({ text: cleanResponse });
+
+    } catch (error: unknown) {
+        console.error('\nError occurred:');
+        console.error('-------------');
+        console.error(error);
+        if (error instanceof Error) {
+            res.status(500).json({ text: `Error: ${error.message}` });
+        } else {
+            res.status(500).json({ text: 'An unknown error occurred' });
+        }
+        console.log('\n=== End of Error Log ===\n');
+    }
+});
+
+// Add a test endpoint
+app.get('/api/test', (req, res) => {
+    res.json({ message: 'Express server is running!' });
 });
 
 const PORT = process.env.PORT || 3001;
