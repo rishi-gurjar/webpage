@@ -152,10 +152,13 @@ async function testEmailSending(skipConfirmation: boolean = false, filePath?: st
     // Send individual emails to each subscriber
     for (const email of subscribers) {
         try {
+            // Wait 1 second before sending next email to stay under rate limit
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
             const { data, error } = await resend.emails.send({
-                from: 'Jarvis <jarvis@rishigurjar.com>',
+                from: 'Rishi\'s Assistant Jarvis <jarvis@rishigurjar.com>',
                 to: [email],
-                subject: `New Blog Post: ${postTitle}`,
+                subject: `URGENT: Rishi\'s Blog Post: ${postTitle}`,
                 html: `
                     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0;">
                         <h2 style="color: #333; font-family: 'Courier New', monospace;">New Blog Post: ${postTitle}</h2>

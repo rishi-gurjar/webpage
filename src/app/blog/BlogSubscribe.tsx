@@ -15,7 +15,7 @@ export function BlogSubscribe() {
     const result = await subscribeEmail(formData);
     
     if (result.error) {
-      setStatus({ type: 'error', message: 'Rishi&apos;s computer is off :(' });
+      setStatus({ type: 'error', message: 'Rishi\'s computer is off :(' });
     } else {
       setStatus({ type: 'success', message: 'Successfully subscribed!' });
       (document.getElementById('email-form') as HTMLFormElement).reset();
