@@ -64,7 +64,17 @@ export default function Home() {
           {/* <a className="hover:text-green-500" href="https://codexfund.vercel.app/" target="_blank" rel="noopener noreferrer"><h4>Codex Fund</h4></a> */}
           <a className="hover:text-green-500" href="https://armada.build/" target="_blank" rel="noopener noreferrer"><h4>Armada</h4></a>
           <a className="hover:text-green-500" href="https://beyondterra.org" target="_blank" rel="noopener noreferrer"><h4>Beyond Terra</h4></a>
+          <a className="hover:text-green-500" href="https://rishigurjar.com/ancients" target="_blank" rel="noopener noreferrer"><h4>Ancients</h4></a>
         </div>
+
+        {/* <div className="relative w-full h-[352px]">
+          <iframe 
+            src="https://open.spotify.com/embed/playlist/5yIvBs25i0461KsiX5OCZR?utm_source=oembed"
+            className="absolute top-0 left-0 w-full h-4/5 border-0"
+            allowFullScreen
+            allow="clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          />
+        </div> */}
       </div>
 
     </main>
