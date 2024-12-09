@@ -151,7 +151,7 @@ function Test() {
         setIsTyping(false);
         setChatMessages(prev => [...prev, {
           sender: 'System',
-          text: 'Error: Could not connect to Rishi\'s server.'
+          text: 'ERROR: Your IP has been blocked by Rishi... jk, Rishi\'s computer is turned off rn :('
         }]);
       }
     }
