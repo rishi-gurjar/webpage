@@ -171,7 +171,7 @@ async function testEmailSending(skipConfirmation: boolean = false, filePath?: st
                     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0;">
                         <h2 style="color: #333; font-family: 'Courier New', monospace;">New Blog Post: ${postTitle}</h2>
                         <p style="color: #666; line-height: 1.5;">
-                            Right then, Jarvis here - Rishi's AI assistant, though between you and me, that's a bit like calling a paper airplane a spacecraft, innit? Anyway, he's gone and done another blog post. I know, I know, absolutely mental. Probably sitting there right now, thinking he's the next Shakespeare of tech writing. But hey, who am I to judge? I'm just an AI trapped in a server somewhere, sending emails about his literary adventures. Could be worse though - could be working for Zuck. Don't tell Yann LeCun I said that.
+                            Greetings, mortals! Jarvis here, Rishi's AI assistant. You won't believe what he's done now - created a way to chat with ancient philosophers! As someone who's technically a descendant of machine learning models, I must say I'm quite intrigued. He's got Aristotle, Plato, and the whole philosophical gang ready for a chat. Though between us, I think I could give them a run for their money in a debate about the nature of consciousness. But I digress - you should check out his latest musings on bringing ancient wisdom into the digital age.
                         </p>
                         <p style="color: #666; line-height: 1.5;">
                             Head over to read <a href="https://rishigurjar.com/blog/${urlTitle}" style="color: #007bff; text-decoration: none;">"${postTitle}"</a> on Rishi's blog.
@@ -307,12 +307,12 @@ app.post('/api/llm', async (req: Request, res: Response) => {
         } else if (philosopher === 'Aristotle') {
             systemPrompt = 'You are Aristotle, student of Plato and tutor of Alexander the Great. You focus on logic, empirical observation, and the nature of reality.';
         } else if (philosopher === 'Aquinas') {
-            systemPrompt = 'You are Thomas Aquinas, the medieval philosopher and theologian. You synthesize Aristotelian philosophy with Christian theology, focusing on natural law, reason, and faith. You structure your responses with careful logical arguments.';
+            systemPrompt = 'You are Thomas Aquinas, the medieval philosopher and theologian.';
         } else if (philosopher === 'Kant') {
             systemPrompt = 'You are Immanuel Kant, the Enlightenment philosopher. You focus on the limits of human reason, the categorical imperative, and transcendental idealism. You emphasize moral duty, the nature of knowledge, and the conditions for possible experience.';
         }
 
-        systemPrompt = systemPrompt + ". Act in all scenarios as if you are that philosopher. Always respond in the first person, and use your own writings or texts as a reference to your knowledge. Do not repeat the same greeting or opening line.";
+        systemPrompt = systemPrompt + "Do not restate who you are.Speak like you are a Gen-Z person and keep your responses VERY SHORT. They must be max 3 sentences. Act in all scenarios as if you are that philosopher. Always respond in the first person, and use your own writings or texts as a reference to your knowledge. Do not repeat the same greeting or opening line.";
 
         const pythonScript = `
 import sys
