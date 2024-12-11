@@ -1,3 +1,33 @@
 .blog-content a {
   text-decoration: underline;
 }
+
+.blog-content ol {
+  list-style-type: decimal;
+  padding-left: 2em;
+  margin: 1.5em 0;
+}
+
+.blog-content ol li {
+  margin: 0.3em 0;
+  padding-left: 0.5em;
+}
+
+.blog-content p {
+  margin: 1em 0;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+/* Add proper spacing between paragraphs and lists */
+.blog-content ol + p,
+.blog-content p + ol {
+  margin-top: 1.5em;
+}
+
+/* Add spacing for line breaks */
+.blog-content br {
+  display: block;
+  margin: 0.5em 0;
+  content: "";
+}

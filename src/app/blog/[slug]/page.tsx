@@ -32,11 +32,18 @@ export default async function BlogPost({ params }: { params: { slug: string } })
       const filePath = path.join(blogDir, filename);
       const fileContents = fs.readFileSync(filePath, 'utf8');
       const { data, content } = matter(fileContents);
+
+      const clean_content = content
+      .replace(/\\\n/g, '\n\n')  // Replace backslash-newlines with double newlines
+      .replace(/\\$/gm, '')      // Remove trailing backslashes
+      .replace(/(\d+)\.\s*/g, '$1. ')  // Ensure proper spacing for list items
+      .replace(/\n\n\n+/g, '\n\n');    // Normalize multiple newlines to double newlines
+
       return {
         slug: generateSlug(data.title),
         title: data.title,
         date: data.date,
-        content,
+        content: clean_content,
       };
     })
     .find((post) => post.slug === params.slug);
