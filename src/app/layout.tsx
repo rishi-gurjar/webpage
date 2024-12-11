@@ -17,17 +17,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-      <link
+        <link
           rel="stylesheet"
           href="https://cdn.locadapt.com/locadapt.min.css"
-      />
-      <script
+        />
+        <script
           src="https://cdn.locadapt.com/locadapt.min.js"
           data-project-id="85466916-e58a-461c-8ca7-5bbb38af4d92"
           data-ssr-defer
           defer
-      />
-      
+        />
       </head>
       <body className={inter.className}>{children}</body>
     </html>
