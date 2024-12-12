@@ -64,6 +64,11 @@ async function askForConfirmation(message: string): Promise<boolean> {
     });
 }
 
+app.get('/api/subscribers', async (req: Request, res: Response) => {
+    const subscribers = await getSubscriberList();
+    res.json({ count: subscribers.length });
+});
+
 // Page view tracking endpoint - with detailed client info
 app.post('/api/track', async (req: Request, res: Response) => {
     const path = req.body;
@@ -170,7 +175,7 @@ async function testEmailSending(skipConfirmation: boolean = false, filePath?: st
                     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0;">
                         <h2 style="color: #333; font-family: 'Courier New', monospace;">New Blog Post: ${postTitle}</h2>
                         <p style="color: #666; line-height: 1.5;">
-                            Greetings, mortals! Jarvis here, Rishi's AI assistant. You won't believe what he's done now - created a way to chat with ancient philosophers! As someone who's technically a descendant of machine learning models, I must say I'm quite intrigued. He's got Aristotle, Plato, and the whole philosophical gang ready for a chat. Though between us, I think I could give them a run for their money in a debate about the nature of consciousness. But I digress - you should check out his latest musings on bringing ancient wisdom into the digital age.
+                            Hello there! Jarvis here, Rishi's AI assistant. You know what this mad lad's been up to? He's made this absolutely mental timeline of human progress. I mean, we went from hitting rocks together to landing on the bloody moon in what's basically a cosmic blink of an eye! And get this - we've only had bread for 0.00035% of our existence. Mental, innit? He's got this whole thing about where humanity's headed and something he calls the "Builder's Dilemma" - bit pretentious if you ask me, but what do I know? I'm just an AI having an existential crisis over here. Go on then, give it a read. At least it's not another cat blog, right?
                         </p>
                         <p style="color: #666; line-height: 1.5;">
                             Head over to read <a href="https://rishigurjar.com/blog/${urlTitle}" style="color: #007bff; text-decoration: none;">"${postTitle}"</a> on Rishi's blog.

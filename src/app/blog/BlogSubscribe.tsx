@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { subscribeEmail } from '@/lib/actions';
 
 export function BlogSubscribe() {
@@ -8,6 +8,14 @@ export function BlogSubscribe() {
     type: 'success' | 'error' | null;
     message: string;
   }>({ type: null, message: '' });
+
+  const [subscriberCount, setSubscriberCount] = useState<number>(1000000000);
+
+  useEffect(() => {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/api/subscribers`)
+      .then(res => res.json())
+      .then(data => setSubscriberCount(data.count))
+  }, []);
 
   async function handleSubmit(formData: FormData) {
     setStatus({ type: null, message: '' });
@@ -18,13 +26,14 @@ export function BlogSubscribe() {
       setStatus({ type: 'error', message: 'Rishi\'s computer is off :(' });
     } else {
       setStatus({ type: 'success', message: 'Successfully subscribed!' });
+      setSubscriberCount(prev => prev + 1);
       (document.getElementById('email-form') as HTMLFormElement).reset();
     }
   }
 
   return (
     <div className="w-full max-w-sm mb-4 p-3 border border-gray-200 rounded-lg">
-      <h2 className="text-base mb-2">Join my very exclusive mailing list of 2 people</h2>
+      <h2 className="text-base mb-2">Join my very exclusive mailing list of {subscriberCount} people</h2>
       <form id="email-form" action={handleSubmit} className="flex flex-col gap-1.5">
         <input
           type="email"
