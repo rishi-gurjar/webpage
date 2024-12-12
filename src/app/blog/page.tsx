@@ -9,7 +9,7 @@ export default async function Blog() {
   return (
     <main className="container grid flex flex-col items-center mt-[60px] lg:mt-[calc(100vh/5.5)] lg:w-[calc(100vw/3)] md:w-[calc(100vw/3)] md:px-0">
       <PageTracker path="/blog" />
-      <h1><b>Blog</b></h1>
+      <h1 className="text-2xl text-[24px] font-['Young_Serif']">Blog</h1>
       <br />
       
       <BlogSubscribe />

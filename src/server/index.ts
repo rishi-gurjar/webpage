@@ -46,6 +46,26 @@ const auth = new google.auth.GoogleAuth({
 const sheets = google.sheets({ version: 'v4', auth });
 
 async function saveEmailToSheets(email: string): Promise<void> {
+    // First increment the subscriber count in F1
+    // First get the current value
+    const response = await sheets.spreadsheets.values.get({
+        spreadsheetId: process.env.SHEET_ID,
+        range: 'F1',
+    });
+    
+    const currentValue = parseInt(response.data.values?.[0]?.[0] || '0');
+    
+    // Then update with new value
+    await sheets.spreadsheets.values.update({
+        spreadsheetId: process.env.SHEET_ID,
+        range: 'F1', 
+        valueInputOption: 'RAW',
+        requestBody: {
+            values: [[currentValue + 1]],
+        },
+    });
+
+    // Then append the new subscriber
     await sheets.spreadsheets.values.append({
         spreadsheetId: process.env.SHEET_ID,
         range: 'A:B',
@@ -65,8 +85,13 @@ async function askForConfirmation(message: string): Promise<boolean> {
 }
 
 app.get('/api/subscribers', async (req: Request, res: Response) => {
-    const subscribers = await getSubscriberList();
-    res.json({ count: subscribers.length });
+    const response = await sheets.spreadsheets.values.get({
+        spreadsheetId: process.env.SHEET_ID,
+        range: 'F1',
+    });
+    
+    const currentValue = parseInt(response.data.values?.[0]?.[0] || '0');
+    res.json({ count: currentValue });
 });
 
 // Page view tracking endpoint - with detailed client info
