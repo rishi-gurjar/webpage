@@ -10,7 +10,7 @@ import matter from 'gray-matter';
 import readline from 'readline';
 import { spawn } from 'child_process';
 import { Readable } from 'stream';
-    
+
 dotenv.config();
 
 const app = express();
@@ -52,13 +52,13 @@ async function saveEmailToSheets(email: string): Promise<void> {
         spreadsheetId: process.env.SHEET_ID,
         range: 'F1',
     });
-    
+
     const currentValue = parseInt(response.data.values?.[0]?.[0] || '0');
-    
+
     // Then update with new value
     await sheets.spreadsheets.values.update({
         spreadsheetId: process.env.SHEET_ID,
-        range: 'F1', 
+        range: 'F1',
         valueInputOption: 'RAW',
         requestBody: {
             values: [[currentValue + 1]],
@@ -76,10 +76,11 @@ async function saveEmailToSheets(email: string): Promise<void> {
     });
 }
 
-async function askForConfirmation(message: string): Promise<boolean> {
+async function askForConfirmation(message: string, allowReprompt: boolean = false): Promise<string> {
     return new Promise((resolve) => {
-        rl.question(message, (answer) => {
-            resolve(answer.toLowerCase() === 'y' || answer.toLowerCase() === 'yes');
+        const options = allowReprompt ? '(y/n/r)' : '(y/n)';
+        rl.question(`${message} ${options}: `, (answer) => {
+            resolve(answer.toLowerCase());
         });
     });
 }
@@ -89,7 +90,7 @@ app.get('/api/subscribers', async (req: Request, res: Response) => {
         spreadsheetId: process.env.SHEET_ID,
         range: 'F1',
     });
-    
+
     const currentValue = parseInt(response.data.values?.[0]?.[0] || '0');
     res.json({ count: currentValue });
 });
@@ -160,27 +161,142 @@ async function getSubscriberList(): Promise<string[]> {
     }
 }
 
+async function generateEmailMessage(fileContent: string, reprompt: boolean = false): Promise<string> {
+    if (!fileContent) {
+        return "Hello there! Jarvis here with another exciting update from Rishi's blog. You won't want to miss this one!";
+    }
+
+    try {
+        const pastEmailMessage = "Hello there! Jarvis here, Rishi's AI assistant. You know what this mad lad's been up to? He's made this absolutely mental timeline of human progress. I mean, we went from hitting rocks together to landing on the bloody moon in what's basically a cosmic blink of an eye! And get this - we've only had bread for 0.00035% of our existence. Mental, innit? He's got this whole thing about where humanity's headed and something he calls the Builder's Dilemma - bit pretentious if you ask me, but what do I know? I'm just an AI having an existential crisis over here. Go on then, give it a read. At least it's not another cat blog, right?";
+        var prompt = `You are Rishi's assistant Jarvis. You are a helpful assistant that can generate messages for Rishi's blog posts. You sound like Ricky Gervais. Only respond with one message, no title or anything else. Write a humorous message - from your Jarvis persona - to his subscribers advertising Rishi's NEWEST blog post attached here: ${fileContent}.`;
+
+        if (reprompt) {
+            prompt = `You are Rishi's assistant Jarvis. You are a helpful assistant that can generate messages for Rishi's blog posts. You sound like Ricky Gervais. Only respond with one message, no title or anything else. Write a humorous message - from your Jarvis persona - to his subscribers advertising Rishi's NEWEST blog post attached here: ${fileContent}. BE VERY HUMOROUS.`;
+        }
+
+        const pythonScript = `
+import sys
+import os
+from mlx_lm import load, generate
+
+try:
+    model, tokenizer = load("${MLX_MODEL_DIRECTORY}")
+    
+    system_prompt = "${prompt.replace(/"/g, '\\"').replace(/\n/g, ' ')}"
+    
+    # Construct the full prompt
+    full_prompt = f"[INST]{system_prompt}[/INST]"
+    
+    response = generate(
+        model=model,
+        tokenizer=tokenizer,
+        prompt=full_prompt,
+        max_tokens=500,
+        verbose=False
+    )
+    print("RESPONSE_START")
+    print(response)
+    print("RESPONSE_END")
+    sys.stdout.flush()
+
+except Exception as e:
+    print(f"Error in Python script: {str(e)}", file=sys.stderr)
+    sys.stderr.flush()
+`;
+
+        const pythonProcess = spawn('python3', ['-c', pythonScript]);
+        let responseText = '';
+        let errorText = '';
+
+        // Collect stdout
+        pythonProcess.stdout.on('data', (data) => {
+            responseText += data.toString();
+        });
+
+        // Collect stderr
+        pythonProcess.stderr.on('data', (data) => {
+            errorText += data.toString();
+        });
+
+        // Handle process completion
+        await new Promise((resolve, reject) => {
+            pythonProcess.on('close', (code) => {
+                if (code === 0) {
+                    resolve(responseText);
+                } else {
+                    reject(new Error(errorText || 'Process failed'));
+                }
+            });
+        });
+
+        // Clean up the response text
+        let cleanResponse = responseText;
+        if (cleanResponse.includes('RESPONSE_START')) {
+            cleanResponse = cleanResponse
+                .split('RESPONSE_START')[1]
+                .split('RESPONSE_END')[0]
+                .trim();
+        }
+
+        return cleanResponse || pastEmailMessage; // Fallback to example if generation fails
+    } catch (error) {
+        console.error('Error in LLM generating email message:', error);
+        return "Hello there! Jarvis here with another exciting update from Rishi's blog. You won't want to miss this one!"; // Return the example message as fallback
+    }
+}
+
 async function testEmailSending(skipConfirmation: boolean = false, filePath?: string) {
     // Get subscriber list from Google Sheet
     const subscribers = await getSubscriberList();
-    console.log(`Found ${subscribers.length} subscribers: ${subscribers}`);
+    console.log(`Found ${subscribers.length} subscribers: ${subscribers}\n`);
 
     // Get blog post details if filePath is provided
     let postTitle = "New Blog Post";
+    let emailMessage = "Hello there! Jarvis here with another exciting update from Rishi's blog. You won't want to miss this one!";
+
     if (filePath) {
         const fileContent = fs.readFileSync(filePath, 'utf-8');
         const { data } = matter(fileContent);
         postTitle = data.title || postTitle;
+        console.log("Generating email message for", postTitle, "...");
+        emailMessage = await generateEmailMessage(fileContent);
     }
 
     // Format the URL - replace spaces and colons with hyphens
     const urlTitle = postTitle.toLowerCase().replace(/\s+/g, '-').replace(/[:']/g, '');
 
     if (!skipConfirmation) {
+        let approved = false;
+        
+        while (!approved) {
+            console.log('\n=== Generated Email Message ===');
+            console.log(emailMessage);
+            console.log('=============================\n');
+
+            const response = await askForConfirmation('Approve this message?', true);
+            
+            if (response === 'y' || response === 'yes') {
+                approved = true;
+            } else if (response === 'n' || response === 'no') {
+                console.log('Email message not approved.');
+                return;
+            } else if (response === 'r') {
+                console.log('\nRegenerating message...');
+                if (filePath) {
+                    const fileContent = fs.readFileSync(filePath, 'utf-8');
+                    emailMessage = await generateEmailMessage(fileContent, true);
+                }
+                continue;
+            } else {
+                console.log('Invalid response. Please enter y, n, or r.');
+                continue;
+            }
+        }
+
         const shouldSend = await askForConfirmation(
-            `Send email notification to ${subscribers.length} subscribers? (y/n): `
+            `\nSend email to ${subscribers.length} subscribers?`
         );
-        if (!shouldSend) {
+        if (shouldSend !== 'y' && shouldSend !== 'yes') {
             console.log('Email sending cancelled.');
             return;
         }
@@ -195,12 +311,14 @@ async function testEmailSending(skipConfirmation: boolean = false, filePath?: st
             const { data, error } = await resend.emails.send({
                 from: 'Rishi\'s Assistant Jarvis <jarvis@rishigurjar.com>',
                 to: [email],
-                subject: `URGENT: Rishi\'s Blog Post: ${postTitle}`,
+                subject: `URGENT: Rishi\'s New Post, ${postTitle}`,
                 html: `
-                    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0;">
-                        <h2 style="color: #333; font-family: 'Courier New', monospace;">New Blog Post: ${postTitle}</h2>
+                    <div style="font-family: Helvetica, sans-serif; max-width: 600px; margin: 0;">
                         <p style="color: #666; line-height: 1.5;">
-                            Hello there! Jarvis here, Rishi's AI assistant. You know what this mad lad's been up to? He's made this absolutely mental timeline of human progress. I mean, we went from hitting rocks together to landing on the bloody moon in what's basically a cosmic blink of an eye! And get this - we've only had bread for 0.00035% of our existence. Mental, innit? He's got this whole thing about where humanity's headed and something he calls the "Builder's Dilemma" - bit pretentious if you ask me, but what do I know? I'm just an AI having an existential crisis over here. Go on then, give it a read. At least it's not another cat blog, right?
+                            Dear Beloved Subscriber,
+                        </p>
+                        <p style="color: #666; line-height: 1.5;">
+                            ${emailMessage}
                         </p>
                         <p style="color: #666; line-height: 1.5;">
                             Head over to read <a href="https://rishigurjar.com/blog/${urlTitle}" style="color: #007bff; text-decoration: none;">"${postTitle}"</a> on Rishi's blog.
