@@ -18,8 +18,8 @@ export default async function Blog() {
         {posts.map((post) => (
           <li key={post.slug}>
             <Link href={`/blog/${post.slug}`}>
-              <h2>{post.title}</h2>
-              <p>{new Date(post.date).toLocaleDateString()}</p>
+              <h2 className="font-['Young_Serif'] font-light">{post.title}</h2>
+              <p className=''>{new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
               <br />
             </Link>
           </li>
