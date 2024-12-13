@@ -9,6 +9,13 @@ import Link from 'next/link';
 import { generateSlug } from '@/lib/blog';
 import { PageTracker } from '../PageTracker';
 
+// Add this interface for better type safety
+interface BlogPost {
+  slug: string;
+  title: string;
+  date: string;
+  content: string;
+}
 
 export async function generateStaticParams() {
   const blogDir = path.join(process.cwd(), 'src/blog-content');
@@ -27,17 +34,19 @@ export async function generateStaticParams() {
 export default async function BlogPost({ params }: { params: { slug: string } }) {
   const blogDir = path.join(process.cwd(), 'src/blog-content');
   const files = fs.readdirSync(blogDir);
-  const post = files
+
+  // Get all posts and sort them by date
+  const posts: BlogPost[] = files
     .map((filename) => {
       const filePath = path.join(blogDir, filename);
       const fileContents = fs.readFileSync(filePath, 'utf8');
       const { data, content } = matter(fileContents);
 
       const clean_content = content
-      .replace(/\\\n/g, '\n\n')  // Replace backslash-newlines with double newlines
-      .replace(/\\$/gm, '')      // Remove trailing backslashes
-      .replace(/(\d+)\.\s*/g, '$1. ')  // Ensure proper spacing for list items
-      .replace(/\n\n\n+/g, '\n\n');    // Normalize multiple newlines to double newlines
+        .replace(/\\\n/g, '\n\n')
+        .replace(/\\$/gm, '')
+        .replace(/(\d+)\.\s*/g, '$1. ')
+        .replace(/\n\n\n+/g, '\n\n');
 
       return {
         slug: generateSlug(data.title),
@@ -46,11 +55,17 @@ export default async function BlogPost({ params }: { params: { slug: string } })
         content: clean_content,
       };
     })
-    .find((post) => post.slug === params.slug);
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-  if (!post) {
+  // Find the current post index
+  const currentIndex = posts.findIndex((post) => post.slug === params.slug);
+  if (currentIndex === -1) {
     notFound();
   }
+
+  const post = posts[currentIndex];
+  const previousPost = currentIndex < posts.length - 1 ? posts[currentIndex + 1] : null;
+  const nextPost = currentIndex > 0 ? posts[currentIndex - 1] : null;
 
   // Process the Markdown content
   const processedContent = await remark()
@@ -66,6 +81,29 @@ export default async function BlogPost({ params }: { params: { slug: string } })
       <p>{new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
       <br />
       <div className="blog-content" dangerouslySetInnerHTML={{ __html: contentHtml }} />
+      <br />
+
+      {/* Add navigation links */}
+      <div className="w-full flex flex-col gap-4 mt-8 border-t pt-4">
+        <h1>Nearby</h1>
+
+        <div className="flex justify-between w-full">
+          {previousPost ? (
+            <Link href={`/blog/${previousPost.slug}`} className="text-blue-600 hover:underline">
+              ← {previousPost.title}
+            </Link>
+          ) : (
+            <div></div>
+          )}
+          {nextPost ? (
+            <Link href={`/blog/${nextPost.slug}`} className="text-blue-600 hover:underline ml-auto">
+              {nextPost.title} →
+            </Link>
+          ) : (
+            <div></div>
+          )}
+        </div>
+      </div>
       <br />
     </main>
   );
