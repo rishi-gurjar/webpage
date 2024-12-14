@@ -85,18 +85,18 @@ export default async function BlogPost({ params }: { params: { slug: string } })
 
       {/* Add navigation links */}
       <div className="w-full flex flex-col gap-4 mt-8 border-t pt-4">
-        <h1>Nearby</h1>
+        <h1 className="">Nearby</h1>
 
         <div className="flex justify-between w-full">
           {previousPost ? (
-            <Link href={`/blog/${previousPost.slug}`} className="text-blue-600 hover:underline">
+            <Link href={`/blog/${previousPost.slug}`} className="text-green-600 hover:underline font-['Young_Serif']">
               ← {previousPost.title}
             </Link>
           ) : (
             <div></div>
           )}
           {nextPost ? (
-            <Link href={`/blog/${nextPost.slug}`} className="text-blue-600 hover:underline ml-auto">
+            <Link href={`/blog/${nextPost.slug}`} className="text-green-600 hover:underline ml-auto font-['Young_Serif']">
               {nextPost.title} →
             </Link>
           ) : (
