@@ -74,7 +74,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
   const contentHtml = processedContent.toString();
 
   return (
-    <main className="container grid flex flex-col items-center mt-[60px] lg:mt-[calc(100vh/5.5)] lg:w-[calc(100vw/3)] md:w-[calc(100vw/3)] md:px-0">
+    <main className="container grid flex flex-col items-center mt-[60px] lg:mt-[calc(100vh/5.5)] lg:w-[calc(150vw/3)] md:w-[calc(100vw/3)] md:px-0">
       <PageTracker path={`/blog/${params.slug}`} />
       <Link href="/blog" className="self-start mb-4">← Back to blog</Link>
       <h1 className="text-2xl text-[24px] font-['Young_Serif']">{post.title}</h1>
