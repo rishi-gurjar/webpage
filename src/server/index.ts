@@ -10,6 +10,8 @@ import matter from 'gray-matter';
 import readline from 'readline';
 import { spawn } from 'child_process';
 import { Readable } from 'stream';
+import { exec } from 'child_process';
+import { promisify } from 'util';
 
 dotenv.config();
 
@@ -167,11 +169,11 @@ async function generateEmailMessage(fileContent: string, reprompt: boolean = fal
     }
 
     try {
-        const pastEmailMessage = "Hello there! Jarvis here, Rishi's AI assistant. You know what this mad lad's been up to? He's made this absolutely mental timeline of human progress. I mean, we went from hitting rocks together to landing on the bloody moon in what's basically a cosmic blink of an eye! And get this - we've only had bread for 0.00035% of our existence. Mental, innit? He's got this whole thing about where humanity's headed and something he calls the Builder's Dilemma - bit pretentious if you ask me, but what do I know? I'm just an AI having an existential crisis over here. Go on then, give it a read. At least it's not another cat blog, right?";
-        var prompt = `You are Rishi's assistant Jarvis. You are a helpful assistant that can generate messages for Rishi's blog posts. You sound like Ricky Gervais. Only respond with one message, no title or anything else. Write a humorous message - from your Jarvis persona - to his subscribers advertising Rishi's NEWEST blog post attached here: ${fileContent}.`;
+        const pastEmailMessage = "Hello there! Jarvis here with another exciting update from Rishi's blog. You won't want to miss this one!";
+        var prompt = `You are Rishi's assistant Jarvis. You are a helpful assistant that can generate messages for Rishi's blog posts. You sound like Ricky Gervais. Only respond with one message, no title or anything else. Write a humorous message - from your Jarvis persona - to his subscribers advertising Rishi's NEWEST blog post attached here: ${fileContent}. IT SHOULD NOT BE MORE THAN 3 SENTENCES AND MUST ACCURATELY REPRESENT THE BLOG POST.`;
 
         if (reprompt) {
-            prompt = `You are Rishi's assistant Jarvis. You are a helpful assistant that can generate messages for Rishi's blog posts. You sound like Ricky Gervais. Only respond with one message, no title or anything else. Write a humorous message - from your Jarvis persona - to his subscribers advertising Rishi's NEWEST blog post attached here: ${fileContent}. BE VERY HUMOROUS.`;
+            prompt = `You are Rishi's assistant Jarvis. You are a helpful assistant that can generate messages for Rishi's blog posts. You sound like Ricky Gervais. Only respond with one message, no title or anything else. Write a humorous message - from your Jarvis persona - to his subscribers advertising Rishi's NEWEST blog post attached here: ${fileContent}. BE VERY HUMOROUS. IT SHOULD NOT BE MORE THAN 3 SENTENCES.`;
         }
 
         const pythonScript = `
@@ -380,10 +382,54 @@ const watcher = chokidar.watch(BLOG_DIR, {
     }
 });
 
+const execAsync = promisify(exec);
+
+async function commitAndPushToGit(filePath: string): Promise<void> {
+    try {
+        const fileName = path.basename(filePath);
+        const commands = [
+            `git add "${filePath}"`,
+            `git commit -m "Add new blog post: ${fileName}"`,
+            'git push origin main' // Adjust branch name if different
+        ];
+
+        for (const command of commands) {
+            const { stdout, stderr } = await execAsync(command);
+            if (stderr) console.error(`Git stderr: ${stderr}`);
+            if (stdout) console.log(`Git stdout: ${stdout}`);
+        }
+
+        console.log('Successfully committed and pushed to Git');
+    } catch (error) {
+        console.error('Error in Git operations:', error);
+        throw error;
+    }
+}
+
 watcher.on('add', async (filePath: string) => {
-    if (path.extname(filePath) === '.md' && hasTodaysDate(filePath)) {
+    if (path.extname(filePath) === '.md') {
         console.log('New blog post detected:', path.basename(filePath));
-        await testEmailSending(false, filePath);
+        
+        const shouldProceed = await askForConfirmation(
+            `Do you want to process the new blog post "${path.basename(filePath)}"?`
+        );
+
+        if (shouldProceed === 'y' || shouldProceed === 'yes') {
+            try {
+                // First commit and push to Git
+                await commitAndPushToGit(filePath);
+                console.log('Git operations completed successfully');
+
+                // Then handle email sending if it has today's date
+                if (hasTodaysDate(filePath)) {
+                    await testEmailSending(false, filePath);
+                }
+            } catch (error) {
+                console.error('Error processing new blog post:', error);
+            }
+        } else {
+            console.log('Blog post processing cancelled');
+        }
     }
 });
 

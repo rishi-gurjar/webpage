@@ -31,3 +31,38 @@
   margin: 0.5em 0;
   content: "";
 }
+
+/* Add these styles for bullet points and numbered lists */
+.blog-content ul {
+    list-style-type: disc;
+    margin-left: 1.5em;
+    margin-bottom: 1em;
+}
+
+.blog-content ol {
+    list-style-type: decimal;
+    margin-left: 1.5em;
+    margin-bottom: 1em;
+}
+
+.blog-content li {
+    margin-bottom: 0.5em;
+}
+
+/* If you want nested lists to look different */
+.blog-content ul ul,
+.blog-content ol ol {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+/* Add some spacing between list items */
+.blog-content li p {
+    margin-bottom: 0.5em;
+}
+
+/* Ensure proper spacing around lists */
+.blog-content ul:not(:last-child),
+.blog-content ol:not(:last-child) {
+    margin-bottom: 1.5em;
+}
