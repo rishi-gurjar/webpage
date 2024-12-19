@@ -407,11 +407,11 @@ async function commitAndPushToGit(filePath: string): Promise<void> {
 }
 
 watcher.on('add', async (filePath: string) => {
-    if (path.extname(filePath) === '.md') {
+    if (path.extname(filePath) === '.md' && hasTodaysDate(filePath)) {
         console.log('New blog post detected:', path.basename(filePath));
         
         const shouldProceed = await askForConfirmation(
-            `Do you want to process the new blog post "${path.basename(filePath)}"?`
+            `Do you want to commit and push the new blog post "${path.basename(filePath)}"?`
         );
 
         if (shouldProceed === 'y' || shouldProceed === 'yes') {
@@ -420,10 +420,8 @@ watcher.on('add', async (filePath: string) => {
                 await commitAndPushToGit(filePath);
                 console.log('Git operations completed successfully');
 
-                // Then handle email sending if it has today's date
-                if (hasTodaysDate(filePath)) {
-                    await testEmailSending(false, filePath);
-                }
+
+                await testEmailSending(false, filePath);
             } catch (error) {
                 console.error('Error processing new blog post:', error);
             }
