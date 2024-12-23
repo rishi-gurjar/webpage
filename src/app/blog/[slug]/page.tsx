@@ -10,10 +10,12 @@ import { generateSlug } from '@/lib/blog';
 import { PageTracker } from '../PageTracker';
 import Image from 'next/image';
 import privacyImg from '/public/privacy_img.png';
+import snowImg from '/public/snow.png';
 
 // Create a mapping for your blog images
 const headerImages: { [key: string]: any } = {
   '/privacy_img.png': privacyImg,
+  '/snow.png': snowImg,
   // Add other blog header images here as needed
 };
 
@@ -94,7 +96,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
       {post.headerImage && (
         <>
           <div className="w-full mb-2 relative aspect-[16/9]">
-            <Image 
+            <Image
               src={headerImages[post.headerImage]}
               alt={post.imageAuthor || `Header image for ${post.title}`}
               fill
@@ -107,7 +109,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
             {post.imageLink && (
               <p className="text-right">
                 {post.imageLink ? (
-                  <a 
+                  <a
                     href={post.imageLink}
                     target="_blank"
                     rel="noopener noreferrer"
