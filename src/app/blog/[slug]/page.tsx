@@ -58,11 +58,15 @@ export default async function BlogPost({ params }: { params: { slug: string } })
       const fileContents = fs.readFileSync(filePath, 'utf8');
       const { data, content } = matter(fileContents);
 
+      // Updated content cleaning to better handle markdown links
       const clean_content = content
         .replace(/\\\n/g, '\n\n')
         .replace(/\\$/gm, '')
         .replace(/(\d+)\.\s*/g, '$1. ')
-        .replace(/\n\n\n+/g, '\n\n');
+        .replace(/\n\n\n+/g, '\n\n')
+        // Fix markdown links that got broken by line breaks
+        .replace(/\[([^\]]+)\]\(([^)]+?)\s+/g, '[$1]($2')
+        .replace(/\s+\)/g, ')');
 
       return {
         slug: generateSlug(data.title),
