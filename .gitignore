@@ -46,3 +46,6 @@ blog-441622-f450efc783d0.json
 !tsconfig.json
 !components.json
 
+/app/blog-purgatory/**/*
+blog-purgatory
+models
