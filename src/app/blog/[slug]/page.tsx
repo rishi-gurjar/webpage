@@ -13,12 +13,14 @@ import privacyImg from '/public/privacy_img.png';
 import snowImg from '/public/snow.png';
 import tasteImg from '/public/taste.png';
 import contractImg from '/public/contract.png';
+import dictatorImg from '/public/dictator.png';
 // Create a mapping for your blog images
 const headerImages: { [key: string]: any } = {
   '/privacy_img.png': privacyImg,
   '/snow.png': snowImg,
   '/taste.png': tasteImg,
   '/contract.png': contractImg,
+  '/dictator.png': dictatorImg
   // Add other blog header images here as needed
 };
 
