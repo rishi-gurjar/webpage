@@ -2,8 +2,9 @@ import express from 'express';
 import { saveEmailToSheets, sendEmails } from '../services/emailService';
 import { generateResponse } from '../services/llmService';
 import { sheets } from '../config';
-
+import http from 'http';
 const router = express.Router();
+const ipstack_key = process.env.IP_STACK_KEY
 
 router.get('/subscribers', async (req, res) => {
     const response = await sheets.spreadsheets.values.get({
@@ -24,11 +25,44 @@ router.post('/track', async (req, res) => {
         req.socket.remoteAddress ||
         'Unknown';
 
+    // Setting the configuration for the request
+    const options = {
+        hostname: 'api.ipstack.com',
+        path: `/${ip}?access_key=${ipstack_key}`,
+        method: 'GET'
+    };
+
+    let parsed_ip_data: any = {};
+    // Sending the request
+    try {
+        // Convert the HTTP request to a Promise
+        const ipData = await new Promise((resolve, reject) => {
+            const options = {
+                hostname: 'api.ipstack.com',
+                path: `/${ip}?access_key=${ipstack_key}`,
+                method: 'GET'
+            };
+
+            const req2 = http.request(options, (res2) => {
+                let data = '';
+                res2.on('data', (chunk) => data += chunk);
+                res2.on('end', () => resolve(JSON.parse(data)));
+            });
+
+            req2.on('error', reject);
+            req2.end();
+        });
+
+        parsed_ip_data = ipData;
+    } catch (error) {
+        console.error("Error fetching IP data:", error);
+    }
+
     const userAgent = req.headers['user-agent'] || 'Unknown';
     const referer = req.headers.referer || 'Direct';
     const device = userAgent.match(/\((.*?)\)/)?.[1]?.split(';')[0] || 'Unknown Device';
 
-    console.log(`${timestamp} | ${path} | ${ip} | ${device}`);
+    console.log(`${timestamp} | ${path} | ${ip} | ${parsed_ip_data.city}, ${parsed_ip_data.region_name}, ${parsed_ip_data.country_name} | ${device}`);
     res.status(200).send('OK');
 });
 
