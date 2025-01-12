@@ -42,9 +42,6 @@ export default function BeaconPage() {
         ? 'https://6b06-128-84-127-255.ngrok-free.app'
         : 'http://localhost:3001';
 
-    console.log('Current API_URL:', API_URL);
-    console.log('Current NODE_ENV:', process.env.NODE_ENV);
-
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [password, setPassword] = useState("")
     const [isLoading, setIsLoading] = useState(false)
@@ -54,7 +51,6 @@ export default function BeaconPage() {
 
     const fetchSleepData = useCallback(async () => {
         try {
-            console.log('Attempting to fetch sleep data from:', `${API_URL}/api/sleep-time`);
             const response = await fetch(`${API_URL}/api/sleep-time`, {
                 method: 'GET',
                 headers: {
@@ -63,63 +59,55 @@ export default function BeaconPage() {
                     'ngrok-skip-browser-warning': 'true'
                 }
             });
-            console.log('Sleep data response status:', response.status);
 
             if (!response.ok) {
-                const text = await response.text();
-                console.error('Sleep API Error:', {
-                    status: response.status,
-                    statusText: response.statusText,
-                    url: response.url,
-                    responseText: text
-                });
                 throw new Error(`API returned ${response.status}`);
             }
             const data = await response.json();
-            console.log('Sleep data received:', data);
             setSleepData(data);
         } catch (error) {
-            console.error('Sleep Data Error:', error);
             setSleepData([]);
         }
     }, [API_URL]);
 
     const fetchMentalphysData = useCallback(async () => {
         try {
-            const response = await fetch(`${API_URL}/api/mentalphys-check`);
+            const response = await fetch(`${API_URL}/api/mentalphys-check`, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'ngrok-skip-browser-warning': 'true'
+                }
+            });
+
             if (!response.ok) {
-                const text = await response.text();
-                console.error('API Error:', {
-                    status: response.status,
-                    statusText: response.statusText,
-                    responseText: text
-                });
                 throw new Error(`API returned ${response.status}`);
             }
             const data = await response.json();
             setMentalphysData(data);
         } catch (error) {
-            console.error('Error fetching mental and phys data:', error);
             setMentalphysData([]);
         }
     }, [API_URL]);
 
     const fetchWorkoutData = useCallback(async () => {
         try {
-            const response = await fetch(`${API_URL}/api/workouts`);
+            const response = await fetch(`${API_URL}/api/workouts`, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'ngrok-skip-browser-warning': 'true'
+                }
+            });
+
             if (!response.ok) {
-                const text = await response.text();
-                console.error('API Error:', {
-                    status: response.status,
-                    statusText: response.statusText,
-                    responseText: text
-                });
                 throw new Error(`API returned ${response.status}`);
             }
             const data = await response.json();
             setWorkoutData(data);
         } catch (error) {
-            console.error('Error fetching workout data:', error);
             setWorkoutData([]);
         }
     }, [API_URL]);
