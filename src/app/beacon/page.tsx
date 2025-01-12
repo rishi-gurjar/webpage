@@ -140,7 +140,7 @@ export default function BeaconPage() {
                 setPassword("")
             }
         } catch (error) {
-            alert('Error validating password')
+            alert('hahahahahahah')
             console.error('Login error:', error)
         } finally {
             setIsLoading(false)
