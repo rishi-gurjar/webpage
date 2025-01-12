@@ -1,6 +1,6 @@
 'use client'
 import { PageTracker } from '@/app/blog/PageTracker';
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import {
     Card,
     CardContent,
@@ -49,7 +49,7 @@ export default function BeaconPage() {
         ? 'https://6b06-128-84-127-255.ngrok-free.app'
         : 'http://localhost:3001';
 
-    const fetchSleepData = async () => {
+    const fetchSleepData = useCallback(async () => {
         try {
             const response = await fetch(`${API_URL}/api/sleep-time`);
             const data = await response.json();
@@ -57,9 +57,9 @@ export default function BeaconPage() {
         } catch (error) {
             console.error('Error fetching sleep data:', error);
         }
-    };
+    }, [API_URL]);
 
-    const fetchMentalphysData = async () => {
+    const fetchMentalphysData = useCallback(async () => {
         try {
             const response = await fetch(`${API_URL}/api/mentalphys-check`);
             const data = await response.json();
@@ -67,9 +67,9 @@ export default function BeaconPage() {
         } catch (error) {
             console.error('Error fetching mental and phys data:', error);
         }
-    };
+    }, [API_URL]);
 
-    const fetchWorkoutData = async () => {
+    const fetchWorkoutData = useCallback(async () => {
         try {
             const response = await fetch(`${API_URL}/api/workouts`);
             const data = await response.json();
@@ -77,7 +77,7 @@ export default function BeaconPage() {
         } catch (error) {
             console.error('Error fetching workout data:', error);
         }
-    };
+    }, [API_URL]);
 
     useEffect(() => {
         if (isAuthenticated) {
@@ -85,7 +85,7 @@ export default function BeaconPage() {
             fetchMentalphysData();
             fetchWorkoutData();
         }
-    }, [isAuthenticated, API_URL]);
+    }, [isAuthenticated, fetchSleepData, fetchMentalphysData, fetchWorkoutData, API_URL]);
 
     const handleLogin = async () => {
         try {
@@ -121,7 +121,7 @@ export default function BeaconPage() {
                 <div className="flex items-center justify-center min-h-screen">
                     <Card className="w-[350px]">
                         <CardHeader>
-                            <CardTitle>Rishi's Protected Beacon</CardTitle>
+                            <CardTitle>Rishi&apos;s Protected Beacon</CardTitle>
                         </CardHeader>
                         <CardContent>
                             <div className="flex flex-col gap-4">
