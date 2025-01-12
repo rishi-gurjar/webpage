@@ -58,7 +58,9 @@ export default function BeaconPage() {
             const response = await fetch(`${API_URL}/api/sleep-time`, {
                 method: 'GET',
                 headers: {
+                    'Accept': 'application/json',
                     'Content-Type': 'application/json',
+                    'ngrok-skip-browser-warning': 'true'
                 }
             });
             console.log('Sleep data response status:', response.status);
@@ -124,19 +126,9 @@ export default function BeaconPage() {
 
     useEffect(() => {
         if (isAuthenticated) {
-            // Test API connectivity first
-            fetch(`${API_URL}/api/ping`)
-                .then(res => res.json())
-                .then(data => {
-                    console.log('API ping successful:', data);
-                    // Then fetch your data
-                    fetchSleepData();
-                    fetchMentalphysData();
-                    fetchWorkoutData();
-                })
-                .catch(error => {
-                    console.error('API ping failed:', error);
-                });
+            fetchSleepData();
+            fetchMentalphysData();
+            fetchWorkoutData();
         }
     }, [isAuthenticated, fetchSleepData, fetchMentalphysData, fetchWorkoutData, API_URL]);
 
