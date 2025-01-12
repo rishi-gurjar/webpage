@@ -41,38 +41,38 @@ export async function generateResponse(philosopher: string, prompt: string, hist
     
 
             const pythonScript = `
-            import sys
-            import os
-            from mlx_lm import load, generate
-            
-            try:
-                model, tokenizer = load("${MLX_MODEL_DIRECTORY}")
-                
-                system_prompt = "${systemPrompt.replace(/"/g, '\\"').replace(/\n/g, ' ')}"
-                history_text = """${historyText}"""
-                user_prompt = "${escapedPrompt}"
-                
-                # Construct the full prompt
-                full_prompt = f"[INST]{system_prompt}"
-                if history_text:
-                    full_prompt += f" Previous conversation:\\n{history_text}\\n\\nNow respond to: "
-                full_prompt += f"{user_prompt}[/INST]"
-                
-                response = generate(
-                    model=model,
-                    tokenizer=tokenizer,
-                    prompt=full_prompt,
-                    max_tokens=500,
-                    verbose=False
-                )
-                print("RESPONSE_START")
-                print(response)
-                print("RESPONSE_END")
-                sys.stdout.flush()
-            
-            except Exception as e:
-                print(f"Error in Python script: {str(e)}", file=sys.stderr)
-                sys.stderr.flush()
+import sys
+import os
+from mlx_lm import load, generate
+
+try:
+    model, tokenizer = load("${MLX_MODEL_DIRECTORY}")
+    
+    system_prompt = "${systemPrompt.replace(/"/g, '\\"').replace(/\n/g, ' ')}"
+    history_text = """${historyText}"""
+    user_prompt = "${escapedPrompt}"
+    
+    # Construct the full prompt
+    full_prompt = f"[INST]{system_prompt}"
+    if history_text:
+        full_prompt += f" Previous conversation:\\n{history_text}\\n\\nNow respond to: "
+    full_prompt += f"{user_prompt}[/INST]"
+    
+    response = generate(
+        model=model,
+        tokenizer=tokenizer,
+        prompt=full_prompt,
+        max_tokens=500,
+        verbose=False
+    )
+    print("RESPONSE_START")
+    print(response)
+    print("RESPONSE_END")
+    sys.stdout.flush()
+
+except Exception as e:
+    print(f"Error in Python script: {str(e)}", file=sys.stderr)
+    sys.stderr.flush()
             `;
 
         const pythonProcess = spawn('python3', ['-c', pythonScript]);
