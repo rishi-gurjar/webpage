@@ -322,7 +322,7 @@ export default function BeaconPage() {
                                     <ChartTooltip
                                         cursor={false}
                                         content={({ active, payload }) => {
-                                            if (!active || !payload?.[0]?.value === undefined) return null;
+                                            if (!active || !payload || !payload[0]) return null;
                                             
                                             const value = payload[0].value as number;
                                             return (
@@ -390,7 +390,7 @@ export default function BeaconPage() {
                                     <ChartTooltip
                                         cursor={false}
                                         content={({ active, payload }) => {
-                                            if (!active || !payload?.[0]?.value === undefined) return null;
+                                            if (!active || !payload || !payload[0]) return null;
                                             
                                             const value = payload[0].value as number;
                                             return (
