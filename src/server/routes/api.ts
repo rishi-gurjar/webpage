@@ -118,7 +118,7 @@ router.get('/test', (req, res) => {
 });
 
 router.post('/validate-beacon-password', async (req: any, res: any) => {
-    log('/validate-beacon-password')
+    // log('/validate-beacon-password')
     const { password } = req.body;
 
     // Get password from environment variable
@@ -134,7 +134,7 @@ router.post('/validate-beacon-password', async (req: any, res: any) => {
 });
 
 router.get('/sleep-time', async (req: express.Request, res: express.Response) => {
-    log('/sleep-time')
+    // log('/sleep-time')
     try {
         const sleepData = await getTotalSleepTime();
         res.json(sleepData);
@@ -145,7 +145,7 @@ router.get('/sleep-time', async (req: express.Request, res: express.Response) =>
 });
 
 router.get('/mentalphys-check', async (req: express.Request, res: express.Response) => {
-    log('/mentalphys-check')
+    // log('/mentalphys-check')
     try {
         const mentalData = await getMentalPhysCheck();
         res.json(mentalData);
@@ -156,7 +156,7 @@ router.get('/mentalphys-check', async (req: express.Request, res: express.Respon
 });
 
 router.get('/workouts', async (req: express.Request, res: express.Response) => {
-    log('/workouts')
+    // log('/workouts')
     try {
         const workoutData = await getWorkouts();
         res.json(workoutData);

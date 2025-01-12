@@ -136,7 +136,7 @@ export default function BeaconPage() {
             if (data.success) {
                 setIsAuthenticated(true)
             } else {
-                alert('Incorrect password')
+                alert('hahahahahahah')
                 setPassword("")
             }
         } catch (error) {
