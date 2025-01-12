@@ -3,6 +3,7 @@ import { saveEmailToSheets, sendEmails } from '../services/emailService';
 import { generateResponse } from '../services/llmService';
 import { sheets } from '../config';
 import http from 'http';
+import { getTotalSleepTime, getMentalPhysCheck, getWorkouts } from '../services/v9Service';
 const router = express.Router();
 const ipstack_key = process.env.IP_STACK_KEY
 
@@ -87,7 +88,7 @@ router.post('/subscribe', async (req, res) => {
 router.post('/llm', async (req, res) => {
     const timestamp = new Date().toISOString();
     const { prompt, philosopher, history } = req.body;
-    
+
     if (!prompt || !philosopher) {
         console.error('Invalid request received:', req.body);
         res.status(400).json({ text: 'Invalid request' });
@@ -102,14 +103,59 @@ router.post('/llm', async (req, res) => {
         res.json({ text: response });
     } catch (error) {
         console.error('\nError occurred:', error);
-        res.status(500).json({ 
-            text: error instanceof Error ? `Error: ${error.message}` : 'An unknown error occurred' 
+        res.status(500).json({
+            text: error instanceof Error ? `Error: ${error.message}` : 'An unknown error occurred'
         });
     }
 });
 
 router.get('/test', (req, res) => {
     res.json({ message: 'Express server is running!' });
+});
+
+router.post('/validate-beacon-password', async (req: any, res: any) => {
+    const { password } = req.body;
+
+    // Get password from environment variable
+    const correctPassword = process.env.BEACON_PASSWORD;
+
+    if (!correctPassword) {
+        return res.status(500).json({ success: false, message: 'Loser' });
+    }
+
+    const isValid = password === correctPassword;
+
+    return res.status(isValid ? 200 : 401).json({ success: isValid });
+});
+
+router.get('/sleep-time', async (req: express.Request, res: express.Response) => {
+    try {
+        const sleepData = await getTotalSleepTime();
+        res.json(sleepData);
+    } catch (error) {
+        console.error('Error fetching sleep time:', error);
+        res.status(500).json({ error: 'Failed to fetch sleep data' });
+    }
+});
+
+router.get('/mentalphys-check', async (req: express.Request, res: express.Response) => {
+    try {
+        const mentalData = await getMentalPhysCheck();
+        res.json(mentalData);
+    } catch (error) {
+        console.error('Error fetching sleep time:', error);
+        res.status(500).json({ error: 'Failed to fetch sleep data' });
+    }
+});
+
+router.get('/workouts', async (req: express.Request, res: express.Response) => {
+    try {
+        const workoutData = await getWorkouts();
+        res.json(workoutData);
+    } catch (error) {
+        console.error('Error fetching sleep time:', error);
+        res.status(500).json({ error: 'Failed to fetch sleep data' });
+    }
 });
 
 export default router; 

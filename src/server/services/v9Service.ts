@@ -42,6 +42,127 @@ async function getWakeTime(): Promise<string[]> {
     }
 }
 
+async function getTotalSleepTime(): Promise<{ date: string, sleep: string }[]> {
+    try {
+        const [dateResponse, sleepResponse] = await Promise.all([
+            sheets.spreadsheets.values.get({
+                spreadsheetId: process.env.V9_SHEET_ID,
+                range: 'A2:A',
+            }),
+            sheets.spreadsheets.values.get({
+                spreadsheetId: process.env.V9_SHEET_ID, 
+                range: 'D2:D',
+            })
+        ]);
+
+        const dates = dateResponse.data.values?.flat() || [];
+        const sleepTimes = sleepResponse.data.values?.flat() || [];
+        
+        return dates.map((date: string, index: number) => ({
+            date: date,
+            sleep: sleepTimes[index]
+        }));
+
+        
+    } catch (error: any) {
+        // More detailed error logging
+        console.error('Error fetching sleep data:', {
+            message: error.message,
+            status: error.status, 
+            errors: error.errors,
+            spreadsheetId: process.env.V9_SHEET_ID
+        });
+        throw new Error(`Failed to fetch sleep time data: ${error.message}`);
+    }
+}
+
+async function getMentalPhysCheck(): Promise<{ date: string, mental: any, physical: any }[]> {
+    try {
+        const [dateResponse, mentalResponse, physicalResponse] = await Promise.all([
+            sheets.spreadsheets.values.get({
+                spreadsheetId: process.env.V9_SHEET_ID,
+                range: 'A2:A',
+            }),
+            sheets.spreadsheets.values.get({
+                spreadsheetId: process.env.V9_SHEET_ID, 
+                range: 'N2:N',
+            }),
+            sheets.spreadsheets.values.get({
+                spreadsheetId: process.env.V9_SHEET_ID, 
+                range: 'O2:O',
+            })
+        ]);
+
+        const dates = dateResponse.data.values?.flat() || [];
+        const mental = mentalResponse.data.values?.flat() || [];
+        const physical = physicalResponse.data.values?.flat() || [];
+        
+        return dates
+            .map((date: string, index: number) => {
+                if (!mental[index]) return null;
+                return {
+                    date: date,
+                    mental: mental[index],
+                    physical: physical[index]
+                };
+            })
+            .filter((entry): entry is { date: string, mental: any, physical: any } => entry !== null);
+
+        
+    } catch (error: any) {
+        // More detailed error logging
+        console.error('Error fetching sleep data:', {
+            message: error.message,
+            status: error.status, 
+            errors: error.errors,
+            spreadsheetId: process.env.V9_SHEET_ID
+        });
+        throw new Error(`Failed to fetch sleep time data: ${error.message}`);
+    }
+}
+
+async function getWorkouts(): Promise<{ date: string, inside: any, outside: any }[]> {
+    try {
+        const [dateResponse, insideResponse, outsideResponse] = await Promise.all([
+            sheets.spreadsheets.values.get({
+                spreadsheetId: process.env.V9_SHEET_ID,
+                range: 'A2:A',
+            }),
+            sheets.spreadsheets.values.get({
+                spreadsheetId: process.env.V9_SHEET_ID, 
+                range: 'E2:E',
+            }),
+            sheets.spreadsheets.values.get({
+                spreadsheetId: process.env.V9_SHEET_ID, 
+                range: 'G2:G',
+            })
+        ]);
+
+        const dates = dateResponse.data.values?.flat() || [];
+        const inside = insideResponse.data.values?.flat() || [];
+        const outside = outsideResponse.data.values?.flat() || [];
+        return dates
+            .map((date: string, index: number) => {
+                return {
+                    date: date,
+                    inside: inside[index] === "TRUE" ? 1 : -1,
+                    outside: outside[index] === "TRUE" ? 1 : -1
+                };
+            })
+
+        
+    } catch (error: any) {
+        // More detailed error logging
+        console.error('Error fetching sleep data:', {
+            message: error.message,
+            status: error.status, 
+            errors: error.errors,
+            spreadsheetId: process.env.V9_SHEET_ID
+        });
+        throw new Error(`Failed to fetch sleep time data: ${error.message}`);
+    }
+}
+
 async function getInsideWorkout(): Promise<string[]> {
     try {
         const response = await sheets.spreadsheets.values.get({
@@ -176,4 +297,9 @@ async function computeTotalSleep() {
     }
 }
 
-export { computeTotalSleep };
+export { 
+    computeTotalSleep, 
+    getTotalSleepTime, 
+    getMentalPhysCheck, 
+    getWorkouts 
+};
