@@ -296,10 +296,10 @@ async function computeTotalSleep() {
         throw error;
     }
 }
-
 export { 
     computeTotalSleep, 
     getTotalSleepTime, 
     getMentalPhysCheck, 
     getWorkouts 
 };
+

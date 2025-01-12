@@ -38,6 +38,13 @@ const chartConfig = {
 } satisfies ChartConfig
 
 export default function BeaconPage() {
+    const API_URL = process.env.NODE_ENV === 'production'
+        ? 'https://6b06-128-84-127-255.ngrok-free.app'
+        : 'http://localhost:3001';
+    
+    console.log('Current API_URL:', API_URL);
+    console.log('Current NODE_ENV:', process.env.NODE_ENV);
+
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [password, setPassword] = useState("")
     const [isLoading, setIsLoading] = useState(false)
@@ -45,30 +52,38 @@ export default function BeaconPage() {
     const [mentalphysData, setMentalphysData] = useState<any[]>([])
     const [workoutData, setWorkoutData] = useState<any[]>([])
 
-    const API_URL = process.env.NODE_ENV === 'production'
-        ? 'https://6b06-128-84-127-255.ngrok-free.app'
-        : 'http://localhost:3001';
-
     const fetchSleepData = useCallback(async () => {
-        const API_URL = process.env.NODE_ENV === 'production'
-        ? 'https://6b06-128-84-127-255.ngrok-free.app'
-        : 'http://localhost:3001';
         try {
-            const response = await fetch(`${API_URL}/api/sleep-time`);
+            console.log('Attempting to fetch sleep data from:', `${API_URL}/api/sleep-time`);
+            const response = await fetch(`${API_URL}/api/sleep-time`, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                },
+                credentials: 'include'
+            });
+            console.log('Sleep data response status:', response.status);
+            
             if (!response.ok) {
                 const text = await response.text();
-                console.error('API Error:', {
+                console.error('Sleep API Error:', {
                     status: response.status,
                     statusText: response.statusText,
+                    url: response.url,
                     responseText: text
                 });
                 throw new Error(`API returned ${response.status}`);
             }
             const data = await response.json();
+            console.log('Sleep data received:', data);
             setSleepData(data);
         } catch (error) {
-            console.error('Error fetching sleep data:', error);
-            setSleepData([]); // Set empty data on error
+            console.error('Sleep Data Error:', {
+                error,
+                url: `${API_URL}/api/sleep-time`,
+                timestamp: new Date().toISOString()
+            });
+            setSleepData([]);
         }
     }, [API_URL]);
 
@@ -120,9 +135,19 @@ export default function BeaconPage() {
 
     useEffect(() => {
         if (isAuthenticated) {
-            fetchSleepData();
-            fetchMentalphysData();
-            fetchWorkoutData();
+            // Test API connectivity first
+            fetch(`${API_URL}/api/ping`)
+                .then(res => res.json())
+                .then(data => {
+                    console.log('API ping successful:', data);
+                    // Then fetch your data
+                    fetchSleepData();
+                    fetchMentalphysData();
+                    fetchWorkoutData();
+                })
+                .catch(error => {
+                    console.error('API ping failed:', error);
+                });
         }
     }, [isAuthenticated, fetchSleepData, fetchMentalphysData, fetchWorkoutData, API_URL]);
 

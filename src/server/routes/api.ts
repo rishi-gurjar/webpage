@@ -7,6 +7,10 @@ import { getTotalSleepTime, getMentalPhysCheck, getWorkouts } from '../services/
 const router = express.Router();
 const ipstack_key = process.env.IP_STACK_KEY
 
+function log(endpoint: string) {
+    const timestamp = new Date().toLocaleString();
+    console.log(`[${timestamp}] Endpoint accessed: ${endpoint}`);
+}
 router.get('/subscribers', async (req, res) => {
     const response = await sheets.spreadsheets.values.get({
         spreadsheetId: process.env.SHEET_ID,
@@ -129,8 +133,10 @@ router.post('/validate-beacon-password', async (req: any, res: any) => {
 });
 
 router.get('/sleep-time', async (req: express.Request, res: express.Response) => {
+    log('/sleep-time')
     try {
         const sleepData = await getTotalSleepTime();
+        console.log(sleepData)
         res.json(sleepData);
     } catch (error) {
         console.error('Error fetching sleep time:', error);
@@ -156,6 +162,11 @@ router.get('/workouts', async (req: express.Request, res: express.Response) => {
         console.error('Error fetching sleep time:', error);
         res.status(500).json({ error: 'Failed to fetch sleep data' });
     }
+});
+
+router.get('/ping', (req: express.Request, res: express.Response) => {
+    console.log('Ping received from:', req.headers.origin);
+    res.json({ message: 'pong', timestamp: new Date().toISOString() });
 });
 
 export default router; 
