@@ -49,14 +49,6 @@ export default function BeaconPage() {
         ? 'https://6b06-128-84-127-255.ngrok-free.app'
         : 'http://localhost:3001';
 
-    useEffect(() => {
-        if (isAuthenticated) {
-            fetchSleepData();
-            fetchMentalphysData();
-            fetchWorkoutData();
-        }
-    }, [isAuthenticated]);
-
     const fetchSleepData = async () => {
         try {
             const response = await fetch(`${API_URL}/api/sleep-time`);
@@ -66,7 +58,6 @@ export default function BeaconPage() {
             console.error('Error fetching sleep data:', error);
         }
     };
-
 
     const fetchMentalphysData = async () => {
         try {
@@ -87,6 +78,14 @@ export default function BeaconPage() {
             console.error('Error fetching workout data:', error);
         }
     };
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            fetchSleepData();
+            fetchMentalphysData();
+            fetchWorkoutData();
+        }
+    }, [isAuthenticated, API_URL]);
 
     const handleLogin = async () => {
         try {
@@ -323,13 +322,13 @@ export default function BeaconPage() {
                                     <ChartTooltip
                                         cursor={false}
                                         content={({ active, payload }) => {
-                                            if (!active || !payload?.length) return null;
+                                            if (!active || !payload?.[0]?.value === undefined) return null;
                                             
-                                            const value = payload[0].value;
+                                            const value = payload[0].value as number;
                                             return (
                                                 <div className="rounded-lg border bg-background p-2 shadow-sm">
                                                     <span className="text-[0.70rem] text-muted-foreground">
-                                                        {value > 0 ? "Worked out" : "Didn't workout"}
+                                                        {value > 0 ? "Worked out" : "Didn&apos;t workout"}
                                                     </span>
                                                 </div>
                                             );
@@ -391,13 +390,13 @@ export default function BeaconPage() {
                                     <ChartTooltip
                                         cursor={false}
                                         content={({ active, payload }) => {
-                                            if (!active || !payload?.length) return null;
+                                            if (!active || !payload?.[0]?.value === undefined) return null;
                                             
-                                            const value = payload[0].value;
+                                            const value = payload[0].value as number;
                                             return (
                                                 <div className="rounded-lg border bg-background p-2 shadow-sm">
                                                     <span className="text-[0.70rem] text-muted-foreground">
-                                                        {value > 0 ? "Worked out" : "Didn't workout"}
+                                                        {value > 0 ? "Worked out" : "Didn&apos;t workout"}
                                                     </span>
                                                 </div>
                                             );
