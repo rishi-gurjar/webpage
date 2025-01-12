@@ -65,6 +65,7 @@ export default function Home() {
           <a className="hover:text-green-500" href="https://armada.build/" target="_blank" rel="noopener noreferrer"><h4>Armada</h4></a>
           <a className="hover:text-green-500" href="https://beyondterra.org" target="_blank" rel="noopener noreferrer"><h4>Beyond Terra</h4></a>
           <a className="hover:text-green-500" href="https://rishigurjar.com/ancients" target="_blank" rel="noopener noreferrer"><h4>Ancients</h4></a>
+          <a className="hover:text-green-500" href="https://rishigurjar.com/beacon" target="_blank" rel="noopener noreferrer"><h4>Beacon</h4></a>
         </div>
 
         {/* <div className="relative w-full h-[352px]">
