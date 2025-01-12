@@ -50,6 +50,9 @@ export default function BeaconPage() {
         : 'http://localhost:3001';
 
     const fetchSleepData = useCallback(async () => {
+        const API_URL = process.env.NODE_ENV === 'production'
+        ? 'https://6b06-128-84-127-255.ngrok-free.app'
+        : 'http://localhost:3001';
         try {
             const response = await fetch(`${API_URL}/api/sleep-time`);
             if (!response.ok) {
@@ -70,6 +73,9 @@ export default function BeaconPage() {
     }, [API_URL]);
 
     const fetchMentalphysData = useCallback(async () => {
+        const API_URL = process.env.NODE_ENV === 'production'
+        ? 'https://6b06-128-84-127-255.ngrok-free.app'
+        : 'http://localhost:3001';
         try {
             const response = await fetch(`${API_URL}/api/mentalphys-check`);
             if (!response.ok) {
@@ -90,6 +96,9 @@ export default function BeaconPage() {
     }, [API_URL]);
 
     const fetchWorkoutData = useCallback(async () => {
+        const API_URL = process.env.NODE_ENV === 'production'
+        ? 'https://6b06-128-84-127-255.ngrok-free.app'
+        : 'http://localhost:3001';
         try {
             const response = await fetch(`${API_URL}/api/workouts`);
             if (!response.ok) {
@@ -180,7 +189,7 @@ export default function BeaconPage() {
     return (
         <div>
             <h1 className="text-4xl p-4 font-semibold tracking-tight">Beacon</h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 p-2">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 p-4">
                 <PageTracker path={`/beacon-accepted`} />
                 <div>
                     <Card>
@@ -358,7 +367,7 @@ export default function BeaconPage() {
                                             return (
                                                 <div className="rounded-lg border bg-background p-2 shadow-sm">
                                                     <span className="text-[0.70rem] text-muted-foreground">
-                                                        {value > 0 ? "Worked out" : "Didn&apos;t workout"}
+                                                        {value > 0 ? "Worked out" : "Did not workout"}
                                                     </span>
                                                 </div>
                                             );
@@ -426,7 +435,7 @@ export default function BeaconPage() {
                                             return (
                                                 <div className="rounded-lg border bg-background p-2 shadow-sm">
                                                     <span className="text-[0.70rem] text-muted-foreground">
-                                                        {value > 0 ? "Worked out" : "Didn&apos;t workout"}
+                                                        {value > 0 ? "Worked out" : "Did not workout"}
                                                     </span>
                                                 </div>
                                             );
