@@ -54,16 +54,12 @@ export default function BeaconPage() {
 
     const fetchSleepData = useCallback(async () => {
         try {
-            const API_URL = process.env.NODE_ENV === 'production'
-                ? 'https://6b06-128-84-127-255.ngrok-free.app'
-                : 'http://localhost:3001';
-
             console.log('Attempting to fetch sleep data from:', `${API_URL}/api/sleep-time`);
             const response = await fetch(`${API_URL}/api/sleep-time`, {
                 method: 'GET',
                 headers: {
-                    'Accept': 'application/json',
-                },
+                    'Content-Type': 'application/json',
+                }
             });
             console.log('Sleep data response status:', response.status);
 
@@ -81,11 +77,7 @@ export default function BeaconPage() {
             console.log('Sleep data received:', data);
             setSleepData(data);
         } catch (error) {
-            console.error('Sleep Data Error:', {
-                error,
-                url: `${API_URL}/api/sleep-time`,
-                timestamp: new Date().toISOString()
-            });
+            console.error('Sleep Data Error:', error);
             setSleepData([]);
         }
     }, [API_URL]);
