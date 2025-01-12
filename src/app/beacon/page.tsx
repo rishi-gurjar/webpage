@@ -52,30 +52,60 @@ export default function BeaconPage() {
     const fetchSleepData = useCallback(async () => {
         try {
             const response = await fetch(`${API_URL}/api/sleep-time`);
+            if (!response.ok) {
+                const text = await response.text();
+                console.error('API Error:', {
+                    status: response.status,
+                    statusText: response.statusText,
+                    responseText: text
+                });
+                throw new Error(`API returned ${response.status}`);
+            }
             const data = await response.json();
             setSleepData(data);
         } catch (error) {
             console.error('Error fetching sleep data:', error);
+            setSleepData([]); // Set empty data on error
         }
     }, [API_URL]);
 
     const fetchMentalphysData = useCallback(async () => {
         try {
             const response = await fetch(`${API_URL}/api/mentalphys-check`);
+            if (!response.ok) {
+                const text = await response.text();
+                console.error('API Error:', {
+                    status: response.status,
+                    statusText: response.statusText,
+                    responseText: text
+                });
+                throw new Error(`API returned ${response.status}`);
+            }
             const data = await response.json();
             setMentalphysData(data);
         } catch (error) {
             console.error('Error fetching mental and phys data:', error);
+            setMentalphysData([]); // Set empty data on error
         }
     }, [API_URL]);
 
     const fetchWorkoutData = useCallback(async () => {
         try {
             const response = await fetch(`${API_URL}/api/workouts`);
+            if (!response.ok) {
+                const text = await response.text();
+                console.error('API Error:', {
+                    status: response.status,
+                    statusText: response.statusText,
+                    responseText: text
+                });
+                throw new Error(`API returned ${response.status}`);
+            }
             const data = await response.json();
             setWorkoutData(data);
         } catch (error) {
             console.error('Error fetching workout data:', error);
+            setWorkoutData([]); // Set empty data on error
         }
     }, [API_URL]);
 
@@ -323,7 +353,7 @@ export default function BeaconPage() {
                                         cursor={false}
                                         content={({ active, payload }) => {
                                             if (!active || !payload || !payload[0]) return null;
-                                            
+
                                             const value = payload[0].value as number;
                                             return (
                                                 <div className="rounded-lg border bg-background p-2 shadow-sm">
@@ -359,7 +389,7 @@ export default function BeaconPage() {
                             <div className="flex gap-2 font-medium leading-none">
                                 {workoutData.length > 0 && (
                                     <>
-                                        {workoutData.slice(-7).filter(day => day.inside > 0).length} 
+                                        {workoutData.slice(-7).filter(day => day.inside > 0).length}
                                         {workoutData.slice(-7).filter(day => day.inside > 0).length === 1 ? ' workout' : ' workouts'} in the last 7 days
                                         <TrendingUp className="h-4 w-4" />
                                     </>
@@ -391,7 +421,7 @@ export default function BeaconPage() {
                                         cursor={false}
                                         content={({ active, payload }) => {
                                             if (!active || !payload || !payload[0]) return null;
-                                            
+
                                             const value = payload[0].value as number;
                                             return (
                                                 <div className="rounded-lg border bg-background p-2 shadow-sm">
@@ -421,7 +451,7 @@ export default function BeaconPage() {
                             <div className="flex gap-2 font-medium leading-none">
                                 {workoutData.length > 0 && (
                                     <>
-                                        {workoutData.slice(-7).filter(day => day.outside > 0).length} 
+                                        {workoutData.slice(-7).filter(day => day.outside > 0).length}
                                         {workoutData.slice(-7).filter(day => day.outside > 0).length === 1 ? ' workout' : ' workouts'} in the last 7 days
                                         <TrendingUp className="h-4 w-4" />
                                     </>
