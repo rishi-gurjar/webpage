@@ -9,7 +9,7 @@ const ipstack_key = process.env.IP_STACK_KEY
 
 function log(endpoint: string) {
     const timestamp = new Date().toLocaleString();
-    console.log(`[${timestamp}] Endpoint accessed: ${endpoint}`);
+    console.log(`${timestamp} | ${endpoint} endpoint`);
 }
 router.get('/subscribers', async (req, res) => {
     const response = await sheets.spreadsheets.values.get({
