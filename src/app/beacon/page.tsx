@@ -41,7 +41,7 @@ export default function BeaconPage() {
     const API_URL = process.env.NODE_ENV === 'production'
         ? 'https://6b06-128-84-127-255.ngrok-free.app'
         : 'http://localhost:3001';
-    
+
     console.log('Current API_URL:', API_URL);
     console.log('Current NODE_ENV:', process.env.NODE_ENV);
 
@@ -54,16 +54,19 @@ export default function BeaconPage() {
 
     const fetchSleepData = useCallback(async () => {
         try {
+            const API_URL = process.env.NODE_ENV === 'production'
+                ? 'https://6b06-128-84-127-255.ngrok-free.app'
+                : 'http://localhost:3001';
+
             console.log('Attempting to fetch sleep data from:', `${API_URL}/api/sleep-time`);
             const response = await fetch(`${API_URL}/api/sleep-time`, {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json',
                 },
-                credentials: 'include'
             });
             console.log('Sleep data response status:', response.status);
-            
+
             if (!response.ok) {
                 const text = await response.text();
                 console.error('Sleep API Error:', {
@@ -88,9 +91,6 @@ export default function BeaconPage() {
     }, [API_URL]);
 
     const fetchMentalphysData = useCallback(async () => {
-        const API_URL = process.env.NODE_ENV === 'production'
-        ? 'https://6b06-128-84-127-255.ngrok-free.app'
-        : 'http://localhost:3001';
         try {
             const response = await fetch(`${API_URL}/api/mentalphys-check`);
             if (!response.ok) {
@@ -106,14 +106,11 @@ export default function BeaconPage() {
             setMentalphysData(data);
         } catch (error) {
             console.error('Error fetching mental and phys data:', error);
-            setMentalphysData([]); // Set empty data on error
+            setMentalphysData([]);
         }
     }, [API_URL]);
 
     const fetchWorkoutData = useCallback(async () => {
-        const API_URL = process.env.NODE_ENV === 'production'
-        ? 'https://6b06-128-84-127-255.ngrok-free.app'
-        : 'http://localhost:3001';
         try {
             const response = await fetch(`${API_URL}/api/workouts`);
             if (!response.ok) {
@@ -129,7 +126,7 @@ export default function BeaconPage() {
             setWorkoutData(data);
         } catch (error) {
             console.error('Error fetching workout data:', error);
-            setWorkoutData([]); // Set empty data on error
+            setWorkoutData([]);
         }
     }, [API_URL]);
 
