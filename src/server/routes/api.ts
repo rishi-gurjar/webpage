@@ -30,13 +30,6 @@ router.post('/track', async (req, res) => {
         req.socket.remoteAddress ||
         'Unknown';
 
-    // Setting the configuration for the request
-    const options = {
-        hostname: 'api.ipstack.com',
-        path: `/${ip}?access_key=${ipstack_key}`,
-        method: 'GET'
-    };
-
     let parsed_ip_data: any = {};
     // Sending the request
     try {
@@ -67,7 +60,8 @@ router.post('/track', async (req, res) => {
     const referer = req.headers.referer || 'Direct';
     const device = userAgent.match(/\((.*?)\)/)?.[1]?.split(';')[0] || 'Unknown Device';
 
-    console.log(`${timestamp} | ${path} | ${ip} | ${parsed_ip_data.city}, ${parsed_ip_data.region_name}, ${parsed_ip_data.country_name} | ${device}`);
+    const locationStr = parsed_ip_data?.city ? `${parsed_ip_data.city}, ${parsed_ip_data.region_name}, ${parsed_ip_data.country_name} | ` : '';
+    console.log(`${timestamp} | ${path} | ${ip} | ${locationStr}${device}`);
     res.status(200).send('OK');
 });
 
