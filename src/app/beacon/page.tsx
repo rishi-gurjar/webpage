@@ -384,7 +384,7 @@ export default function BeaconPage() {
                         </CardFooter>
                     </Card>
                 </div>
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                     <div>
                         <Card>
                             <CardHeader>
@@ -510,7 +510,7 @@ export default function BeaconPage() {
                         </Card>
                     </div>
                 </div>
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                     <div>
                         <Card className="flex flex-col">
                             <CardHeader className="items-center pb-0">
