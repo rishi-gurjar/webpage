@@ -163,6 +163,39 @@ async function getWorkouts(): Promise<{ date: string, inside: any, outside: any 
     }
 }
 
+async function getHydrated(): Promise<{ date: string, number_drank: any}[]> {
+    try {
+        const [dateResponse, hydratedResponse] = await Promise.all([
+            sheets.spreadsheets.values.get({
+                spreadsheetId: process.env.V9_SHEET_ID,
+                range: 'A2:A',
+            }),
+            sheets.spreadsheets.values.get({
+                spreadsheetId: process.env.V9_SHEET_ID, 
+                range: 'I2:I',
+            }),
+        ]);
+
+        const dates = dateResponse.data.values?.flat() || [];
+        const hydrated = hydratedResponse.data.values?.flat() || [];
+        return dates.map((date: string, index: number) => ({
+            date: date,
+            number_drank: parseFloat(hydrated[index]) || 0
+        }))
+
+        
+    } catch (error: any) {
+        // More detailed error logging
+        console.error('Error fetching sleep data:', {
+            message: error.message,
+            status: error.status, 
+            errors: error.errors,
+            spreadsheetId: process.env.V9_SHEET_ID
+        });
+        throw new Error(`Failed to fetch sleep time data: ${error.message}`);
+    }
+}
+
 async function getInsideWorkout(): Promise<string[]> {
     try {
         const response = await sheets.spreadsheets.values.get({
@@ -300,6 +333,7 @@ export {
     computeTotalSleep, 
     getTotalSleepTime, 
     getMentalPhysCheck, 
-    getWorkouts 
+    getWorkouts,
+    getHydrated
 };
 

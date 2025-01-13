@@ -3,7 +3,12 @@ import { saveEmailToSheets, sendEmails } from '../services/emailService';
 import { generateResponse } from '../services/llmService';
 import { sheets } from '../config';
 import http from 'http';
-import { getTotalSleepTime, getMentalPhysCheck, getWorkouts } from '../services/v9Service';
+import { 
+    getTotalSleepTime, 
+    getMentalPhysCheck, 
+    getWorkouts,
+    getHydrated
+} from '../services/v9Service';
 const router = express.Router();
 const ipstack_key = process.env.IP_STACK_KEY
 
@@ -154,6 +159,17 @@ router.get('/workouts', async (req: express.Request, res: express.Response) => {
     try {
         const workoutData = await getWorkouts();
         res.json(workoutData);
+    } catch (error) {
+        console.error('Error fetching sleep time:', error);
+        res.status(500).json({ error: 'Failed to fetch sleep data' });
+    }
+});
+
+router.get('/hydrated', async (req: express.Request, res: express.Response) => {
+    // log('/hydrated')
+    try {
+        const hydratedData = await getHydrated();
+        res.json(hydratedData);
     } catch (error) {
         console.error('Error fetching sleep time:', error);
         res.status(500).json({ error: 'Failed to fetch sleep data' });

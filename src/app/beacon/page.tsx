@@ -13,7 +13,23 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { TrendingUp } from "lucide-react"
 
-import { CartesianGrid, Line, LineChart, XAxis, YAxis, Bar, BarChart, Cell, LabelList } from "recharts"
+import {
+    CartesianGrid,
+    Line,
+    LineChart,
+    XAxis,
+    YAxis,
+    Bar,
+    BarChart,
+    Cell,
+    LabelList,
+    Label,
+    PolarGrid,
+    PolarRadiusAxis,
+    RadialBar,
+    RadialBarChart,
+    PolarAngleAxis
+} from "recharts"
 import {
     ChartConfig,
     ChartContainer,
@@ -34,6 +50,9 @@ const chartConfig = {
     sleep: {
         label: "Sleep",
         color: "hsl(var(--chart-1))",
+    },
+    number_drank: {
+        label: "Number Drank"
     }
 } satisfies ChartConfig
 
@@ -48,6 +67,7 @@ export default function BeaconPage() {
     const [sleepData, setSleepData] = useState<any[]>([])
     const [mentalphysData, setMentalphysData] = useState<any[]>([])
     const [workoutData, setWorkoutData] = useState<any[]>([])
+    const [hydratedData, setHydratedData] = useState<any[]>([])
 
     const fetchSleepData = useCallback(async () => {
         try {
@@ -112,13 +132,35 @@ export default function BeaconPage() {
         }
     }, [API_URL]);
 
+    const fetchHydratedData = useCallback(async () => {
+        try {
+            const response = await fetch(`${API_URL}/api/hydrated`, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'ngrok-skip-browser-warning': 'true'
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error(`API returned ${response.status}`);
+            }
+            const data = await response.json();
+            setHydratedData(data);
+        } catch (error) {
+            setHydratedData([]);
+        }
+    }, [API_URL]);
+
     useEffect(() => {
         if (isAuthenticated) {
             fetchSleepData();
             fetchMentalphysData();
             fetchWorkoutData();
+            fetchHydratedData();
         }
-    }, [isAuthenticated, fetchSleepData, fetchMentalphysData, fetchWorkoutData, API_URL]);
+    }, [isAuthenticated, fetchSleepData, fetchMentalphysData, fetchWorkoutData, fetchHydratedData, API_URL]);
 
     const handleLogin = async () => {
         try {
@@ -342,130 +384,300 @@ export default function BeaconPage() {
                         </CardFooter>
                     </Card>
                 </div>
-                <div>
+                <div className="grid grid-cols-2 gap-2">
+                    <div>
+                        <Card>
+                            <CardHeader>
+                                <CardTitle>Inside Workouts</CardTitle>
+                                <CardDescription>Workouts inside for more than 45 minutes</CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                <ChartContainer config={chartConfig} className="h-[21vh] w-[50hh]">
+                                    <BarChart accessibilityLayer data={workoutData}>
+                                        <CartesianGrid vertical={false} />
+                                        <ChartTooltip
+                                            cursor={false}
+                                            content={({ active, payload }) => {
+                                                if (!active || !payload || !payload[0]) return null;
+
+                                                const value = payload[0].value as number;
+                                                return (
+                                                    <div className="rounded-lg border bg-background p-2 shadow-sm">
+                                                        <span className="text-[0.70rem] text-muted-foreground">
+                                                            {value > 0 ? "Worked out" : "Did not workout"}
+                                                        </span>
+                                                    </div>
+                                                );
+                                            }}
+                                        />
+                                        <XAxis
+                                            dataKey="date"
+                                            tickLine={false}
+                                            axisLine={false}
+                                            tickMargin={3}
+                                        />
+                                        <Bar dataKey="inside">
+                                            {workoutData.map((item) => (
+                                                <Cell
+                                                    key={item.date}
+                                                    fill={
+                                                        item.inside > 0
+                                                            ? "#2563eb"
+                                                            : "hsl(var(--chart-1))"
+                                                    }
+                                                />
+                                            ))}
+                                        </Bar>
+                                    </BarChart>
+                                </ChartContainer>
+                            </CardContent>
+                            <CardFooter className="flex-col items-start gap-2 text-sm">
+                                <div className="flex gap-2 font-medium leading-none">
+                                    {workoutData.length > 0 && (
+                                        <>
+                                            {workoutData.slice(-7).filter(day => day.inside > 0).length}
+                                            {workoutData.slice(-7).filter(day => day.inside > 0).length === 1 ? ' workout' : ' workouts'} in the last 7 days
+                                            <TrendingUp className="h-4 w-4" />
+                                        </>
+                                    )}
+                                </div>
+                                <div className="leading-none text-muted-foreground">
+                                    Showing workout data for the last {workoutData.length} days
+                                </div>
+                            </CardFooter>
+                        </Card>
+                    </div>
+                    <div>
+                        <Card>
+                            <CardHeader>
+                                <CardTitle>Outside Workouts</CardTitle>
+                                <CardDescription>Workouts outside for more than 45 minutes</CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                <ChartContainer config={chartConfig} className="h-[21vh] w-[50hh]">
+                                    <BarChart accessibilityLayer data={workoutData}>
+                                        <CartesianGrid vertical={false} />
+                                        <XAxis
+                                            dataKey="date"
+                                            tickLine={false}
+                                            axisLine={false}
+                                            tickMargin={3}
+                                        />
+                                        <ChartTooltip
+                                            cursor={false}
+                                            content={({ active, payload }) => {
+                                                if (!active || !payload || !payload[0]) return null;
+
+                                                const value = payload[0].value as number;
+                                                return (
+                                                    <div className="rounded-lg border bg-background p-2 shadow-sm">
+                                                        <span className="text-[0.70rem] text-muted-foreground">
+                                                            {value > 0 ? "Worked out" : "Did not workout"}
+                                                        </span>
+                                                    </div>
+                                                );
+                                            }}
+                                        />
+                                        <Bar dataKey="outside">
+                                            {workoutData.map((item) => (
+                                                <Cell
+                                                    key={item.date}
+                                                    fill={
+                                                        item.outside > 0
+                                                            ? "#2563eb"
+                                                            : "hsl(var(--chart-1))"
+                                                    }
+                                                />
+                                            ))}
+                                        </Bar>
+                                    </BarChart>
+                                </ChartContainer>
+                            </CardContent>
+                            <CardFooter className="flex-col items-start gap-2 text-sm">
+                                <div className="flex gap-2 font-medium leading-none">
+                                    {workoutData.length > 0 && (
+                                        <>
+                                            {workoutData.slice(-7).filter(day => day.outside > 0).length}
+                                            {workoutData.slice(-7).filter(day => day.outside > 0).length === 1 ? ' workout' : ' workouts'} in the last 7 days
+                                            <TrendingUp className="h-4 w-4" />
+                                        </>
+                                    )}
+                                </div>
+                                <div className="leading-none text-muted-foreground">
+                                    Showing workout data for the last {workoutData.length} days
+                                </div>
+                            </CardFooter>
+                        </Card>
+                    </div>
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                    <div>
+                        <Card className="flex flex-col">
+                            <CardHeader className="items-center pb-0">
+                                <CardTitle>Hydration Today</CardTitle>
+                                <CardDescription>How many 0.7L bottles you drank today</CardDescription>
+                            </CardHeader>
+                            <CardContent className="flex-1 pb-0">
+                                <ChartContainer
+                                    config={chartConfig}
+                                    className="mx-auto aspect-square max-h-[250px]"
+                                >
+                                    <RadialBarChart
+                                        data={hydratedData.length > 0 ? [hydratedData[hydratedData.length - 1]] : []}
+                                        startAngle={180}
+                                        endAngle={-180}
+                                        innerRadius={80}
+                                        outerRadius={110}
+                                    >
+                                        <PolarGrid
+                                            gridType="circle"
+                                            radialLines={false}
+                                            stroke="none"
+                                            className="first:fill-muted last:fill-background"
+                                            polarRadius={[86, 74]}
+                                        />
+                                        <PolarAngleAxis
+                                            type="number"
+                                            domain={[0, 5.5]}
+                                            tick={false}
+                                        />
+                                        <RadialBar 
+                                            dataKey="number_drank" 
+                                            background 
+                                            cornerRadius={10}
+                                            fill={hydratedData.length > 0 && hydratedData[hydratedData.length - 1].number_drank >= 5.5 ? "#22c55e" : "#2563eb"}
+                                        />
+                                        <PolarRadiusAxis 
+                                            tick={false} 
+                                            tickLine={false} 
+                                            axisLine={false}
+                                        >
+                                            <Label
+                                                content={({ viewBox }) => {
+                                                    if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                                                        return (
+                                                            <text
+                                                                x={viewBox.cx}
+                                                                y={viewBox.cy}
+                                                                textAnchor="middle"
+                                                                dominantBaseline="middle"
+                                                            >
+                                                                <tspan
+                                                                    x={viewBox.cx}
+                                                                    y={viewBox.cy}
+                                                                    className={`fill-foreground text-4xl font-bold ${
+                                                                        hydratedData.length > 0 && hydratedData[hydratedData.length - 1].number_drank >= 5.5 
+                                                                            ? "text-green-500" 
+                                                                            : ""
+                                                                    }`}
+                                                                >
+                                                                    {hydratedData.length > 0 ? hydratedData[hydratedData.length - 1].number_drank : 0}
+                                                                </tspan>
+                                                                <tspan
+                                                                    x={viewBox.cx}
+                                                                    y={(viewBox.cy || 0) + 24}
+                                                                    className={`fill-muted-foreground ${
+                                                                        hydratedData.length > 0 && hydratedData[hydratedData.length - 1].number_drank >= 5.5 
+                                                                            ? "text-green-500/70" 
+                                                                            : ""
+                                                                    }`}
+                                                                >
+                                                                    / 5.5 bottles
+                                                                </tspan>
+                                                            </text>
+                                                        )
+                                                    }
+                                                    return null;
+                                                }}
+                                            />
+                                        </PolarRadiusAxis>
+                                    </RadialBarChart>
+                                </ChartContainer>
+                            </CardContent>
+                            <CardFooter className="flex-col gap-2 text-sm">
+                                <div className="flex items-center gap-2 font-medium leading-none">
+                                    {hydratedData.length > 0 && (
+                                        <>
+                                            {(hydratedData[hydratedData.length - 1].number_drank / 5.5 * 100).toFixed(0)}% of daily goal
+                                            <TrendingUp className="h-4 w-4" />
+                                        </>
+                                    )}
+                                </div>
+                                <div className="leading-none text-muted-foreground">
+                                    Target: 5.5 bottles (0.7L each)
+                                </div>
+                            </CardFooter>
+                        </Card>
+
+                    </div>
+                    <div>
                     <Card>
                         <CardHeader>
-                            <CardTitle>Inside Workouts</CardTitle>
-                            <CardDescription>Workouts inside for more than 45 minutes</CardDescription>
+                            <CardTitle>Temporal Hydration</CardTitle>
+                            <CardDescription>Number of 0.7L bottles drank over time</CardDescription>
                         </CardHeader>
                         <CardContent>
                             <ChartContainer config={chartConfig} className="h-[21vh] w-full">
-                                <BarChart accessibilityLayer data={workoutData}>
+                                <LineChart
+                                    accessibilityLayer
+                                    data={hydratedData}
+                                    margin={{
+                                        left: 2,
+                                        right: 12,
+                                        top: 12,
+                                        bottom: 12
+                                    }}
+                                >
                                     <CartesianGrid vertical={false} />
-                                    <ChartTooltip
-                                        cursor={false}
-                                        content={({ active, payload }) => {
-                                            if (!active || !payload || !payload[0]) return null;
-
-                                            const value = payload[0].value as number;
-                                            return (
-                                                <div className="rounded-lg border bg-background p-2 shadow-sm">
-                                                    <span className="text-[0.70rem] text-muted-foreground">
-                                                        {value > 0 ? "Worked out" : "Did not workout"}
-                                                    </span>
-                                                </div>
-                                            );
-                                        }}
-                                    />
                                     <XAxis
                                         dataKey="date"
                                         tickLine={false}
                                         axisLine={false}
-                                        tickMargin={3}
+                                        tickMargin={8}
                                     />
-                                    <Bar dataKey="inside">
-                                        {workoutData.map((item) => (
-                                            <Cell
-                                                key={item.date}
-                                                fill={
-                                                    item.inside > 0
-                                                        ? "#2563eb"
-                                                        : "hsl(var(--chart-1))"
-                                                }
-                                            />
-                                        ))}
-                                    </Bar>
-                                </BarChart>
+                                    <YAxis
+                                        tickLine={false}
+                                        axisLine={false}
+                                        tickMargin={8}
+                                        domain={[4, 'auto']}
+                                        label={{ value: 'Hours', angle: -90, position: 'insideLeft' }}
+                                    />
+                                    <ChartTooltip
+                                        cursor={false}
+                                        content={<ChartTooltipContent hideLabel />}
+                                    />
+                                    <Line
+                                        name="Bottles"
+                                        dataKey="number_drank"
+                                        type="natural"
+                                        stroke="#2563eb"
+                                        strokeWidth={2}
+                                        dot={false}
+                                    />
+                                </LineChart>
                             </ChartContainer>
                         </CardContent>
                         <CardFooter className="flex-col items-start gap-2 text-sm">
                             <div className="flex gap-2 font-medium leading-none">
-                                {workoutData.length > 0 && (
+                                {hydratedData.length > 0 && (
                                     <>
-                                        {workoutData.slice(-7).filter(day => day.inside > 0).length}
-                                        {workoutData.slice(-7).filter(day => day.inside > 0).length === 1 ? ' workout' : ' workouts'} in the last 7 days
+                                        WTD mean: {(hydratedData.slice(-7).reduce((acc, curr) => {
+                                            const bottles = typeof curr.number_drank === 'string' ?
+                                                parseFloat(curr.number_drank) : curr.number_drank;
+                                            return acc + bottles;
+                                        }, 0) / Math.min(hydratedData.length, 7)).toFixed(1)} bottles
                                         <TrendingUp className="h-4 w-4" />
                                     </>
                                 )}
                             </div>
                             <div className="leading-none text-muted-foreground">
-                                Showing workout data for the last {workoutData.length} days
+                                Showing hydration data for the last {hydratedData.length} days
                             </div>
                         </CardFooter>
                     </Card>
+                    </div>
                 </div>
-                <div>
-                    <Card>
-                        <CardHeader>
-                            <CardTitle>Outside Workouts</CardTitle>
-                            <CardDescription>Workouts outside for more than 45 minutes</CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                            <ChartContainer config={chartConfig} className="h-[21vh] w-full">
-                                <BarChart accessibilityLayer data={workoutData}>
-                                    <CartesianGrid vertical={false} />
-                                    <XAxis
-                                        dataKey="date"
-                                        tickLine={false}
-                                        axisLine={false}
-                                        tickMargin={3}
-                                    />
-                                    <ChartTooltip
-                                        cursor={false}
-                                        content={({ active, payload }) => {
-                                            if (!active || !payload || !payload[0]) return null;
 
-                                            const value = payload[0].value as number;
-                                            return (
-                                                <div className="rounded-lg border bg-background p-2 shadow-sm">
-                                                    <span className="text-[0.70rem] text-muted-foreground">
-                                                        {value > 0 ? "Worked out" : "Did not workout"}
-                                                    </span>
-                                                </div>
-                                            );
-                                        }}
-                                    />
-                                    <Bar dataKey="outside">
-                                        {workoutData.map((item) => (
-                                            <Cell
-                                                key={item.date}
-                                                fill={
-                                                    item.outside > 0
-                                                        ? "#2563eb"
-                                                        : "hsl(var(--chart-1))"
-                                                }
-                                            />
-                                        ))}
-                                    </Bar>
-                                </BarChart>
-                            </ChartContainer>
-                        </CardContent>
-                        <CardFooter className="flex-col items-start gap-2 text-sm">
-                            <div className="flex gap-2 font-medium leading-none">
-                                {workoutData.length > 0 && (
-                                    <>
-                                        {workoutData.slice(-7).filter(day => day.outside > 0).length}
-                                        {workoutData.slice(-7).filter(day => day.outside > 0).length === 1 ? ' workout' : ' workouts'} in the last 7 days
-                                        <TrendingUp className="h-4 w-4" />
-                                    </>
-                                )}
-                            </div>
-                            <div className="leading-none text-muted-foreground">
-                                Showing workout data for the last {workoutData.length} days
-                            </div>
-                        </CardFooter>
-                    </Card>
-                </div>
             </div>
         </div>
     )
