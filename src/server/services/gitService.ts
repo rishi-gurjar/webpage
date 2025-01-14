@@ -52,22 +52,9 @@ export async function commitImageFile(imagePath: string): Promise<void> {
     try {
         await execAsync(`git add "${imagePath}"`);
         await execAsync(`git add 'src/app/blog/[slug]/page.tsx'`);
-        await execAsync(`git commit -m "Add blog header image: ${path.basename(imagePath)}"`);
-
-        await retry(async () => {
-            try {
-                await execAsync('ping -c 1 github.com');
-                await execAsync('git push origin main');
-            } catch (error) {
-                console.error('Network or Git error:', error);
-                throw error;
-            }
-        });
-
-        console.log(`Successfully committed image: ${imagePath}`);
+        console.log(`Successfully added image and page.tsx: ${imagePath}`);
     } catch (error) {
-        console.error(`Error committing image: ${error}`);
-        console.log('Image committed locally. Please push manually when connection is restored.');
+        console.error(`Error added image: ${error}`);
         return;
     }
 } 

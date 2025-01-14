@@ -74,7 +74,7 @@ export async function sendEmails(filePath: string, skipConfirmation: boolean = f
         console.log(emailMessage);
         console.log('=============================\n');
 
-        const response = await askForConfirmation('Approve this message?', true);
+        const response = await askForConfirmation('Approve this message and deploy?', true);
         
         if (response === 'y' || response === 'yes') {
             approved = true;
