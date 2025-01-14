@@ -51,6 +51,7 @@ export async function commitAndPushToGit(filePath: string): Promise<void> {
 export async function commitImageFile(imagePath: string): Promise<void> {
     try {
         await execAsync(`git add "${imagePath}"`);
+        await execAsync(`git add 'src/app/blog/[slug]/page.tsx'`);
         await execAsync(`git commit -m "Add blog header image: ${path.basename(imagePath)}"`);
 
         await retry(async () => {
