@@ -14,6 +14,7 @@ import snowImg from '/public/snow.png';
 import tasteImg from '/public/taste.png';
 import contractImg from '/public/contract.png';
 import dictatorImg from '/public/dictator.png';
+import sabotageImg from '/public/sabotage.jpg';
 
 // Create a mapping for your blog images
 const headerImages: { [key: string]: any } = {
@@ -22,6 +23,7 @@ const headerImages: { [key: string]: any } = {
   '/taste.png': tasteImg,
   '/contract.png': contractImg,
   '/dictator.png': dictatorImg,
+  '/sabotage.jpg': sabotageImg,
 };
 
 // Add this interface for better type safety
