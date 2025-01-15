@@ -7,18 +7,6 @@ import lamb from '/public/mysticlamb.png';
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import React, { useState } from 'react'
 import { PageTracker } from './blog/PageTracker';
-import { Metadata } from 'next';
-
-export const metadata: Metadata = {
-  title: 'Rishi Gurjar',
-  description: 'Personal website of Rishi Gurjar, a student at Cornell studying ecology and computer science.',
-  openGraph: {
-    type: 'website',
-    title: 'Rishi Gurjar',
-    description: 'Personal website of Rishi Gurjar, a student at Cornell studying ecology and computer science.',
-    siteName: "Rishi Gurjar's Website"
-  }
-};
 
 export default function Home() {
   const [img, setImg] = useState(tileImage);

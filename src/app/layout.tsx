@@ -5,8 +5,14 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Rishi Gurjar",
-  description: "Rishi Gurjar | Gardening and crafting",
+  title: 'Rishi Gurjar',
+  description: 'Personal website of Rishi Gurjar, a student at Cornell studying ecology and computer science.',
+  openGraph: {
+    type: 'website',
+    title: 'Rishi Gurjar',
+    description: 'Personal website of Rishi Gurjar, a student at Cornell studying ecology and computer science.',
+    siteName: "Rishi Gurjar's Website"
+  }
 };
 
 export default function RootLayout({
@@ -30,5 +36,5 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>{children}</body>
     </html>
-  );
+  )
 }
