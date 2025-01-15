@@ -15,6 +15,7 @@ import tasteImg from '/public/taste.png';
 import contractImg from '/public/contract.png';
 import dictatorImg from '/public/dictator.png';
 import sabotageImg from '/public/sabotage.jpg';
+import { Metadata } from 'next';
 
 // Create a mapping for your blog images
 const headerImages: { [key: string]: any } = {
@@ -37,6 +38,61 @@ interface BlogPost {
   imageLink?: string;
 }
 
+// Add metadata types
+type Props = {
+  params: { slug: string }
+}
+
+// Add generateMetadata function
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const post = await getPost(params.slug);
+  if (!post) return {};
+
+  const publishedTime = new Date(post.date).toISOString();
+
+  return {
+    title: post.title,
+    description: post.content.substring(0, 160),
+    authors: [{
+      name: 'Rishi Gurjar',
+      url: 'https://rishigurjar.com',
+    }],
+    openGraph: {
+      title: post.title,
+      description: post.content.substring(0, 160),
+      type: 'article',
+      publishedTime,
+      authors: ['Rishi Gurjar'],
+      siteName: "Rishi Gurjar's Blog"
+    }
+  };
+}
+
+// Add helper function to get post data
+async function getPost(slug: string): Promise<BlogPost | null> {
+  const blogDir = path.join(process.cwd(), 'src/blog-content');
+  const files = fs.readdirSync(blogDir);
+
+  for (const filename of files) {
+    const filePath = path.join(blogDir, filename);
+    const fileContents = fs.readFileSync(filePath, 'utf8');
+    const { data, content } = matter(fileContents);
+
+    if (generateSlug(data.title) === slug) {
+      return {
+        slug,
+        title: data.title,
+        date: data.date,
+        content,
+        headerImage: data.headerImage,
+        imageAuthor: data.imageAuthor,
+        imageLink: data.imageLink,
+      };
+    }
+  }
+  return null;
+}
+
 export async function generateStaticParams() {
   const blogDir = path.join(process.cwd(), 'src/blog-content');
   const files = fs.readdirSync(blogDir);
@@ -51,7 +107,7 @@ export async function generateStaticParams() {
   });
 }
 
-export default async function BlogPost({ params }: { params: { slug: string } }) {
+export default async function BlogPost({ params }: Props) {
   const blogDir = path.join(process.cwd(), 'src/blog-content');
   const files = fs.readdirSync(blogDir);
 
@@ -100,70 +156,105 @@ export default async function BlogPost({ params }: { params: { slug: string } })
     .process(post.content);
   const contentHtml = processedContent.toString();
 
+  // Add JSON-LD structured data
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    datePublished: new Date(post.date).toISOString(),
+    dateModified: new Date(post.date).toISOString(),
+    author: {
+      '@type': 'Person',
+      name: 'Rishi Gurjar',
+      url: 'https://rishigurjar.com',
+      jobTitle: 'Student',
+      sameAs: [
+        'https://github.com/rishi-gurjar',
+        'https://www.linkedin.com/in/rishigurjar/',
+        'https://x.com/rishi__gurjar',
+      ]
+    },
+    image: undefined,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://rishigurjar.com/blog/${params.slug}`
+    },
+    publisher: {
+      '@type': 'Person',
+      name: 'Rishi Gurjar'
+    }
+  };
+
   return (
-    <main className="container grid flex flex-col items-center mt-[60px] lg:mt-[calc(100vh/5.5)] lg:w-[calc(100vw/3)] md:w-[calc(100vw/3)] md:px-0">
-      <PageTracker path={`/blog/${params.slug}`} />
-      <Link href="/blog" className="self-start mb-4">← Back to blog</Link>
-      {post.headerImage && (
-        <>
-          <div className="w-full mb-2 relative aspect-[16/9]">
-            <Image
-              src={headerImages[post.headerImage]}
-              alt={post.imageAuthor || `Header image for ${post.title}`}
-              fill
-              className="rounded-lg object-cover"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              priority
-            />
-          </div>
-          <div className="w-full mb-8 text-sm text-gray-600 italic">
-            {post.imageLink && (
-              <p className="text-right">
-                {post.imageLink ? (
-                  <a
-                    href={post.imageLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-700 hover:underline"
-                  >
-                    {post.imageAuthor}
-                  </a>
-                ) : (
-                  post.imageAuthor
-                )}
-              </p>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <main className="container grid flex flex-col items-center mt-[60px] lg:mt-[calc(100vh/5.5)] lg:w-[calc(100vw/3)] md:w-[calc(100vw/3)] md:px-0">
+        <PageTracker path={`/blog/${params.slug}`} />
+        <Link href="/blog" className="self-start mb-4">← Back to blog</Link>
+        {post.headerImage && (
+          <>
+            <div className="w-full mb-2 relative aspect-[16/9]">
+              <Image
+                src={headerImages[post.headerImage]}
+                alt={post.imageAuthor || `Header image for ${post.title}`}
+                fill
+                className="rounded-lg object-cover"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                priority
+              />
+            </div>
+            <div className="w-full mb-8 text-sm text-gray-600 italic">
+              {post.imageLink && (
+                <p className="text-right">
+                  {post.imageLink ? (
+                    <a
+                      href={post.imageLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-700 hover:underline"
+                    >
+                      {post.imageAuthor}
+                    </a>
+                  ) : (
+                    post.imageAuthor
+                  )}
+                </p>
+              )}
+            </div>
+          </>
+        )}
+        <h1 className="text-2xl text-[24px] font-['Young_Serif']">{post.title}</h1>
+        <p>{new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
+        <br />
+        <div className="blog-content" dangerouslySetInnerHTML={{ __html: contentHtml }} />
+        <br />
+
+        {/* Add navigation links */}
+        <div className="w-full flex flex-col gap-4 mt-8 border-t pt-4">
+          <h1 className="">Nearby</h1>
+
+          <div className="flex justify-between w-full">
+            {previousPost ? (
+              <Link href={`/blog/${previousPost.slug}`} className="text-green-600 hover:underline font-['Young_Serif']">
+                ← {previousPost.title}
+              </Link>
+            ) : (
+              <div></div>
+            )}
+            {nextPost ? (
+              <Link href={`/blog/${nextPost.slug}`} className="text-green-600 hover:underline ml-auto font-['Young_Serif']">
+                {nextPost.title} →
+              </Link>
+            ) : (
+              <div></div>
             )}
           </div>
-        </>
-      )}
-      <h1 className="text-2xl text-[24px] font-['Young_Serif']">{post.title}</h1>
-      <p>{new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
-      <br />
-      <div className="blog-content" dangerouslySetInnerHTML={{ __html: contentHtml }} />
-      <br />
-
-      {/* Add navigation links */}
-      <div className="w-full flex flex-col gap-4 mt-8 border-t pt-4">
-        <h1 className="">Nearby</h1>
-
-        <div className="flex justify-between w-full">
-          {previousPost ? (
-            <Link href={`/blog/${previousPost.slug}`} className="text-green-600 hover:underline font-['Young_Serif']">
-              ← {previousPost.title}
-            </Link>
-          ) : (
-            <div></div>
-          )}
-          {nextPost ? (
-            <Link href={`/blog/${nextPost.slug}`} className="text-green-600 hover:underline ml-auto font-['Young_Serif']">
-              {nextPost.title} →
-            </Link>
-          ) : (
-            <div></div>
-          )}
         </div>
-      </div>
-      <br />
-    </main>
+        <br />
+      </main>
+    </>
   );
 }

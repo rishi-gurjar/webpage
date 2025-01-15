@@ -7,6 +7,18 @@ import lamb from '/public/mysticlamb.png';
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import React, { useState } from 'react'
 import { PageTracker } from './blog/PageTracker';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Rishi Gurjar',
+  description: 'Personal website of Rishi Gurjar, a student at Cornell studying ecology and computer science.',
+  openGraph: {
+    type: 'website',
+    title: 'Rishi Gurjar',
+    description: 'Personal website of Rishi Gurjar, a student at Cornell studying ecology and computer science.',
+    siteName: "Rishi Gurjar's Website"
+  }
+};
 
 export default function Home() {
   const [img, setImg] = useState(tileImage);
@@ -22,17 +34,41 @@ export default function Home() {
     setCaption("DALLE-2, 2022 AD");
   }
 
+  const personSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Rishi Gurjar',
+    url: 'https://rishigurjar.com',
+    jobTitle: 'Student',
+    alumniOf: [
+      {
+        '@type': 'CollegeOrUniversity',
+        name: 'Cornell University'
+      }
+    ],
+    sameAs: [
+      'https://github.com/rishi-gurjar',
+      'https://www.linkedin.com/in/rishigurjar/',
+      'https://x.com/rishi__gurjar',
+    ],
+    knowsAbout: [
+      'Software Engineering',
+      'Design',
+      'Ecology',
+    ]
+  };
+
   return (
     <main className="container grid flex flex-col items-center mt-[60px] lg:mt-[calc(100vh/5.5)] lg:w-[calc(100vw/3)] md:w-[calc(100vw/3)] md:px-0">
       <PageTracker path="/" />
       <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         <AspectRatio ratio={16 / 7.5}>
-          <Image 
-            src={img} 
-            alt="Image" 
-            className="rounded-md object-cover" 
+          <Image
+            src={img}
+            alt="Image"
+            className="rounded-md object-cover"
             priority={true}
-            width={800} 
+            width={800}
             height={375}
           />
           <h3 className="leading-7 text-right [&:not(:first-child)]:mt-1">{caption}</h3>
@@ -78,6 +114,10 @@ export default function Home() {
         </div> */}
       </div>
 
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+      />
     </main>
   );
 }
