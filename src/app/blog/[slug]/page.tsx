@@ -16,6 +16,7 @@ import contractImg from '/public/contract.png';
 import dictatorImg from '/public/dictator.png';
 import sabotageImg from '/public/sabotage.jpg';
 import { Metadata } from 'next';
+import ernstImg from '/public/ernst.png';
 
 // Create a mapping for your blog images
 const headerImages: { [key: string]: any } = {
@@ -25,6 +26,7 @@ const headerImages: { [key: string]: any } = {
   '/contract.png': contractImg,
   '/dictator.png': dictatorImg,
   '/sabotage.jpg': sabotageImg,
+  '/ernst.png': ernstImg,
 };
 
 // Add this interface for better type safety
