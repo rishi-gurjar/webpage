@@ -317,7 +317,8 @@ async function computeTotalSleep() {
             await setSleepHours(hours, i)
 
         }
-        console.log("Sleep hours updated")
+        const timestamp = new Date().toLocaleString();
+        console.log(`${timestamp} | Sleep hours updated`);
 
         return {
             sleepTimes: sleepTimeData,
