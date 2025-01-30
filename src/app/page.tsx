@@ -94,7 +94,11 @@ export default function Home() {
           <a className="hover:text-green-500" href="https://rishigurjar.com/beacon" target="_blank" rel="noopener noreferrer"><h4>Beacon</h4></a>
           {/* <h4>Smart contract bounty project</h4>
           <h4>b2b data marketing and sales tooling</h4>
-          <h4>Synth type shit</h4> */}
+            <h4>omnichannel marketing ai tool for agencies</h4>
+          <h4>Synth type shit</h4> 
+          <h4>viral iOs apps</h4>
+          */}
+
         </div>
 
         {/* <div className="relative w-full h-[352px]">
