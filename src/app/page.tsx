@@ -78,6 +78,7 @@ export default function Home() {
           <a className="hover:text-blue-500" href="https://x.com/rishi__gurjar" target="_blank" rel="noopener noreferrer"><h4>Twitter</h4></a>
           <a className="hover:text-blue-500" href="https://github.com/rishi-gurjar" target="_blank" rel="noopener noreferrer"><h4>GitHub</h4></a>
           <a className="hover:text-blue-500" href="https://unsplash.com/@rishigurjar/" target="_blank" rel="noopener noreferrer"><h4>Unsplash</h4></a>
+          <a className="hover:text-green-500" href="https://www.goodreads.com/user/show/143258693-rishi-gurjar" target="_blank" rel="noopener noreferrer"><h4>Goodreads</h4></a>
         </div>
         <br />
 
