@@ -19,6 +19,7 @@ import { Metadata } from 'next';
 import ernstImg from '/public/ernst.png';
 import napoleonImg from '/public/napoleon.png';
 import airImg from '/public/air.jpg';
+import mosesImg from '/public/moses.png';
 
 // Create a mapping for your blog images
 const headerImages: { [key: string]: any } = {
@@ -31,6 +32,7 @@ const headerImages: { [key: string]: any } = {
   '/ernst.png': ernstImg,
   '/napoleon.png': napoleonImg,
   '/air.jpg': airImg,
+  '/moses.png': mosesImg,
 };
 
 // Add this interface for better type safety
