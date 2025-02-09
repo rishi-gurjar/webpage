@@ -21,6 +21,7 @@ import napoleonImg from '/public/napoleon.png';
 import airImg from '/public/air.jpg';
 import mosesImg from '/public/moses.png';
 import skiImg from '/public/ski.png';
+import mimesisImg from '/public/mimesis.png';
 
 // Create a mapping for your blog images
 const headerImages: { [key: string]: any } = {
@@ -35,6 +36,7 @@ const headerImages: { [key: string]: any } = {
   '/air.jpg': airImg,
   '/moses.png': mosesImg,
   '/ski.png': skiImg,
+  '/mimesis.png': mimesisImg,
 };
 
 // Add this interface for better type safety
