@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Page() {
   return (
     <div style={{ fontFamily: 'Helvetica Neue', padding: '20px', maxWidth: '800px', margin: '0 auto' }}>
@@ -5,6 +7,11 @@ export default function Page() {
         <h1 style={{ fontSize: '2.5rem', marginBottom: '10px' }}>Nudge</h1>
         <p style={{ fontSize: '1.2rem', color: '#555' }}>
           An elegantly designed companion, inspired by thoughtful simplicity.
+        </p>
+
+        <p style={{ display: 'flex', gap: '20px', justifyContent: 'center' }}>
+          <Link href="/nudge/pp" style={{ color: '#555', textDecoration: 'underline' }}>Privacy Policy</Link>
+          <Link href="/nudge/tos" style={{ color: '#555', textDecoration: 'underline' }}>Terms of Service</Link>
         </p>
       </header>
 
