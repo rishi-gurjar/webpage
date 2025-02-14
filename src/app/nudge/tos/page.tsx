@@ -7,7 +7,7 @@ export default function TOS() {
         <li style={{ marginBottom: '15px' }}>
           <strong>Introduction</strong>
           <p>
-            Nudge ("we", "us", or "our") values your privacy and is committed to protecting your personal information. This Privacy Policy explains how we collect, use, and safeguard your data when you use our mobile application ("App").
+            Nudge (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) values your privacy and is committed to protecting your personal information. This Privacy Policy explains how we collect, use, and safeguard your data when you use our mobile application (&quot;App&quot;).
           </p>
         </li>
         <li style={{ marginBottom: '15px' }}>
@@ -54,7 +54,7 @@ export default function TOS() {
           </p>
         </li>
         <li style={{ marginBottom: '15px' }}>
-          <strong>Children's Privacy</strong>
+          <strong>Children&apos;s Privacy</strong>
           <p>
             Our App is not intended for individuals under the age of 13, and we do not knowingly collect personal information from children under 13. If you believe we have collected such information in error, please contact us immediately.
           </p>
@@ -74,7 +74,7 @@ export default function TOS() {
         <li style={{ marginBottom: '15px' }}>
           <strong>Changes to This Privacy Policy</strong>
           <p>
-            We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated "Last Updated" date. Your continued use of the App after any changes signifies your acceptance of the revised policy.
+            We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated &quot;Last Updated&quot; date. Your continued use of the App after any changes signifies your acceptance of the revised policy.
           </p>
         </li>
         <li style={{ marginBottom: '15px' }}>

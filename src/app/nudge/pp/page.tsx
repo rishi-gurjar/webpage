@@ -7,7 +7,7 @@ export default function PP() {
     <li style={{ marginBottom: '15px' }}>
       <strong>Acceptance of Terms</strong>
       <p>
-        By downloading, accessing, or using the Nudge mobile application (“App”), you agree to be bound by these Terms of Service (“Terms”). If you do not agree to these Terms, please do not use the App.
+        By downloading, accessing, or using the Nudge mobile application (&quot;App&quot;), you agree to be bound by these Terms of Service (&quot;Terms&quot;). If you do not agree to these Terms, please do not use the App.
       </p>
     </li>
     <li style={{ marginBottom: '15px' }}>
@@ -49,7 +49,7 @@ export default function PP() {
         You agree to use Nudge only for lawful purposes and in compliance with these Terms. Prohibited activities include:
       </p>
       <ul style={{ listStyleType: 'disc', paddingLeft: '20px' }}>
-        <li>Misusing or interfering with the App’s functionality.</li>
+        <li>Misusing or interfering with the App&apos;s functionality.</li>
         <li>Engaging in fraudulent or harmful conduct.</li>
         <li>Attempting to circumvent or disable security features.</li>
       </ul>
@@ -63,7 +63,7 @@ export default function PP() {
     <li style={{ marginBottom: '15px' }}>
       <strong>Disclaimers &amp; Limitation of Liability</strong>
       <p>
-        <strong>Disclaimer of Warranties:</strong> Nudge is provided on an “as is” and “as available” basis without warranties of any kind, either express or implied.
+        <strong>Disclaimer of Warranties:</strong> Nudge is provided on an &quot;as is&quot; and &quot;as available&quot; basis without warranties of any kind, either express or implied.
       </p>
       <p>
         <strong>Limitation of Liability:</strong> Under no circumstances will Nudge, its owners, or affiliates be liable for any indirect, incidental, consequential, or punitive damages arising from your use of the App.
