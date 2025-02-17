@@ -30,7 +30,7 @@ export default function Page() {
               maxWidth: '60%',
               fontSize: '15px'
             }}>
-              You want a six-pack, motherfucker? You better not eat fucking cookies today.
+              You want a six-pack, motherf**ker? You better not eat cookies today.
             </div>
           </div>
           <p style={{ marginTop: '20px' }}>
