@@ -1,5 +1,6 @@
 import Link from "next/link";
-
+import DavidGoggins from "/public/david.png";
+import Image from "next/image";
 export default function Page() {
   return (
     <div style={{ fontFamily: 'Helvetica Neue', padding: '20px', maxWidth: '650px', margin: '0 auto' }}>
@@ -11,13 +12,29 @@ export default function Page() {
       <main>
         <section style={{ marginBottom: '30px' }}>
           <p>
-            Rohan wants to be shredded (who doesn't want abs?), but he has a problem. The mere sight of a cookie makes him forget his goal. So, Rohan and his friend Rishi made an app that reminds Rohan to lock in around meal time.
+            Rohan wants to be shredded (who doesn&apos;t want abs?), but he has a problem. The mere sight of a cookie makes him forget his goal. So, Rohan and his friend Rishi made an app that reminds Rohan to lock in around meal time.
           </p>
-          <p style={{ marginTop: '20px', fontStyle: 'italic' }}>
-            "You want a six-pack, motherfucker? You better not eat fucking cookies today."
-          </p>
+          <div style={{ display: 'flex', alignItems: 'flex-start', marginTop: '20px', gap: '8px' }}>
+            <Image 
+              src={DavidGoggins} 
+              alt="David Goggins"
+              width={40} 
+              height={40} 
+              style={{ borderRadius: '50%' }}
+            />
+            <div style={{ 
+              backgroundColor: '#007AFF',
+              color: 'white',
+              padding: '12px 16px',
+              borderRadius: '20px',
+              maxWidth: '60%',
+              fontSize: '15px'
+            }}>
+              You want a six-pack, motherfucker? You better not eat fucking cookies today.
+            </div>
+          </div>
           <p style={{ marginTop: '20px' }}>
-            If David Goggins isn't your style, maybe Mother Teresa is. Your personalized AI coach—tuned to your motivations and goals—will send you custom <i>Nudges</i> when you need them most.
+            If David Goggins isn&apos;t your style, maybe Mother Teresa is. Your personalized AI coach—tuned to your motivations and goals—will send you custom <i>Nudges</i> when you need them most.
           </p>
           <p style={{ marginTop: '20px' }}>
             <Link href="#" style={{ color: '#000', textDecoration: 'underline' }}>Get Nudge here.</Link>
