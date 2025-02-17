@@ -1,7 +1,7 @@
 export default function TOS() {
     return (
     <section style={{ marginTop: '40px' }}>
-      <h2 style={{ fontSize: '1.75rem', marginBottom: '20px', marginLeft: '40px' }}>Nudge Privacy Policy</h2>
+      <h2 style={{ fontSize: '1.75rem', marginBottom: '20px', marginLeft: '40px', fontFamily: 'Londrina Solid'}}>Nudge Privacy Policy</h2>
       <p style={{ marginBottom: '20px', marginLeft: '40px' }}>Last Updated: 2/14/2025</p>
       <ol style={{ lineHeight: '1.6', marginLeft: '40px', marginRight: '40px' }}>
         <li style={{ marginBottom: '15px' }}>
