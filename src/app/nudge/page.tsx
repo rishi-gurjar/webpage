@@ -27,8 +27,8 @@ export default function Page() {
               color: 'white',
               padding: '12px 16px',
               borderRadius: '20px',
-              maxWidth: '60%',
-              fontSize: '15px'
+              maxWidth: '85%',
+              fontSize: '15px',
             }}>
               You want a six-pack, motherf**ker? You better not eat cookies today.
             </div>
