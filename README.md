@@ -8,5 +8,5 @@ Rebuild: npm run build
 4. Add image files to ./public
 
 ###### RUN
-npm run dev
-
+Testing: npm run dev
+Server: npm run server in src/server
