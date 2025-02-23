@@ -23,6 +23,7 @@ import mosesImg from '/public/moses.png';
 import skiImg from '/public/ski.png';
 import mimesisImg from '/public/mimesis.png';
 import nudgeImg from '/public/nudge.png';
+import machinaImg from '/public/machina.jpg';
 
 // Create a mapping for your blog images
 const headerImages: { [key: string]: any } = {
@@ -39,6 +40,7 @@ const headerImages: { [key: string]: any } = {
   '/ski.png': skiImg,
   '/mimesis.png': mimesisImg,
   '/nudge.png': nudgeImg,
+  '/machina.jpg': machinaImg,
 };
 
 // Add this interface for better type safety
