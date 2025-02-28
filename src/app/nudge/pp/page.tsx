@@ -92,7 +92,7 @@ export default function PP() {
       <p>
         If you have any questions regarding these Terms, please contact us at:
       </p>
-      <p>Email: x = rishi, y = gurjar, z = 2000 | xyz@gmail.com</p>
+      <p>Email: nudgeship@gmail.com</p>
     </li>
   </ol>
 </section>

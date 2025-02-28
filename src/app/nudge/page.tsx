@@ -45,6 +45,7 @@ export default function Page() {
       <footer style={{ textAlign: 'center', marginTop: '40px', borderTop: '1px solid #eee', paddingTop: '20px', fontSize: '0.9rem', color: '#777' }}>
 
       <p style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginBottom: '10px' }}>&copy; {new Date().getFullYear()} Nudge <Link href="/nudge/pp" style={{ color: '#555', textDecoration: 'underline', marginLeft: '20px' }}>Privacy Policy</Link><Link href="/nudge/tos" style={{ color: '#555', textDecoration: 'underline', marginLeft: '20px' }}>Terms of Service</Link></p>
+      <p style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginBottom: '10px' }}>Contact us at <Link href="mailto:nudgeship@gmail.com" style={{ color: '#555', textDecoration: 'underline', marginLeft: '20px' }}>nudgeship@gmail.com</Link></p>
       </footer>
     </div>
   );
