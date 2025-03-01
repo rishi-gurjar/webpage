@@ -4,6 +4,9 @@ import { PORT } from './config';
 import apiRoutes from './routes/api';
 import { setupBlogWatcher } from './watchers/blogWatcher';
 import { computeTotalSleep } from './services/v9Service';
+import dotenv from 'dotenv';
+
+dotenv.config(); // Load environment variables from .env file
 
 const app = express();
 

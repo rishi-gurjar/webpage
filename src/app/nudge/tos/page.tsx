@@ -1,6 +1,9 @@
+import { PageTracker } from "@/app/blog/PageTracker";
+
 export default function TOS() {
     return (
     <section style={{ marginTop: '40px' }}>
+      <PageTracker path={`/nudge/tos`} />
       <h2 style={{ fontSize: '1.75rem', marginBottom: '20px', marginLeft: '40px', fontFamily: 'Londrina Solid'}}>Nudge Privacy Policy</h2>
       <p style={{ marginBottom: '20px', marginLeft: '40px' }}>Last Updated: 2/14/2025</p>
       <ol style={{ lineHeight: '1.6', marginLeft: '40px', marginRight: '40px' }}>

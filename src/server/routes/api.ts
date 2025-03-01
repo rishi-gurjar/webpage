@@ -9,13 +9,17 @@ import {
     getWorkouts,
     getHydrated
 } from '../services/v9Service';
+import { createClient } from '@supabase/supabase-js';
 const router = express.Router();
 const ipstack_key = process.env.IP_STACK_KEY
+const supabaseUrl = process.env.SUPA_URL
+const supabaseKey = process.env.SUPA_KEY;
 
 function log(endpoint: string) {
     const timestamp = new Date().toLocaleString();
     console.log(`${timestamp} | ${endpoint} endpoint`);
 }
+
 router.get('/subscribers', async (req, res) => {
     const response = await sheets.spreadsheets.values.get({
         spreadsheetId: process.env.SHEET_ID,
@@ -132,6 +136,22 @@ router.post('/validate-beacon-password', async (req: any, res: any) => {
     return res.status(isValid ? 200 : 401).json({ success: isValid });
 });
 
+router.post('/validate-nudge-dash-password', async (req: any, res: any) => {
+    // log('/validate-beacon-password')
+    const { password } = req.body;
+
+    // Get password from environment variable
+    const correctPassword = process.env.NUDGE_DASH_PASSWORD;
+
+    if (!correctPassword) {
+        return res.status(500).json({ success: false, message: 'Loser' });
+    }
+
+    const isValid = password === correctPassword;
+
+    return res.status(isValid ? 200 : 401).json({ success: isValid });
+});
+
 router.get('/sleep-time', async (req: express.Request, res: express.Response) => {
     // log('/sleep-time')
     try {
@@ -179,6 +199,66 @@ router.get('/hydrated', async (req: express.Request, res: express.Response) => {
 router.get('/ping', (req: express.Request, res: express.Response) => {
     console.log('Ping received from:', req.headers.origin);
     res.json({ message: 'pong', timestamp: new Date().toISOString() });
+});
+
+// Get all psych profile data
+router.get('/nudge/psych-profiles', async (req: any, res: any) => {
+
+    try {
+                
+        if (!supabaseUrl || !supabaseKey) {
+            return res.status(500).json({ error: 'Supabase credentials not configured' });
+        }
+        
+        const supabase = createClient(supabaseUrl, supabaseKey);
+        
+        const { data, error, count } = await supabase
+            .from('psych_profiles')
+            .select('*', { count: 'exact' });
+            
+        if (error) {
+            console.error('Supabase error:', error);
+            throw error;
+        }
+        
+        res.json({ data, count });
+    } catch (error) {
+        console.error('Error fetching psych profiles:', error);
+        res.status(500).json({ 
+            error: 'Failed to fetch psych profiles', 
+            details: error instanceof Error ? error.message : String(error) 
+        });
+    }
+});
+
+// Consolidate user growth and active users into a single endpoint
+router.get('/nudge/user-data', async (req: any, res: any) => {
+    try {        
+        
+        if (!supabaseUrl || !supabaseKey) {
+            return res.status(500).json({ error: 'Supabase credentials not configured' });
+        }
+        
+        const supabase = createClient(supabaseUrl, supabaseKey);
+        
+        // Get all user data in one request
+        const { data, error } = await supabase
+            .from('profiles')
+            .select('id, created_at, updated_at');
+            
+        if (error) {
+            console.error('Supabase error:', error);
+            throw error;
+        }
+        
+        res.json({ data });
+    } catch (error) {
+        console.error('Error fetching user data:', error);
+        res.status(500).json({ 
+            error: 'Failed to fetch user data', 
+            details: error instanceof Error ? error.message : String(error) 
+        });
+    }
 });
 
 export default router; 
