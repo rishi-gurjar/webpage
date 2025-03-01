@@ -252,7 +252,7 @@ export default function NudgeDashboard() {
             console.error('Error fetching user data:', error);
             setUserGrowthData([]);
         }
-    }, [API_URL, calculateActiveUsers]);
+    }, [API_URL]);
 
     // Add this helper function to calculate active users
     const calculateActiveUsers = useCallback((data: any[]) => {
