@@ -159,7 +159,19 @@ export default function NudgeDashboard() {
             setIsLoading(true)
             
             // Fetch all profiles from API instead of Supabase
-            const response = await fetch(`${API_URL}/api/nudge/psych-profiles`)
+            const response = await fetch(`${API_URL}/api/nudge/psych-profiles`, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'ngrok-skip-browser-warning': 'true'
+                }
+            });
+            
+            if (!response.ok) {
+                throw new Error(`API returned ${response.status}`);
+            }
+            
             const { data, count } = await response.json()
             
             if (data) {
@@ -192,7 +204,19 @@ export default function NudgeDashboard() {
     const fetchUserGrowthData = useCallback(async () => {
         try {
             // Fetch user data from consolidated endpoint
-            const response = await fetch(`${API_URL}/api/nudge/user-data`);
+            const response = await fetch(`${API_URL}/api/nudge/user-data`, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'ngrok-skip-browser-warning': 'true'
+                }
+            });
+            
+            if (!response.ok) {
+                throw new Error(`API returned ${response.status}`);
+            }
+            
             const { data } = await response.json();
             
             if (data && data.length > 0) {
@@ -228,7 +252,7 @@ export default function NudgeDashboard() {
             console.error('Error fetching user data:', error);
             setUserGrowthData([]);
         }
-    }, [API_URL]);
+    }, [API_URL, calculateActiveUsers]);
 
     // Add this helper function to calculate active users
     const calculateActiveUsers = useCallback((data: any[]) => {
@@ -293,9 +317,15 @@ export default function NudgeDashboard() {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'ngrok-skip-browser-warning': 'true'
                 },
                 body: JSON.stringify({ password })
             });
+            
+            if (!response.ok) {
+                throw new Error(`API returned ${response.status}`);
+            }
             
             const data = await response.json();
             
