@@ -46,6 +46,23 @@ import {
     ChartLegendContent
 } from "@/components/ui/chart"
 
+// Add this interface near the top of your file, before the component
+interface PsychProfile {
+  gender: string;
+  source: string;
+  loses_sight_of_goals: boolean;
+  goal_areas: string;
+  feels_regret: string;
+  life_difference: string;
+  desire_level: string;
+  [key: string]: any; // For any other properties
+}
+
+// Create a new interface for the transformed data
+interface FormattedPsychProfile extends Omit<PsychProfile, 'loses_sight_of_goals'> {
+    loses_sight_of_goals: string;
+}
+
 const chartConfig = {
     gender: {
         label: "Gender",
@@ -111,7 +128,7 @@ export default function NudgeDashboard() {
     const [retentionData, setRetentionData] = useState<any[]>([])
 
     // Helper function to count occurrences and format for charts
-    const countAndFormat = (data: any[], field: string, isList: boolean = false) => {
+    const countAndFormat = (data: PsychProfile[], field: keyof PsychProfile, isList: boolean = false) => {
         const counts: Record<string, number> = {}
         
         data.forEach(item => {
@@ -150,20 +167,20 @@ export default function NudgeDashboard() {
                 setTotalProfiles(count || data.length)
                 
                 // Process data for each chart
-                setGenderData(countAndFormat(data, 'gender'))
-                setSourceData(countAndFormat(data, 'source'))
+                setGenderData(countAndFormat(data as PsychProfile[], 'gender'))
+                setSourceData(countAndFormat(data as PsychProfile[], 'source'))
                 
                 // For boolean loses_sight_of_goals, convert to categories
-                const losesGoalsFormatted = data.map(item => ({
+                const losesGoalsFormatted = (data as PsychProfile[]).map((item: PsychProfile) => ({
                     ...item,
                     loses_sight_of_goals: item.loses_sight_of_goals ? 'Yes' : 'No'
-                }))
-                setLosesGoalsData(countAndFormat(losesGoalsFormatted, 'loses_sight_of_goals'))
+                })) as FormattedPsychProfile[]
+                setLosesGoalsData(countAndFormat(losesGoalsFormatted as any, 'loses_sight_of_goals'))
                 
-                setGoalAreasData(countAndFormat(data, 'goal_areas', true))
-                setFeelsRegretData(countAndFormat(data, 'feels_regret'))
-                setLifeDifferenceData(countAndFormat(data, 'life_difference'))
-                setDesireLevelData(countAndFormat(data, 'desire_level'))
+                setGoalAreasData(countAndFormat(data as PsychProfile[], 'goal_areas', true))
+                setFeelsRegretData(countAndFormat(data as PsychProfile[], 'feels_regret'))
+                setLifeDifferenceData(countAndFormat(data as PsychProfile[], 'life_difference'))
+                setDesireLevelData(countAndFormat(data as PsychProfile[], 'desire_level'))
             }
         } catch (error) {
             console.error('Error fetching data:', error)
@@ -182,7 +199,7 @@ export default function NudgeDashboard() {
                 // Group by day for growth chart
                 const dateGroups: Record<string, number> = {};
                 
-                data.forEach(profile => {
+                data.forEach((profile: any) => {
                     if (profile.created_at) {
                         // Format date as YYYY-MM-DD
                         const date = new Date(profile.created_at).toISOString().split('T')[0];
@@ -214,7 +231,7 @@ export default function NudgeDashboard() {
     }, [API_URL]);
 
     // Add this helper function to calculate active users
-    const calculateActiveUsers = useCallback((data) => {
+    const calculateActiveUsers = useCallback((data: any[]) => {
         // Get current date and time
         const now = new Date();
         
@@ -285,11 +302,11 @@ export default function NudgeDashboard() {
             if (data.success) {
                 setIsAuthenticated(true);
             } else {
-                alert('HAHAHAHAHAHA');
+                alert("HAHAHAHAHAHA");
             }
         } catch (error) {
             console.error('Error validating password:', error);
-            alert('HAHAHAHAHAHA rishi asleep :(');
+            alert("HAHAHAHAHAHA rishi asleep :(");
         } finally {
             setIsLoading(false);
         }
@@ -337,7 +354,7 @@ export default function NudgeDashboard() {
     return (
         <div>
             <PageTracker path={`/nudge/dash`} />
-            <h1 className="text-4xl p-4 font-semibold tracking-tight">A Very Humble Seaman's Compass</h1>
+            <h1 className="text-4xl p-4 font-semibold tracking-tight">A Very Humble Seaman&apos;s Compass</h1>
 
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 p-4">
                 <PageTracker path={`/nudge/dash-authenticated`} />
@@ -496,7 +513,7 @@ export default function NudgeDashboard() {
                 <Card>
                     <CardHeader>
                         <CardTitle>Life Difference</CardTitle>
-                        <CardDescription>How different users' lives would be if they achieved goals</CardDescription>
+                        <CardDescription>How different users&apos; lives would be if they achieved goals</CardDescription>
                     </CardHeader>
                     <CardContent>
                         <ChartContainer config={chartConfig} className="h-[300px] w-full">
