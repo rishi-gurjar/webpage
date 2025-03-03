@@ -58,7 +58,7 @@ const chartConfig = {
 
 export default function BeaconPage() {
     const API_URL = process.env.NODE_ENV === 'production'
-        ? 'https://9cfa-128-84-124-75.ngrok-free.app'
+        ? 'https://9e4c-128-84-124-75.ngrok-free.app'
         : 'http://localhost:3001';
 
     const [isAuthenticated, setIsAuthenticated] = useState(false)
