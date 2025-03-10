@@ -15,7 +15,7 @@ export default function Page() {
       <main>
         <section style={{ marginBottom: '30px' }}>
           <p>
-            These Terms of Service ("Terms") govern your use of the Twirl mobile application ("App") and the services provided by Twirl ("we", "us", "our"). By downloading, installing, or using the App, you agree to comply with and be bound by these Terms. Please read these Terms carefully before using the App.
+            These Terms of Service (&quot;Terms&quot;) govern your use of the Twirl mobile application (&quot;App&quot;) and the services provided by Twirl (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;). By downloading, installing, or using the App, you agree to comply with and be bound by these Terms. Please read these Terms carefully before using the App.
           </p>
 
           <h2 style={{ fontSize: '1.5rem', marginTop: '30px', marginBottom: '15px' }}>1. Subscription and Billing</h2>
@@ -32,7 +32,7 @@ export default function Page() {
           <p>You agree not to:</p>
           <ul style={{ paddingLeft: '20px', marginTop: '10px' }}>
             <li>Upload or share any content that violates the rights of others, is illegal, or is offensive.</li>
-            <li>Engage in any activity that could damage, disable, or impair the App's functionality.</li>
+            <li>Engage in any activity that could damage, disable, or impair the App&apos;s functionality.</li>
             <li>Use the App for any unlawful or fraudulent activities.</li>
           </ul>
 
@@ -40,7 +40,7 @@ export default function Page() {
           <p>All content provided by Twirl, including the design, text, graphics, logos, and software, is the property of Twirl and is protected by intellectual property laws. You are granted a limited, non-exclusive, non-transferable license to use the App for personal, non-commercial purposes. You may not reproduce, distribute, or modify the content without prior written permission from us.</p>
 
           <h2 style={{ fontSize: '1.5rem', marginTop: '30px', marginBottom: '15px' }}>5. AI Rating System and OpenAI GPT</h2>
-          <p>Twirl utilizes OpenAI's GPT (Generative Pretrained Transformer) technology to generate outfit ratings based on the photos you upload. While we integrate OpenAI's GPT system, we are not responsible for how OpenAI processes or uses any data. OpenAI operates independently and has its own privacy and data usage policies.</p>
+          <p>Twirl utilizes OpenAI&apos;s GPT (Generative Pretrained Transformer) technology to generate outfit ratings based on the photos you upload. While we integrate OpenAI&apos;s GPT system, we are not responsible for how OpenAI processes or uses any data. OpenAI operates independently and has its own privacy and data usage policies.</p>
 
           <h2 style={{ fontSize: '1.5rem', marginTop: '30px', marginBottom: '15px' }}>6. Termination</h2>
           <p>We may suspend or terminate your access to Twirl at any time, without notice, for any reason, including if we believe you have violated these Terms. You may cancel your subscription and stop using the App at any time by following the cancellation instructions in your account settings or contacting customer support.</p>

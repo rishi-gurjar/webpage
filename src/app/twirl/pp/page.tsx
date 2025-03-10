@@ -15,7 +15,7 @@ export default function Page() {
       <main>
         <section style={{ marginBottom: '30px' }}>
           <p>
-            At Twirl ("we", "us", "our"), we value your privacy and are committed to protecting your personal data in compliance with applicable privacy laws. This Privacy Policy explains how we collect, use, store, and protect the information you provide when using our mobile application ("App"). By accessing or using Twirl, you agree to the collection and use of information in accordance with this policy.
+            At Twirl (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;), we value your privacy and are committed to protecting your personal data in compliance with applicable privacy laws. This Privacy Policy explains how we collect, use, store, and protect the information you provide when using our mobile application (&quot;App&quot;). By accessing or using Twirl, you agree to the collection and use of information in accordance with this policy.
           </p>
 
           <h2 style={{ fontSize: '1.5rem', marginTop: '30px', marginBottom: '15px' }}>1. Information We Collect</h2>
@@ -31,13 +31,13 @@ export default function Page() {
           <ul style={{ paddingLeft: '20px', marginTop: '10px' }}>
             <li>To provide and enhance the functionality of the App, including AI-based ratings of your outfits.</li>
             <li>To store your photos securely in your personal library for easy access.</li>
-            <li>To analyze usage data to improve the App's features and performance.</li>
+            <li>To analyze usage data to improve the App&apos;s features and performance.</li>
             <li>To communicate with you about updates or changes to the App.</li>
           </ul>
 
           <h2 style={{ fontSize: '1.5rem', marginTop: '30px', marginBottom: '15px' }}>3. AI Rating System Powered by OpenAI GPT</h2>
           <p>
-            Twirl uses OpenAI's GPT (Generative Pretrained Transformer) technology to generate outfit ratings based on the photos you upload. The AI provides ratings in five subcategories and a main overall score for your outfits. While we integrate OpenAI's GPT technology into our system, we are not responsible for how GPT processes or uses any data. OpenAI, as the provider of the GPT system, manages all aspects of its functionality and data handling. We encourage you to review OpenAI's Privacy Policy to understand how they use and process data.
+            Twirl uses OpenAI&apos;s GPT (Generative Pretrained Transformer) technology to generate outfit ratings based on the photos you upload. The AI provides ratings in five subcategories and a main overall score for your outfits. While we integrate OpenAI&apos;s GPT technology into our system, we are not responsible for how GPT processes or uses any data. OpenAI, as the provider of the GPT system, manages all aspects of its functionality and data handling. We encourage you to review OpenAI&apos;s Privacy Policy to understand how they use and process data.
           </p>
 
           <h2 style={{ fontSize: '1.5rem', marginTop: '30px', marginBottom: '15px' }}>4. Storage of Photos</h2>
@@ -74,7 +74,7 @@ export default function Page() {
             By using Twirl, you agree that we shall not be held liable for any direct, indirect, incidental, special, consequential, or punitive damages arising from your use of the App or the information you provide. While we make efforts to protect your information, we do not guarantee the security or accuracy of your data, and you acknowledge that any transmission of data is at your own risk.
           </p>
           <p>
-            Additionally, we are not responsible for any data handling or processing performed by OpenAI's GPT technology. OpenAI operates independently, and we have no control over their data usage practices.
+            Additionally, we are not responsible for any data handling or processing performed by OpenAI&apos;s GPT technology. OpenAI operates independently, and we have no control over their data usage practices.
           </p>
 
           <h2 style={{ fontSize: '1.5rem', marginTop: '30px', marginBottom: '15px' }}>10. Changes to This Privacy Policy</h2>
