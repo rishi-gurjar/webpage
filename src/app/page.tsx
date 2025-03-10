@@ -83,7 +83,8 @@ export default function Home() {
         <br />
 
         <h2 className="leading-7 [&:not(:first-child)]:mt-1">Side projects</h2>
-        <div>
+        <div className="pb-4">
+          <a className="hover:text-green-500" href="https://rishigurjar.com/twirl" target="_blank" rel="noopener noreferrer"><h4>Twirl</h4></a>
           <a className="hover:text-green-500" href="https://rishigurjar.com/nudge" target="_blank" rel="noopener noreferrer"><h4>Nudge</h4></a>
           <a className="hover:text-green-500" href="https://cornelldatajournal.org" target="_blank" rel="noopener noreferrer"><h4>Data Journal</h4></a>
           {/* <a className="hover:text-green-500" href="https://verduslabs.com/" target="_blank" rel="noopener noreferrer"><h4>Verdus Labs</h4></a> */}
