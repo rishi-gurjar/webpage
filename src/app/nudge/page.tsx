@@ -37,7 +37,7 @@ export default function Page() {
             If David Goggins isn&apos;t your style, maybe Mother Teresa is. Your personalized AI coach—tuned to your motivations and goals—will send you custom <i>Nudges</i> when you need them most.
           </p>
           <p style={{ marginTop: '20px' }}>
-            <Link href="https://testflight.apple.com/join/FZjQ8ABz" style={{ color: '#000', textDecoration: 'underline' }}>Get Nudge here.</Link>
+            <Link href="https://apps.apple.com/us/app/nudge-daily-smart-reminders/id6742312056" style={{ color: '#000', textDecoration: 'underline' }}>Get Nudge here.</Link>
           </p>
         </section>
       </main>
