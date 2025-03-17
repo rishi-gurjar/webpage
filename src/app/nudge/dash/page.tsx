@@ -106,7 +106,7 @@ const DESIRE_COLORS = ['#b3e5fc', '#4fc3f7', '#0288d1', '#01579b']; // Light Blu
 export default function NudgeDashboard() {
     
     const API_URL = process.env.NODE_ENV === 'production'
-    ? 'https://03db-128-84-127-211.ngrok-free.app'
+    ? process.env.NGROK_URL
     : 'http://localhost:3001';
 
     const [isAuthenticated, setIsAuthenticated] = useState(false)
