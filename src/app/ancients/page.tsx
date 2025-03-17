@@ -117,7 +117,7 @@ function Test() {
         }));
 
         const API_URL = process.env.NODE_ENV === 'production'
-            ? process.env.NGROK_URL
+            ? 'https://17ba-128-84-127-211.ngrok-free.app'
             : 'http://localhost:3001';
 
         const response = await fetch(`${API_URL}/api/llm`, {
