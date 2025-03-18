@@ -59,49 +59,54 @@ export default function Home() {
             width={800}
             height={375}
           />
-          <h3 className="leading-7 text-right [&:not(:first-child)]:mt-1">{caption}</h3>
+          <h3 className="leading-7 text-right [&:not(:first-child)]:mt-1 text-gray-500 font-mono text-sm">{caption}</h3>
         </AspectRatio>
       </div>
 
       <div className="mt-4">
-        <h2 className="scroll-m-20 text-xl font-semibold tracking-tight">Rishi Gurjar</h2>
+        <h2 className="scroll-m-20 text-lg font-semibold tracking-tight text-gray-500">Rishi Gurjar</h2>
         <div >
-          <h4>SF Bay Area & Ithaca, NY</h4>
-          <h4>Email: x@y | x = rrg85, y = cornell.edu</h4>
+          <h4 className="text-gray-500 text-sm">SF Bay Area & Ithaca, NY</h4>
+          <h4 className="text-gray-500 text-sm">Email: x@y | x = rrg85, y = cornell.edu</h4>
         </div>
         <br />
 
-        <h2 className="leading-7 [&:not(:first-child)]:mt-1">Socials</h2>
-        <div>
-          <a className="hover:text-blue-500" href="/blog"><h4>Blog</h4></a>
-          <a className="hover:text-blue-500" href="https://www.linkedin.com/in/rishigurjar/" target="_blank" rel="noopener noreferrer"><h4>Linkedin</h4></a>
-          <a className="hover:text-blue-500" href="https://x.com/rishi__gurjar" target="_blank" rel="noopener noreferrer"><h4>Twitter</h4></a>
-          <a className="hover:text-blue-500" href="https://github.com/rishi-gurjar" target="_blank" rel="noopener noreferrer"><h4>GitHub</h4></a>
-          <a className="hover:text-blue-500" href="https://unsplash.com/@rishigurjar/" target="_blank" rel="noopener noreferrer"><h4>Unsplash</h4></a>
-          <a className="hover:text-blue-500" href="https://www.goodreads.com/user/show/143258693-rishi-gurjar" target="_blank" rel="noopener noreferrer"><h4>Goodreads</h4></a>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
+          <div>
+            <h2 className="leading-7 [&:not(:first-child)]:mt-1 text-gray-500 font-mono text-sm">SOCIALS</h2>
+            <div>
+              <a className="hover:text-blue-500 text-gray-500 text-sm" href="/blog"><h4>Blog</h4></a>
+              <a className="hover:text-blue-500 text-gray-500 text-sm" href="https://www.linkedin.com/in/rishigurjar/" target="_blank" rel="noopener noreferrer"><h4>Linkedin</h4></a>
+              <a className="hover:text-blue-500 text-gray-500 text-sm" href="https://x.com/rishi__gurjar" target="_blank" rel="noopener noreferrer"><h4>Twitter</h4></a>
+              <a className="hover:text-blue-500 text-gray-500 text-sm" href="https://github.com/rishi-gurjar" target="_blank" rel="noopener noreferrer"><h4>GitHub</h4></a>
+              <a className="hover:text-blue-500 text-gray-500 text-sm" href="https://unsplash.com/@rishigurjar/" target="_blank" rel="noopener noreferrer"><h4>Unsplash</h4></a>
+              <a className="hover:text-blue-500 text-gray-500 text-sm" href="https://www.goodreads.com/user/show/143258693-rishi-gurjar" target="_blank" rel="noopener noreferrer"><h4>Goodreads</h4></a>
+            </div>
+          </div>
+
+          <div>
+            <h2 className="leading-7 [&:not(:first-child)]:mt-1 text-gray-500 font-mono text-sm">SIDE PROJECTS</h2>
+            <div className="pb-4">
+              <a className="hover:text-green-500 text-gray-500 text-sm" href="https://rishigurjar.com/twirl" target="_blank" rel="noopener noreferrer"><h4>Twirl</h4></a>
+              <a className="hover:text-green-500 text-gray-500 text-sm" href="https://rishigurjar.com/nudge" target="_blank" rel="noopener noreferrer"><h4>Nudge</h4></a>
+              <a className="hover:text-green-500 text-gray-500 text-sm" href="https://cornelldatajournal.org" target="_blank" rel="noopener noreferrer"><h4>Data Journal</h4></a>
+              {/* <a className="hover:text-green-500" href="https://verduslabs.com/" target="_blank" rel="noopener noreferrer"><h4>Verdus Labs</h4></a> */}
+              <a className="hover:text-green-500 text-gray-500 text-sm" href="https://coldcraft.ai" target="_blank" rel="noopener noreferrer"><h4>ColdCraft</h4></a>
+              {/* <a className="hover:text-green-500" href="https://codexfund.vercel.app/" target="_blank" rel="noopener noreferrer"><h4>Codex Fund</h4></a> */}
+              <a className="hover:text-green-500 text-gray-500 text-sm" href="https://armada.build/" target="_blank" rel="noopener noreferrer"><h4>Armada</h4></a>
+              <a className="hover:text-green-500 text-gray-500 text-sm" href="https://beyondterra.org" target="_blank" rel="noopener noreferrer"><h4>Beyond Terra</h4></a>
+              <a className="hover:text-green-500 text-gray-500 text-sm" href="https://rishigurjar.com/ancients" target="_blank" rel="noopener noreferrer"><h4>Ancients</h4></a>
+              <a className="hover:text-green-500 text-gray-500 text-sm" href="https://rishigurjar.com/beacon" target="_blank" rel="noopener noreferrer"><h4>Beacon</h4></a>
+              {/* <h4>Smart contract bounty project</h4>
+              <h4>b2b data marketing and sales tooling</h4>
+                <h4>omnichannel marketing ai tool for agencies</h4>
+              <h4>Synth type shit</h4> 
+              <h4>viral iOs apps</h4>
+              */}
+            </div>
+          </div>
         </div>
         <br />
-
-        <h2 className="leading-7 [&:not(:first-child)]:mt-1">Side projects</h2>
-        <div className="pb-4">
-          <a className="hover:text-green-500" href="https://rishigurjar.com/twirl" target="_blank" rel="noopener noreferrer"><h4>Twirl</h4></a>
-          <a className="hover:text-green-500" href="https://rishigurjar.com/nudge" target="_blank" rel="noopener noreferrer"><h4>Nudge</h4></a>
-          <a className="hover:text-green-500" href="https://cornelldatajournal.org" target="_blank" rel="noopener noreferrer"><h4>Data Journal</h4></a>
-          {/* <a className="hover:text-green-500" href="https://verduslabs.com/" target="_blank" rel="noopener noreferrer"><h4>Verdus Labs</h4></a> */}
-          <a className="hover:text-green-500" href="https://coldcraft.ai" target="_blank" rel="noopener noreferrer"><h4>ColdCraft</h4></a>
-          {/* <a className="hover:text-green-500" href="https://codexfund.vercel.app/" target="_blank" rel="noopener noreferrer"><h4>Codex Fund</h4></a> */}
-          <a className="hover:text-green-500" href="https://armada.build/" target="_blank" rel="noopener noreferrer"><h4>Armada</h4></a>
-          <a className="hover:text-green-500" href="https://beyondterra.org" target="_blank" rel="noopener noreferrer"><h4>Beyond Terra</h4></a>
-          <a className="hover:text-green-500" href="https://rishigurjar.com/ancients" target="_blank" rel="noopener noreferrer"><h4>Ancients</h4></a>
-          <a className="hover:text-green-500" href="https://rishigurjar.com/beacon" target="_blank" rel="noopener noreferrer"><h4>Beacon</h4></a>
-          {/* <h4>Smart contract bounty project</h4>
-          <h4>b2b data marketing and sales tooling</h4>
-            <h4>omnichannel marketing ai tool for agencies</h4>
-          <h4>Synth type shit</h4> 
-          <h4>viral iOs apps</h4>
-          */}
-
-        </div>
 
         {/* <div className="relative w-full h-[352px]">
           <iframe 
