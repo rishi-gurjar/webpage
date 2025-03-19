@@ -174,7 +174,7 @@
           success: (function(_this) {
             return function() {
               var func, hide;
-              _this.ui.updateMessage("Launching " + executable);
+              _this.ui.updateMessage("blah blah blah");
               hide = function() {
                 return _this.ui.hideLoader();
               };
@@ -187,7 +187,7 @@
           })(this),
           progress: (function(_this) {
             return function(total, current) {
-              return _this.ui.updateMessage("Mount " + executable + " (" + (current * 100 / total | 0) + "%)");
+              return _this.ui.updateMessage("blah blah blah" + " (" + (current * 100 / total | 0) + "%)");
             };
           })(this)
         });
@@ -201,13 +201,13 @@
   
       Dosbox.prototype.downloadScript = function() {
         this.module.setStatus('Loading js-dos');
-        this.ui.updateMessage('Loading js-dos');
+        this.ui.updateMessage('blah blah blah');
   
         return new Dosbox.Xhr('components/js-dos-apiv3.js', {
           success: (function(_this) {
             return function(script) {
               var func;
-              _this.ui.updateMessage('Initializing dosbox');
+              _this.ui.updateMessage('blah blah blah');
               func = function() {
                 return _this._jsdos_init(_this.module, script, _this.onload);
               };
@@ -216,7 +216,7 @@
           })(this),
           progress: (function(_this) {
             return function(total, current) {
-              return _this.ui.updateMessage("Loading js-dos (" + (current * 100 / total | 0) + "%)");
+              return _this.ui.updateMessage("blah blah blah (" + (current * 100 / total | 0) + "%)");
             };
           })(this)
         });
