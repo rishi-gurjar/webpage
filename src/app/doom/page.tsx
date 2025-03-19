@@ -90,9 +90,6 @@ export default function DoomPage() {
       {/* Main container */}
       <div className="container">
         <div id="dosbox"></div>
-        <button className="wrapper" onClick={() => window.dosbox?.requestFullScreen()}>
-          <a><span>FULLSCREEN</span></a>
-        </button>
       </div>
 
       {/* Preload js-dos-apiv3.js */}
@@ -110,7 +107,7 @@ export default function DoomPage() {
         onError={(e) => console.error("Script loading error:", e)}
       />
 
-      {/* Add inline script to fix overlay */}
+      {/* Add inline script to fix overlay and auto-fullscreen */}
       <Script id="fix-overlay" strategy="afterInteractive">
         {`
           // Create a placeholder for the overlay image
@@ -124,8 +121,35 @@ export default function DoomPage() {
                 background: #000 !important;
                 background-size: 100% !important;
               }
+              
+              /* Hide the fullscreen button */
+              .wrapper {
+                display: none !important;
+              }
+              
+              /* Make the container fill the screen */
+              .container, .dosbox-container, canvas.dosbox-canvas {
+                width: 100% !important;
+                height: 100vh !important;
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+              }
+              
+              body {
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+              }
             \`;
             document.head.appendChild(style);
+            
+            // Add event listener to handle clicks anywhere to go fullscreen
+            document.addEventListener('click', function() {
+              if (window.dosbox && window.dosbox.requestFullScreen) {
+                window.dosbox.requestFullScreen();
+              }
+            });
           }
         `}
       </Script>
