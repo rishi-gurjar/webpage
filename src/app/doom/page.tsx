@@ -16,11 +16,11 @@ export default function DoomPage() {
       try {
         // Create a proxy for the Xhr function to fix paths
         const originalXhrConstructor = window.XMLHttpRequest;
-        window.XMLHttpRequest = function() {
+        window.XMLHttpRequest = function(this: any) {
           const xhr = new originalXhrConstructor();
           const originalOpen = xhr.open;
           
-          xhr.open = function(method, url, ...args) {
+          xhr.open = function(method: string, url: string | URL, ...args: any[]): void {
             // Fix the js-dos-apiv3.js path
             if (typeof url === 'string' && url === 'components/js-dos-apiv3.js') {
               url = '/jsdoom/components/js-dos-apiv3.js';
