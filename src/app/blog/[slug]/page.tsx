@@ -27,6 +27,7 @@ import machinaImg from '/public/machina.jpg';
 import appmassImg from '/public/appmass.png';
 import buzzImg from '/public/buzz.png';
 import theworldImg from '/public/theworld.png';
+import orgImg from '/public/org.png';
 
 // Create a mapping for your blog images
 const headerImages: { [key: string]: any } = {
@@ -47,6 +48,7 @@ const headerImages: { [key: string]: any } = {
   '/appmass.png': appmassImg,
   '/buzz.png': buzzImg,
   '/theworld.png': theworldImg,
+  '/org.png': orgImg,
 };
 
 // Add this interface for better type safety
@@ -144,7 +146,7 @@ export default async function BlogPost({ params }: Props) {
       const clean_content = content
         .replace(/\\\n/g, '\n\n')
         .replace(/\\$/gm, '')
-        .replace(/(\d+)\.\s*/g, '$1. ')
+        .replace(/^(\d+)\.\s*/gm, '$1. ')
         .replace(/\n\n\n+/g, '\n\n')
         // Fix markdown links that got broken by line breaks
         .replace(/\[([^\]]+)\]\(([^)]+?)\s+/g, '[$1]($2')
