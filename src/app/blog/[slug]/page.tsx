@@ -131,6 +131,13 @@ export async function generateStaticParams() {
   });
 }
 
+// Add this function to process image paths before markdown processing
+function processImagePaths(content: string): string {
+  // Replace markdown image syntax that starts with /
+  // This will convert ![alt](/image.png) to ![alt](/blog-images/image.png)
+  return content.replace(/!\[(.*?)\]\(\/([^)]+)\)/g, '![$1](/blog-images/$2)');
+}
+
 export default async function BlogPost({ params }: Props) {
   const blogDir = path.join(process.cwd(), 'src/blog-content');
   const files = fs.readdirSync(blogDir);
@@ -174,10 +181,13 @@ export default async function BlogPost({ params }: Props) {
   const previousPost = currentIndex < posts.length - 1 ? posts[currentIndex + 1] : null;
   const nextPost = currentIndex > 0 ? posts[currentIndex - 1] : null;
 
+  // Process image paths first, then process markdown
+  const contentWithFixedPaths = processImagePaths(post.content);
+  
   // Process the Markdown content
   const processedContent = await remark()
     .use(html)
-    .process(post.content);
+    .process(contentWithFixedPaths);
   const contentHtml = processedContent.toString();
 
   // Add JSON-LD structured data
