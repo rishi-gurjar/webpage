@@ -45,7 +45,7 @@ export default function TwirlLandingPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link 
-                href="https://testflight.apple.com/join/bReeHWCt"
+                href="https://apps.apple.com/us/app/twirl-ai-outfit-rating/id6743049586"
                 className="bg-black text-white px-8 py-3 rounded-full font-medium flex items-center justify-center gap-2 hover:bg-gray-800 transition-colors transform hover:scale-105 shadow-lg"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
