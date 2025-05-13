@@ -30,6 +30,7 @@ import theworldImg from '/public/theworld.png';
 import orgImg from '/public/org.png';
 import thinkersImg from '/public/thinkers.png';
 import blindImg from '/public/blind.png';
+import sageImg from '/public/sage.png';
 
 // Create a mapping for your blog images
 const headerImages: { [key: string]: any } = {
@@ -53,6 +54,7 @@ const headerImages: { [key: string]: any } = {
   '/org.png': orgImg,
   '/thinkers.png': thinkersImg,
   '/blind.png': blindImg,
+  '/sage.png': sageImg,
 };
 
 // Add this interface for better type safety
@@ -99,7 +101,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 // Add helper function to get post data
 async function getPost(slug: string): Promise<BlogPost | null> {
   const blogDir = path.join(process.cwd(), 'src/blog-content');
-  const files = fs.readdirSync(blogDir);
+  const allFiles = fs.readdirSync(blogDir);
+  
+  // Filter to only include files, not directories
+  const files = allFiles.filter(filename => {
+    const filePath = path.join(blogDir, filename);
+    return fs.statSync(filePath).isFile();
+  });
 
   for (const filename of files) {
     const filePath = path.join(blogDir, filename);
@@ -124,15 +132,21 @@ async function getPost(slug: string): Promise<BlogPost | null> {
 export async function generateStaticParams() {
   const blogDir = path.join(process.cwd(), 'src/blog-content');
   const files = fs.readdirSync(blogDir);
-
-  return files.map((filename) => {
-    const filePath = path.join(blogDir, filename);
-    const fileContents = fs.readFileSync(filePath, 'utf8');
-    const { data } = matter(fileContents);
-    return {
-      slug: generateSlug(data.title),
-    };
-  });
+  
+  return files
+    .filter(filename => {
+      const filePath = path.join(blogDir, filename);
+      // Skip directories
+      return fs.statSync(filePath).isFile();
+    })
+    .map((filename) => {
+      const filePath = path.join(blogDir, filename);
+      const fileContents = fs.readFileSync(filePath, 'utf8');
+      const { data } = matter(fileContents);
+      return {
+        slug: generateSlug(data.title),
+      };
+    });
 }
 
 // Add this function to process image paths before markdown processing
@@ -144,7 +158,13 @@ function processImagePaths(content: string): string {
 
 export default async function BlogPost({ params }: Props) {
   const blogDir = path.join(process.cwd(), 'src/blog-content');
-  const files = fs.readdirSync(blogDir);
+  const allFiles = fs.readdirSync(blogDir);
+  
+  // Filter to get only files, not directories
+  const files = allFiles.filter(filename => {
+    const filePath = path.join(blogDir, filename);
+    return fs.statSync(filePath).isFile();
+  });
 
   // Get all posts and sort them by date
   const posts: BlogPost[] = files
