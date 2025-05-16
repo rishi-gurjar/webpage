@@ -32,6 +32,7 @@ import thinkersImg from '/public/thinkers.png';
 import blindImg from '/public/blind.png';
 import sageImg from '/public/sage.png';
 import durerImg from '/public/durer.png';
+import batImg from '/public/bat.png';
 
 // Create a mapping for your blog images
 const headerImages: { [key: string]: any } = {
@@ -57,6 +58,7 @@ const headerImages: { [key: string]: any } = {
   '/blind.png': blindImg,
   '/sage.png': sageImg,
   '/durer.png': durerImg,
+  '/bat.png': batImg,
 };
 
 // Add this interface for better type safety
