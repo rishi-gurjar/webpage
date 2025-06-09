@@ -75,7 +75,7 @@ export default function Home() {
           <div>
             <h2 className="leading-7 [&:not(:first-child)]:mt-1 text-gray-500 font-mono text-sm">SOCIALS</h2>
             <div>
-              <a className="hover:text-blue-500 text-gray-500 text-sm" href="/blog"><h4>Blog</h4></a>
+              <a className="hover:text-blue-500 text-gray-500 text-sm" href="/blog"><h4>Beliefs</h4></a>
               <a className="hover:text-blue-500 text-gray-500 text-sm" href="https://www.linkedin.com/in/rishigurjar/" target="_blank" rel="noopener noreferrer"><h4>Linkedin</h4></a>
               <a className="hover:text-blue-500 text-gray-500 text-sm" href="https://x.com/rishi__gurjar" target="_blank" rel="noopener noreferrer"><h4>Twitter</h4></a>
               <a className="hover:text-blue-500 text-gray-500 text-sm" href="https://github.com/rishi-gurjar" target="_blank" rel="noopener noreferrer"><h4>GitHub</h4></a>
