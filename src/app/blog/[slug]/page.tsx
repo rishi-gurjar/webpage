@@ -35,6 +35,7 @@ import durerImg from '/public/durer.png';
 import batImg from '/public/bat.png';
 import cliffsImg from '/public/cliffs.png';
 import preconciousImg from '/public/preconcious.png';
+import stpeterImg from '/public/stpeter.png';
 
 // Create a mapping for your blog images
 const headerImages: { [key: string]: any } = {
@@ -63,6 +64,7 @@ const headerImages: { [key: string]: any } = {
   '/bat.png': batImg,
   '/cliffs.png': cliffsImg,
   '/preconcious.png': preconciousImg,
+  '/stpeter.png': stpeterImg,
 };
 
 // Add this interface for better type safety
