@@ -89,6 +89,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!post) return {};
 
   const publishedTime = new Date(post.date).toISOString();
+  
+  // Construct the image URL for Open Graph
+  const imageUrl = post.headerImage ? `https://rishigurjar.com${post.headerImage}` : undefined;
 
   return {
     title: post.title,
@@ -103,7 +106,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: 'article',
       publishedTime,
       authors: ['Rishi Gurjar'],
-      siteName: "Rishi Gurjar's Blog"
+      siteName: "Rishi Gurjar's Blog",
+      images: imageUrl ? [{
+        url: imageUrl,
+        width: 1200,
+        height: 675,
+        alt: post.title,
+      }] : undefined,
     }
   };
 }
@@ -242,7 +251,7 @@ export default async function BlogPost({ params }: Props) {
         'https://x.com/rishi__gurjar',
       ]
     },
-    image: undefined,
+    image: post.headerImage ? `https://rishigurjar.com${post.headerImage}` : undefined,
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': `https://rishigurjar.com/blog/${params.slug}`
