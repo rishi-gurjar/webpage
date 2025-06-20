@@ -85,9 +85,12 @@ export default function Home() {
           </div>
 
           <div>
+            <h2 className="leading-7 [&:not(:first-child)]:mt-1 text-gray-500 font-mono text-sm">MAIN PROJECT</h2>
+            <div className="pb-4">
+              <a className="hover:text-green-500 text-gray-500 text-sm" href="https://verduslabs.com" target="_blank" rel="noopener noreferrer"><h4>Verdus Labs</h4></a>
+            </div>
             <h2 className="leading-7 [&:not(:first-child)]:mt-1 text-gray-500 font-mono text-sm">SIDE PROJECTS</h2>
             <div className="pb-4">
-              <a className="hover:text-green-500 text-gray-500 text-sm" href="https://verduslabs.com" target="_blank" rel="noopener noreferrer"><h4>Verdus</h4></a>
               <a className="hover:text-green-500 text-gray-500 text-sm" href="https://rishigurjar.com/doom" target="_blank" rel="noopener noreferrer"><h4>DOOM</h4></a>
               <a className="hover:text-green-500 text-gray-500 text-sm" href="https://rishigurjar.com/twirl" target="_blank" rel="noopener noreferrer"><h4>Twirl</h4></a>
               <a className="hover:text-green-500 text-gray-500 text-sm" href="https://rishigurjar.com/nudge" target="_blank" rel="noopener noreferrer"><h4>Nudge</h4></a>
