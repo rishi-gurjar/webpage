@@ -39,6 +39,7 @@ import stpeterImg from '/public/stpeter.png';
 import natImg from '/public/nat.png';
 import altImg from '/public/alt.png';
 import coroImg from '/public/coro.png';
+import hansImg from '/public/hans.png';
 
 // Create a mapping for your blog images
 const headerImages: { [key: string]: any } = {
@@ -71,6 +72,7 @@ const headerImages: { [key: string]: any } = {
   '/nat.png': natImg,
   '/alt.png': altImg,
   '/coro.png': coroImg,
+  '/hans.png': hansImg,
 };
 
 // Add this interface for better type safety
