@@ -1,6 +1,7 @@
 import { getPosts } from '@/lib/getPosts';
 import { BlogSubscribe } from './BlogSubscribe';
 import { PageTracker } from './PageTracker';
+import { BlogList } from './BlogList';
 import Link from 'next/link';
 
 export default async function Blog() {
@@ -15,17 +16,7 @@ export default async function Blog() {
       
       <BlogSubscribe />
 
-      <ul>
-        {posts.map((post) => (
-          <li key={post.slug}>
-            <Link href={`/blog/${post.slug}`}>
-              <h2 className="font-['Young_Serif'] font-light">{post.title}</h2>
-              <p className=''>{new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
-              <br />
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <BlogList posts={posts} />
     </main>
   );
 }

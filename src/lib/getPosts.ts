@@ -23,6 +23,7 @@ export async function getPosts() {
         slug: generateSlug(data.title),
         title: data.title,
         date: data.date,
+        headerImage: data.headerImage,
       });
     } catch (error) {
       console.error(`Error processing ${filename}:`, error);
