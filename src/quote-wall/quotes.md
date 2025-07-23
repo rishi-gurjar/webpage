@@ -1,5 +1,6 @@
 a little philosophy inclineth man's mind to atheism; but depth in philosophy bringeth men's minds about to religion | Francis Bacon | The Essays: Of Atheism | 2025-07-23T19:45:36.701Z
 …just as Columbus did, before his wonderful voyage across the Atlantic Ocean, when he gave the reasons for his confidence that he could find new lands and continents beyond those known already; reasons which, although rejected at first, were later proved by experiment, and became the causes and starting points of great things | Francis Bacon | Aphorism 92, Book I of Novum Organum | 2025-07-23T20:12:36.701Z
-If the truth shall kill them, let them die | Ayn Rand paraphrasing Kant | Judgment Day: My Years with Ayn Rand
+If the truth shall kill them, let them die | Ayn Rand paraphrasing Kant | Judgment Day: My Years with Ayn Rand | 2025-07-23T20:19:36.701Z
 To be is to do | Kant (misattributed), ancient maxim attributed to Socrates | | 2025-07-23T20:22:36.701Z
 I had to deny knowledge in order to make room for faith | Kant | Critique of Pure Reason | 2025-07-23T20:27:36.701Z
+Ford was the kind of guy that when something was in the way, he found a way around it, he just got it done. He was really focused on what the customer needed, even when the customer didn’t know what they needed | Musk | Wait But Why: How Tesla Will Change The World | 2025-07-23T21:05:23.400Z
