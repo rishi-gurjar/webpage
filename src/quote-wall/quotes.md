@@ -3,4 +3,5 @@ a little philosophy inclineth man's mind to atheism; but depth in philosophy bri
 If the truth shall kill them, let them die | Ayn Rand paraphrasing Kant | Judgment Day: My Years with Ayn Rand | 2025-07-23T20:19:36.701Z
 To be is to do | Kant (misattributed), ancient maxim attributed to Socrates | | 2025-07-23T20:22:36.701Z
 I had to deny knowledge in order to make room for faith | Kant | Critique of Pure Reason | 2025-07-23T20:27:36.701Z
-Ford was the kind of guy that when something was in the way, he found a way around it, he just got it done. He was really focused on what the customer needed, even when the customer didn’t know what they needed | Musk | Wait But Why: How Tesla Will Change The World | 2025-07-23T21:05:23.400Z
+Ford was the kind of guy that when something was in the way, he found a way around it, he just got it done. He was really focused on what the customer needed, even when the customer didn’t know what they needed | Musk | Wait But Why: How Tesla Will Change The World | 2025-07-23T21:09:31.311Z
+Failure can be the information you need to get where you're going | Rick Rubin | IG post | 2025-07-23T21:09:31.311Z
