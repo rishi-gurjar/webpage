@@ -36,7 +36,7 @@ export function BlogSubscribe() {
       <h2 className="text-base mb-2">
         Join my very exclusive mailing list of {subscriberCount}{' '}
         <a
-          href="/blog/quotes"
+          href="/quotes"
           className="hover:italic hover:text-blue-800"
         >
           people

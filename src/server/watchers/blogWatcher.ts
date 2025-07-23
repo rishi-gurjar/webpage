@@ -7,6 +7,115 @@ import path from 'path';
 import fs from 'fs';
 import readline from 'readline';
 
+// Removed previous quotes tracking - now we detect quotes ready for metadata by the trailing "|"
+
+interface Quote {
+    text: string;
+    author: string;
+    source: string;
+    timestamp?: string;
+}
+
+
+
+function parseQuotes(filePath: string): Quote[] {
+    try {
+        const fileContents = fs.readFileSync(filePath, 'utf8');
+        const quotes: Quote[] = [];
+        
+        fileContents
+            .split('\n')
+            .filter(line => line.trim() && line.includes('|'))
+            .forEach(line => {
+                const parts = line.split('|').map(part => part.trim());
+                if (parts.length >= 3) {
+                    quotes.push({
+                        text: parts[0],
+                        author: parts[1],
+                        source: parts[2],
+                        timestamp: parts[3] || undefined
+                    });
+                }
+            });
+            
+        return quotes;
+    } catch (error) {
+        console.error('Error reading quotes file:', error);
+        return [];
+    }
+}
+
+async function processQuotesNeedingMetadata(filePath: string, quotesNeedingMetadata: string[]): Promise<Quote[]> {
+    try {
+        const timestamp = new Date().toISOString();
+        
+        const fileContents = fs.readFileSync(filePath, 'utf8');
+        const lines = fileContents.split('\n');
+        
+        const processedQuotes: Quote[] = [];
+        
+        // Find and update lines that end with "|" (ready for metadata)
+        const updatedLines = lines.map(line => {
+            if (quotesNeedingMetadata.includes(line)) {
+                // Remove the trailing "|" and add metadata
+                const cleanLine = line.slice(0, -1).trim();
+                const parts = cleanLine.split('|').map(part => part.trim());
+                
+                if (parts.length === 3) {
+                    const updatedLine = `${cleanLine} | ${timestamp}`;
+                    processedQuotes.push({
+                        text: parts[0],
+                        author: parts[1],
+                        source: parts[2],
+                        timestamp
+                    });
+                    return updatedLine;
+                }
+            }
+            return line;
+        });
+        
+        fs.writeFileSync(filePath, updatedLines.join('\n'));
+        console.log('✓ Added timestamp metadata to quotes');
+        
+        return processedQuotes;
+    } catch (error) {
+        console.error('Error processing quotes metadata:', error);
+        return [];
+    }
+}
+
+function findQuotesNeedingMetadata(filePath: string): string[] {
+    try {
+        const fileContents = fs.readFileSync(filePath, 'utf8');
+        return fileContents
+            .split('\n')
+            .filter(line => {
+                const trimmed = line.trim();
+                // Look for lines that have exactly 3 parts + end with "|" (indicating ready for metadata)
+                if (trimmed.endsWith('|')) {
+                    const parts = trimmed.slice(0, -1).split('|').map(part => part.trim());
+                    return parts.length === 3 && parts.every(part => part.length > 0);
+                }
+                return false;
+            });
+    } catch (error) {
+        console.error('Error reading quotes file:', error);
+        return [];
+    }
+}
+
+function displayQuote(quote: Quote): void {
+    console.log('\n📝 New quote detected:');
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    console.log(`"${quote.text}"`);
+    console.log(`   — ${quote.author}${quote.source ? `, ${quote.source}` : ''}`);
+    if (quote.timestamp) {
+        console.log(`   📅 ${new Date(quote.timestamp).toLocaleString()}`);
+    }
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+}
+
 // Create readline interface
 const rl = readline.createInterface({
     input: process.stdin,
@@ -92,7 +201,11 @@ async function updateHeaderImagesInPage(imagePath: string) {
 
 export function setupBlogWatcher() {
     const publicDir = path.join(process.cwd(), 'public');
-    const watcher = chokidar.watch([BLOG_DIR, publicDir], {
+    const quotesFile = path.join(process.cwd(), 'src/quote-wall/quotes.md');
+    
+    // Quotes watcher will detect quotes ending with "|" for metadata processing
+    
+    const watcher = chokidar.watch([BLOG_DIR, publicDir, quotesFile], {
         ignored: /(^|[\/\\])\../,
         persistent: true,
         awaitWriteFinish: {
@@ -154,8 +267,44 @@ export function setupBlogWatcher() {
         }
     });
 
+    watcher.on('change', async (filePath: string) => {
+        // Handle changes to quotes.md
+        if (path.basename(filePath) === 'quotes.md') {
+            console.log('Quotes file changed:', path.basename(filePath));
+            
+            const quotesNeedingMetadata = findQuotesNeedingMetadata(filePath);
+            
+            if (quotesNeedingMetadata.length > 0) {
+                console.log(`Found ${quotesNeedingMetadata.length} quote(s) ready for metadata...`);
+                
+                // Process quotes that end with "|" and add metadata
+                const processedQuotes = await processQuotesNeedingMetadata(filePath, quotesNeedingMetadata);
+                
+                for (const processedQuote of processedQuotes) {
+                    displayQuote(processedQuote);
+                    
+                    const shouldProceed = await askForConfirmation(
+                        `Do you want to commit and push this quote to git?`
+                    );
+
+                    if (shouldProceed === 'y' || shouldProceed === 'yes') {
+                        try {
+                            await commitAndPushToGit(filePath);
+                            console.log('✓ Quote committed and pushed to git successfully');
+                        } catch (error) {
+                            console.error('Error committing quote:', error);
+                        }
+                    } else {
+                        console.log('Quote commit cancelled');
+                    }
+                }
+            }
+        }
+    });
+
     watcher.on('ready', () => {
         console.log('Initial scan complete. Ready for changes');
+        console.log('Watching for blog posts and quotes...');
     });
 
     watcher.on('error', error => {

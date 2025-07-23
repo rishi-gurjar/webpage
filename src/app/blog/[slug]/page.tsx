@@ -90,12 +90,13 @@ interface BlogPost {
 
 // Add metadata types
 type Props = {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 // Add generateMetadata function
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const post = await getPost(params.slug);
+  const { slug } = await params;
+  const post = await getPost(slug);
   if (!post) return {};
 
   const publishedTime = new Date(post.date).toISOString();
@@ -186,6 +187,7 @@ function processImagePaths(content: string): string {
 }
 
 export default async function BlogPost({ params }: Props) {
+  const { slug } = await params;
   const blogDir = path.join(process.cwd(), 'src/blog-content');
   const allFiles = fs.readdirSync(blogDir);
   
@@ -225,7 +227,7 @@ export default async function BlogPost({ params }: Props) {
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   // Find the current post index
-  const currentIndex = posts.findIndex((post) => post.slug === params.slug);
+  const currentIndex = posts.findIndex((post) => post.slug === slug);
   if (currentIndex === -1) {
     notFound();
   }
@@ -264,7 +266,7 @@ export default async function BlogPost({ params }: Props) {
     image: post.headerImage ? `https://rishigurjar.com${post.headerImage}` : undefined,
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://rishigurjar.com/blog/${params.slug}`
+      '@id': `https://rishigurjar.com/blog/${slug}`
     },
     publisher: {
       '@type': 'Person',
@@ -279,7 +281,7 @@ export default async function BlogPost({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <main className="container grid flex flex-col items-center mt-[60px] lg:mt-[calc(100vh/5.5)] lg:w-[calc(100vw/3)] md:w-[calc(100vw/3)] md:px-0">
-        <PageTracker path={`/blog/${params.slug}`} />
+        <PageTracker path={`/blog/${slug}`} />
         <Link href="/blog" className="self-start mb-4">← Back to blog</Link>
         {post.headerImage && (
           <>
