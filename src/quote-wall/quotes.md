@@ -5,3 +5,5 @@ To be is to do | Kant (misattributed), ancient maxim attributed to Socrates | | 
 I had to deny knowledge in order to make room for faith | Kant | Critique of Pure Reason | 2025-07-23T20:27:36.701Z
 Ford was the kind of guy that when something was in the way, he found a way around it, he just got it done. He was really focused on what the customer needed, even when the customer didn’t know what they needed | Musk | Wait But Why: How Tesla Will Change The World | 2025-07-23T21:09:31.311Z
 Failure can be the information you need to get where you're going | Rick Rubin | IG post | 2025-07-23T21:09:31.311Z
+We aim to invest in category-defining companies with a singular conviction | Joshua Kushner | |
+We're looking for remarkable intellect, extreme focus, an obsession with the customer, unreasonable determination, especially in the face of adversity, clear and credible ambition, and usually a bit of divergence—people who don't feel the need to be liked by everybody | Neil Mehta | Colossus: The Visions of Neil Mehta | 2025-07-23T21:16:15.986Z
