@@ -33,7 +33,15 @@ export function BlogSubscribe() {
 
   return (
     <div className="w-full max-w-sm mb-4 p-3 border border-gray-200 rounded-lg">
-      <h2 className="text-base mb-2">Join my very exclusive mailing list of {subscriberCount} people</h2>
+      <h2 className="text-base mb-2">
+        Join my very exclusive mailing list of {subscriberCount}{' '}
+        <a
+          href="/blog/quotes"
+          className="hover:italic hover:text-blue-800"
+        >
+          people
+        </a>
+      </h2>
       <form id="email-form" action={handleSubmit} className="flex flex-col gap-1.5">
         <input
           type="email"
