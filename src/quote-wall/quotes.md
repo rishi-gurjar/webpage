@@ -1,1 +1,2 @@
 a little philosophy inclineth man's mind to atheism; but depth in philosophy bringeth men's minds about to religion | Francis Bacon | The Essays: Of Atheism
+…just as Columbus did, before his wonderful voyage across the Atlantic Ocean, when he gave the reasons for his confidence that he could find new lands and continents beyond those known already; reasons which, although rejected at first, were later proved by experiment, and became the causes and starting points of great things | Francis Bacon | Aphorism 92, Book I of Novum Organum

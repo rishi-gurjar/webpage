@@ -54,7 +54,7 @@ export default async function QuotesPage() {
           quotes.map((quote, index) => (
             <div key={index} className="pl-6 py-2 text-xs">
               <blockquote className="font-mono">
-                {quote.text}
+                "{quote.text}"
               </blockquote>
               <div className="text-xs text-black-600">
                 <span className="font-medium">— {quote.author},</span>
