@@ -8,3 +8,4 @@ Failure can be the information you need to get where you're going | Rick Rubin |
 We aim to invest in category-defining companies with a singular conviction | Joshua Kushner | | 2025-07-23T21:16:35.056Z
 We're looking for remarkable intellect, extreme focus, an obsession with the customer, unreasonable determination, especially in the face of adversity, clear and credible ambition, and usually a bit of divergence—people who don't feel the need to be liked by everybody | Neil Mehta | Colossus: The Visions of Neil Mehta | 2025-07-23T21:16:40.056Z
 My unmatched perspicacity, coupled with sheer indefatigability makes me a FEARED OPPONENT IN ANY REALM OF HUMAN ENDEAVOUR | Andrew Tate | Twitter | 2025-07-25T02:53:55.822Z
+The fundamental cause of trouble in the world today is that the stupid are cocksure while the intelligent are full of doubt. | Bukowski (misattributed), Bertrand Russell | Marriage and Morals | 2025-07-25T02:56:07.596Z
