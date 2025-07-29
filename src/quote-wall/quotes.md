@@ -16,3 +16,4 @@ Thinking small is a self-fulfilling prophecy | Bezos | Dealbook Summit | 2025-07
 One of the strategies of dissidence in the last years of Socialism was therefore precisely to take the ruling ideology more seriously/literally than it took itself by way of ignoring its virtual unwritten shadow. | Slavoj Zizek | What's Wrong with Fundamentalism? - Part II | 2025-07-29T15:39:22.716Z
 always drink upstream from the herd | Unknown | A mug at Cornell | 2025-07-29T17:06:20.467Z
 Self-sacrifice? But it is precisely the self that cannot and must not be sacrificed. | Ayn Rand | The Fountainhead | 2025-07-29T20:10:43.074Z
+If Men were angels, no government would be necessary. | Madison | Federalist No. 51 | 2025-07-29T22:37:11.278Z
