@@ -14,3 +14,4 @@ Man has a large capacity for effort. In fact it is so much greater than we think
 It's generally human nature to overestimate risk and underestimate opportunity | Bezos | Dealbook Summit | 2025-07-28T05:01:30.299Z
 Thinking small is a self-fulfilling prophecy | Bezos | Dealbook Summit | 2025-07-28T05:02:08.121Z
 One of the strategies of dissidence in the last years of Socialism was therefore precisely to take the ruling ideology more seriously/literally than it took itself by way of ignoring its virtual unwritten shadow. | Slavoj Zizek | What's Wrong with Fundamentalism? - Part II | 2025-07-29T15:39:22.716Z
+always drink upstream from the herd | Unknown | A mug at Cornell | 2025-07-29T17:06:20.467Z
