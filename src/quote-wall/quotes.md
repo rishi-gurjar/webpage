@@ -19,3 +19,4 @@ Self-sacrifice? But it is precisely the self that cannot and must not be sacrifi
 If Men were angels, no government would be necessary. | Madison | Federalist No. 51 | 2025-07-29T22:37:11.278Z
 Incompetence in the limit is indistinguishable from sabotage | Musk | Titter | 2025-07-30T05:26:53.708Z
 One of the schools of Tlon goes so far as to negate time: it reasons that the present is indefinite, that the future has no reality other than as a present hope, that the past has no reality other than as a present memory | Jorge Luis Borges | Tlön, Uqbar, Orbis Tertius | 2025-07-30T19:02:24.357Z
+It seems that Spartan men ate nearly six times as much as their wives | Bertrand Russell citing John Bagnell Bury, History of Greece | The History of Western Philosophy | 2025-07-30T22:04:55.454Z
