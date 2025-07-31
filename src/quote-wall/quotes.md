@@ -25,3 +25,4 @@ Leisure is essential to wisdom | Plato via Bertrand Russell | The History of Wes
 Inextinguishable laughter among the blessed gods | Homer via Bertrand Russell | The History of Western Philosophy | 2025-07-31T20:59:22.010Z
 Justice is nothing else than the interest of the stronger | Thrasymachus | Plato's Republic | 2025-07-31T21:00:33.506Z
 And what is purification but the separation of the soul from the body? | Plato | Phaedo | 2025-07-31T21:22:56.549Z
+there is no teaching only recollection | Socrates | Meno | 2025-07-31T21:32:07.749Z
