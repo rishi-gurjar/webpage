@@ -23,3 +23,4 @@ It seems that Spartan men ate nearly six times as much as their wives | Bertrand
 It has always been correct to praise Plato, but not to understand him | Bertrand Russell | The History of Western Philosophy | 2025-07-31T20:56:59.174Z
 Leisure is essential to wisdom | Plato via Bertrand Russell | The History of Western Philosophy | 2025-07-31T20:57:30.328Z
 Inextinguishable laughter among the blessed gods | Homer via Bertrand Russell | The History of Western Philosophy | 2025-07-31T20:59:22.010Z
+Justice is nothing else than the interest of the stronger | Thrasymachus | Plato's Republic | 2025-07-31T21:00:33.506Z
