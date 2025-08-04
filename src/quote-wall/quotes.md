@@ -33,3 +33,4 @@ When [the magnanimous man] is in danger he is unsparing of his life, knowing tha
 [On the morality of lenders charging interest] At every stage, there has been a wealth of theoretical argument to support the economically convenient opinion | Bertrand Russell | The History of Western Philosophy | 2025-08-04T20:56:59.640Z
 Plato's communism annoys Aristotle | Bertrand Russell | The History of Western Philosophy | 2025-08-04T20:57:23.692Z
 I do not agree with Plato, but if anything could make me do so, it would be Aristotle's arguments against him | Bertrand Russell | The History of Western Philosophy | 2025-08-04T20:58:00.036Z
+The purpose of education is 'virtue' not usefulness | Aristotle via Bertrand Russell | The History of Western Philosophy | 2025-08-04T20:59:49.577Z
