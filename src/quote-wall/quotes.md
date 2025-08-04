@@ -28,3 +28,4 @@ And what is purification but the separation of the soul from the body? | Plato |
 there is no teaching only recollection | Socrates | Meno | 2025-07-31T21:32:07.749Z
 [Alexander the Great] unified the vices of a Highland chieftain to the frenzy of an Oriental despot | A.W. Benn | The History of Western Philosophy | 2025-08-04T20:48:08.745Z
 Bare matter is conceived as a potentiality of form | Bertrand Russell | The History of Western Philosophy | 2025-08-04T20:49:27.949Z
+When [the magnanimous man] is in danger he is unsparing of his life, knowing that there are conditions on which life is not worth living | Aristotle | Nicomachean Ethics | 2025-08-04T20:52:17.664Z
