@@ -1,4 +1,4 @@
-a little philosophy inclineth man's mind to atheism; but depth in philosophy bringeth men's minds about to religion | Francis Bacon | The Essays: Of Atheism | 2025-07-23T19:45:36.701Z
+bera little philosophy inclineth man's mind to atheism; but depth in philosophy bringeth men's minds about to religion | Francis Bacon | The Essays: Of Atheism | 2025-07-23T19:45:36.701Z
 …just as Columbus did, before his wonderful voyage across the Atlantic Ocean, when he gave the reasons for his confidence that he could find new lands and continents beyond those known already; reasons which, although rejected at first, were later proved by experiment, and became the causes and starting points of great things | Francis Bacon | Aphorism 92, Book I of Novum Organum | 2025-07-23T20:12:36.701Z
 If the truth shall kill them, let them die | Ayn Rand paraphrasing Kant | Judgment Day: My Years with Ayn Rand | 2025-07-23T20:19:36.701Z
 To be is to do | Kant (misattributed), ancient maxim attributed to Socrates | | 2025-07-23T20:22:36.701Z
@@ -26,3 +26,4 @@ Inextinguishable laughter among the blessed gods | Homer via Bertrand Russell | 
 Justice is nothing else than the interest of the stronger | Thrasymachus | Plato's Republic | 2025-07-31T21:00:33.506Z
 And what is purification but the separation of the soul from the body? | Plato | Phaedo | 2025-07-31T21:22:56.549Z
 there is no teaching only recollection | Socrates | Meno | 2025-07-31T21:32:07.749Z
+[Alexander the Great] unified the vices of a Highland chieftain to the frenzy of an Oriental despot | Bertrand Russell | The History of Western Philosophy | 2025-08-04T20:48:08.745Z
