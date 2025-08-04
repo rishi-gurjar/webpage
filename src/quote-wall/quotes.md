@@ -29,3 +29,4 @@ there is no teaching only recollection | Socrates | Meno | 2025-07-31T21:32:07.7
 [Alexander the Great] unified the vices of a Highland chieftain to the frenzy of an Oriental despot | A.W. Benn | The History of Western Philosophy | 2025-08-04T20:48:08.745Z
 Bare matter is conceived as a potentiality of form | Bertrand Russell | The History of Western Philosophy | 2025-08-04T20:49:27.949Z
 When [the magnanimous man] is in danger he is unsparing of his life, knowing that there are conditions on which life is not worth living | Aristotle | Nicomachean Ethics | 2025-08-04T20:52:17.664Z
+[The proud man is] open in his hate and in his love, for to conceal one's feelings, i.e. to care less for truth than for what people think, is a coward's part | Aristotle | Nicomachean Ethics | 2025-08-04T20:54:46.497Z
