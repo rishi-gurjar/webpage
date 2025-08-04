@@ -26,4 +26,5 @@ Inextinguishable laughter among the blessed gods | Homer via Bertrand Russell | 
 Justice is nothing else than the interest of the stronger | Thrasymachus | Plato's Republic | 2025-07-31T21:00:33.506Z
 And what is purification but the separation of the soul from the body? | Plato | Phaedo | 2025-07-31T21:22:56.549Z
 there is no teaching only recollection | Socrates | Meno | 2025-07-31T21:32:07.749Z
-[Alexander the Great] unified the vices of a Highland chieftain to the frenzy of an Oriental despot | Bertrand Russell | The History of Western Philosophy | 2025-08-04T20:48:08.745Z
+[Alexander the Great] unified the vices of a Highland chieftain to the frenzy of an Oriental despot | A.W. Benn | The History of Western Philosophy | 2025-08-04T20:48:08.745Z
+Bare matter is conceived as a potentiality of form | Bertrand Russell | The History of Western Philosophy | 2025-08-04T20:49:27.949Z
