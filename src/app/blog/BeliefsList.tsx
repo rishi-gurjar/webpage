@@ -3,7 +3,7 @@ import Link from 'next/link';
 export function BeliefsList() {
   return (
     <section id="beliefs" className="w-full mb-6 p-3 border border-gray-200 rounded-lg">
-      <h2 className="text-base font-mono mb-2">distilled beliefs</h2>
+      <h2 className="text-base font-mono mb-2">distilled</h2>
       <ul className="list-disc ml-5 space-y-2">
         <li className="leading-snug">
           Preserve and expand{' '}
