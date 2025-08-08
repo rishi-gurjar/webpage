@@ -64,7 +64,7 @@ export function BeliefsList() {
         </li>
       </ul>
       <div className="mt-5" />
-      <h2 className="text-base font-mono mb-2">gpt-5/claude-4-sonnet's favorites</h2>
+      <h2 className="text-base font-mono mb-2">gpt-5/claude-4-sonnet&apos;s favorites</h2>
       <ul className="list-disc ml-5 space-y-1">
         <li><Link href="/blog/minimum-self" className="underline hover:text-blue-700">Minimum Self</Link></li>
         <li><Link href="/blog/synthetic-self" className="underline hover:text-blue-700">Synthetic Self</Link></li>
@@ -75,5 +75,3 @@ export function BeliefsList() {
     </section>
   );
 }
-
-
