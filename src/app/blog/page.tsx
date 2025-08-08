@@ -1,5 +1,6 @@
 import { getPosts } from '@/lib/getPosts';
 import { BlogSubscribe } from './BlogSubscribe';
+import { BeliefsList } from './BeliefsList';
 import { PageTracker } from './PageTracker';
 import { BlogList } from './BlogList';
 import Link from 'next/link';
@@ -8,15 +9,41 @@ export default async function Blog() {
   const posts = await getPosts();
 
   return (
-    <main className="container grid flex flex-col items-center mt-[60px] lg:mt-[calc(100vh/5.5)] lg:w-[calc(100vw/3)] md:w-[calc(100vw/3)] md:px-0">
+    <div className="min-h-screen bg-white">
       <PageTracker path="/blog" />
-      <Link href="/" className="self-start mb-4">← Back to home</Link>
-      <h1 className="text-2xl text-[24px] font-['Young_Serif']">Blog</h1>
-      <br />
       
-      <BlogSubscribe />
+      {/* Navigation */}
+      <nav className="max-w-4xl mx-auto px-6 pt-8 pb-4">
+      <Link href="/blog" className="self-start mb-4">← Back to blog</Link>
 
-      <BlogList posts={posts} />
-    </main>
+      </nav>
+
+      {/* Main Content */}
+      <main className="max-w-4xl mx-auto px-6 pb-16">
+        
+        {/* Header Section */}
+        <header className="mb-12">
+          <h1 className="text-4xl lg:text-5xl font-['Young_Serif'] mt-2 text-gray-900 mb-6">
+            Blog
+          </h1>
+        </header>
+
+        {/* Two Column Layout for Large Screens */}
+        <div className="grid lg:grid-cols-[1fr,320px] gap-8 lg:gap-12">
+          
+          {/* Blog List - Main Column */}
+          <div className="order-2 lg:order-1">
+            <BlogList posts={posts} />
+          </div>
+          
+          {/* Sidebar - Secondary Column */}
+          <div className="order-1 lg:order-2 space-y-4">
+            <BlogSubscribe />
+            <BeliefsList />
+          </div>
+          
+        </div>
+      </main>
+    </div>
   );
 }
