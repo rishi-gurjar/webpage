@@ -62,10 +62,10 @@ export function BlogList({ posts }: BlogListProps) {
               href={`/blog/${post.slug}`}
               onMouseEnter={() => handleMouseEnter(post.slug)}
               onMouseLeave={handleMouseLeave}
-              className="block hover:opacity-80 transition-opacity"
+              className="block"
             >
-              <h2 className="font-['Young_Serif'] font-light">{post.title}</h2>
-              <p className="">{new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
+              <h2 className="font-['Young_Serif'] font-light text-gray-500 hover:text-black">{post.title}</h2>
+              <p className="text-gray-500 text-sm">{new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
               <br />
             </Link>
           </li>

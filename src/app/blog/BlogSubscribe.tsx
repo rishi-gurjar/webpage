@@ -33,7 +33,7 @@ export function BlogSubscribe() {
 
   return (
     <div className="w-full max-w-sm mb-4 p-3 border border-gray-200 rounded-lg">
-      <h2 className="text-base mb-2">
+      <h2 className="text-base mb-2 text-gray-500 text-sm">
         Join my very exclusive mailing list of {subscriberCount}{' '}
         <a
           href="/quotes"
@@ -42,17 +42,17 @@ export function BlogSubscribe() {
           people
         </a>
       </h2>
-      <form id="email-form" action={handleSubmit} className="flex flex-col gap-1.5">
+      <form id="email-form" action={handleSubmit} className="flex flex-col gap-1.5 text-gray-500 text-sm">
         <input
           type="email"
           name="email"
           placeholder="Enter your email"
           required
-          className="flex-1 px-2 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+          className="flex-1 px-2 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 text-gray-500"
         />
         <button
           type="submit"
-          className="px-3 py-1.5 text-sm bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          className="px-3 py-1.5 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-500 text-sm"
         >
           Subscribe
         </button>

@@ -3,8 +3,8 @@ import Link from 'next/link';
 export function BeliefsList() {
   return (
     <section id="beliefs" className="w-full mb-6 p-3 border border-gray-200 rounded-lg">
-      <h2 className="text-base font-mono mb-2">distilled</h2>
-      <ul className="list-disc ml-5 space-y-2">
+      <h2 className="text-base font-mono mb-2 text-gray-500 text-sm">distilled</h2>
+      <ul className="list-disc ml-5 space-y-2 text-gray-500 text-sm">
         <li className="leading-snug">
           Preserve and expand{' '}
           <Link href="/blog/minimum-self" className="underline hover:text-blue-700">conscious life</Link>
@@ -64,8 +64,8 @@ export function BeliefsList() {
         </li>
       </ul>
       <div className="mt-5" />
-      <h2 className="text-base font-mono mb-2">gpt-5/claude-4-sonnet&apos;s favorites</h2>
-      <ul className="list-disc ml-5 space-y-1">
+      <h2 className="text-base font-mono mb-2 text-gray-500 text-sm">gpt-5/claude-4-sonnet&apos;s favorites</h2>
+      <ul className="list-disc ml-5 space-y-1 text-gray-500 text-sm">
         <li><Link href="/blog/minimum-self" className="underline hover:text-blue-700">Minimum Self</Link></li>
         <li><Link href="/blog/synthetic-self" className="underline hover:text-blue-700">Synthetic Self</Link></li>
         <li><Link href="/blog/constitutional-dictator" className="underline hover:text-blue-700">Constitutional Dictator</Link></li>

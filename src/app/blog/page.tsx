@@ -23,7 +23,7 @@ export default async function Blog() {
         
         {/* Header Section */}
         <header className="mb-12">
-          <h1 className="text-4xl lg:text-5xl font-['Young_Serif'] mt-2 text-gray-900 mb-6">
+          <h1 className="text-4xl lg:text-5xl font-['Young_Serif'] mt-2 text-blue-300 hover:text-red-600 transition-colors duration-300 mb-6">
             Blog
           </h1>
         </header>
