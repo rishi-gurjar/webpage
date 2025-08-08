@@ -44,6 +44,7 @@ import dockImg from '/public/dock.png';
 import krelImg from '/public/krel.png';
 import agaImg from '/public/aga.png';
 import baconImg from '/public/bacon.png';
+import neilImg from '/public/neil.png';
 
 // Create a mapping for your blog images
 const headerImages: { [key: string]: any } = {
@@ -81,6 +82,7 @@ const headerImages: { [key: string]: any } = {
   '/krel.png': krelImg,
   '/aga.png': agaImg,
   '/bacon.png': baconImg,
+  '/neil.png': neilImg,
 };
 
 // Add this interface for better type safety
