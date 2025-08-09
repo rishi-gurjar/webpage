@@ -37,3 +37,4 @@ The purpose of education is 'virtue' not usefulness | Aristotle via Bertrand Rus
 Idleness is to the human mind like rust to iron | Ezra Cornell | |
 For the Munduruku, the whole idea of counting children was ludicrous. The whole idea, in fact, of counting anything was ludicrous. | Alex Bellos | Alex's Adventures in Numberland | 2025-08-09T03:38:57.010Z
 In Lincolnshire during medieval times, a pimp plus a dik got you a bumfit. | Alex Bellos | Alex's Adventures in Numberland | 2025-08-09T05:08:58.027Z
+[On base-2] Alas! What was once hailed as a monument to monotheism ended in the bowels of a robot | Tobias Dantzig | Number, the Language of Science | 2025-08-09T14:39:03.208Z
