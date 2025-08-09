@@ -35,3 +35,5 @@ Plato's communism annoys Aristotle | Bertrand Russell | The History of Western P
 I do not agree with Plato, but if anything could make me do so, it would be Aristotle's arguments against him | Bertrand Russell | The History of Western Philosophy | 2025-08-04T20:58:00.036Z
 The purpose of education is 'virtue' not usefulness | Aristotle via Bertrand Russell | The History of Western Philosophy | 2025-08-04T20:59:49.577Z
 Idleness is to the human mind like rust to iron | Ezra Cornell | |
+For the Munduruku, the whole idea of counting children was ludicrous. The whole idea, in fact, of counting anything was ludicrous. | Alex Bellos | Alex's Adventures in Numberland | 2025-08-09T03:38:57.010Z
+In Lincolnshire during medieval times, a pimp plus a dik got you a bumfit. | Alex Bellos | Alex's Adventures in Numberland | 2025-08-09T05:08:58.027Z
