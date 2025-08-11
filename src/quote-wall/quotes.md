@@ -38,3 +38,4 @@ Idleness is to the human mind like rust to iron | Ezra Cornell | |
 For the Munduruku, the whole idea of counting children was ludicrous. The whole idea, in fact, of counting anything was ludicrous. | Alex Bellos | Alex's Adventures in Numberland | 2025-08-09T03:38:57.010Z
 In Lincolnshire during medieval times, a pimp plus a dik got you a bumfit. | Alex Bellos | Alex's Adventures in Numberland | 2025-08-09T05:08:58.027Z
 [On base-2] Alas! What was once hailed as a monument to monotheism ended in the bowels of a robot | Tobias Dantzig | Number, the Language of Science | 2025-08-09T14:39:03.208Z
+Far over the misty mountains cold / To dungeons deep and caverns old / We must away ere break of day, / To find our long-forgotten gold. | Thorin via J.R.R. Tolkien | The Hobbit | 2025-08-11T16:32:18.294Z
