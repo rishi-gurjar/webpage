@@ -10,6 +10,7 @@ import {
     getHydrated
 } from '../services/v9Service';
 import { createClient } from '@supabase/supabase-js';
+import { getBooksCached } from '../services/goodreadsService';
 const router = express.Router();
 const ipstack_key = process.env.IP_STACK_KEY
 const supabaseUrl = process.env.SUPA_URL
@@ -199,6 +200,18 @@ router.get('/hydrated', async (req: express.Request, res: express.Response) => {
 router.get('/ping', (req: express.Request, res: express.Response) => {
     console.log('Ping received from:', req.headers.origin);
     res.json({ message: 'pong', timestamp: new Date().toISOString() });
+});
+
+// Goodreads books
+router.get('/books', async (_req: express.Request, res: express.Response) => {
+    try {
+        const books = await getBooksCached();
+        console.log(`[goodreads] /api/books served: ${books.length}`);
+        res.json({ updatedAt: new Date().toISOString(), count: books.length, books });
+    } catch (e) {
+        console.error('Error fetching books:', e);
+        res.status(500).json({ error: 'Failed to fetch books' });
+    }
 });
 
 // Get all psych profile data

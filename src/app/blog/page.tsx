@@ -14,7 +14,7 @@ export default async function Blog() {
       
       {/* Navigation */}
       <nav className="max-w-4xl mx-auto px-6 pt-8 pb-4">
-      <Link href="/blog" className="self-start mb-4">← Back to blog</Link>
+      <Link href="/" className="self-start mb-4">← Back to home</Link>
 
       </nav>
 

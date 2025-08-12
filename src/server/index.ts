@@ -5,6 +5,7 @@ import apiRoutes from './routes/api';
 import { setupBlogWatcher } from './watchers/blogWatcher';
 import { computeTotalSleep } from './services/v9Service';
 import dotenv from 'dotenv';
+import { scheduleDailyScrape } from './services/goodreadsService';
 
 dotenv.config(); // Load environment variables from .env file
 
@@ -27,6 +28,7 @@ app.use('/api', apiRoutes);
 (async () => {
     try {
         setupBlogWatcher();
+        scheduleDailyScrape();
         setInterval(async () => {
             await computeTotalSleep();
         }, 1000 * 60 * 60); // update sleep hours hourly
