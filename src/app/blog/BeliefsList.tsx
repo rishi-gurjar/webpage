@@ -8,8 +8,8 @@ export function BeliefsList() {
         <li className="leading-snug">
           Preserve and expand{' '}
           <Link href="/blog/minimum-self" className="underline hover:text-blue-700">conscious life</Link>
-          ; reduce{' '}
-          <Link href="/blog/just-to-be-rich" className="underline hover:text-blue-700">existential risk</Link>
+          ; increase human{' '}
+          <Link href="/blog/maxfortune-minmisfortune" className="underline hover:text-blue-700">progress</Link>
           .
         </li>
         <li className="leading-snug">
@@ -52,7 +52,9 @@ export function BeliefsList() {
         <li className="leading-snug">
           Develop{' '}
           <Link href="/blog/paste-or-taste" className="underline hover:text-blue-700">taste</Link>{' '}
-          via deep exposure; resist{' '}
+          via deep{' '}
+          <Link href="/books" className=" hover:text-blue-700 hover:italic">exposure</Link>
+          ; resist{' '}
           <Link href="/blog/mimesis" className="underline hover:text-blue-700">mimesis</Link>
           .
         </li>
