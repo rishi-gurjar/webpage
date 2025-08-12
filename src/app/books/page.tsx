@@ -32,7 +32,6 @@ export default async function BooksPage() {
   return (
     <main className="container flex flex-col items-center mt-[60px] lg:mt-[calc(100vh/5.5)] w-full px-4">
       <Link href="/" className="self-start mb-4">← Back to home</Link>
-      <h1 className="text-2xl text-[24px] font-['Young_Serif']">Books</h1>
       <br />
 
       <section className="w-full max-w-4xl">
@@ -49,7 +48,7 @@ export default async function BooksPage() {
                     <img src={b.cover} alt={b.title} className="w-auto h-10 object-cover rounded" />
                   )}
                   <div className="flex-1">
-                    <h2 className="font-['Young_Serif'] leading-tight">{b.title}</h2>
+                    <h2 className="font-mono leading-tight text-sm">{b.title}</h2>
                     <p className="text-sm text-gray-700">{b.author}</p>
                   </div>
                 </div>
