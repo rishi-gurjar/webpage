@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 import Link from 'next/link';
 
 type Book = {
@@ -10,20 +12,24 @@ type Book = {
 
 async function getBooks(): Promise<Book[]> {
   const base = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
-  const res = await fetch(`${base}/api/books`, { cache: 'no-store' });
-  if (!res.ok) return [];
-  const data = await res.json();
-  return data.books as Book[];
+  try {
+    const res = await fetch(`${base}/api/books`, { cache: 'no-store' });
+    if (!res.ok) return [];
+    const data = await res.json();
+    return (data.books || []) as Book[];
+  } catch {
+    return [];
+  }
 }
 
 export default async function BooksPage() {
   const books = await getBooks();
-  
+
   // Sort books: currently reading first, then finished books
   const sortedBooks = books.sort((a, b) => {
     const aIsCurrentlyReading = a.dateRead === "not set";
     const bIsCurrentlyReading = b.dateRead === "not set";
-    
+
     if (aIsCurrentlyReading && !bIsCurrentlyReading) return -1;
     if (!aIsCurrentlyReading && bIsCurrentlyReading) return 1;
     return 0;
@@ -55,7 +61,7 @@ export default async function BooksPage() {
                 <div className="flex-shrink-0">
                   {b.dateRead != "not set" ? (
                     <span className="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded">
-                        Finished on {b.dateRead}
+                      Finished on {b.dateRead}
                     </span>
                   ) : (
                     <span className="inline-block bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded">

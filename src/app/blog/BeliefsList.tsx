@@ -53,7 +53,7 @@ export function BeliefsList() {
           Develop{' '}
           <Link href="/blog/paste-or-taste" className="underline hover:text-blue-700">taste</Link>{' '}
           via deep{' '}
-          <Link href="/books" className=" hover:text-blue-700 hover:italic">exposure</Link>
+          <Link href="/reads" className=" hover:text-blue-700 hover:italic">exposure</Link>
           ; resist{' '}
           <Link href="/blog/mimesis" className="underline hover:text-blue-700">mimesis</Link>
           .
