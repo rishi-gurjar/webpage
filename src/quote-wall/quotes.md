@@ -40,3 +40,4 @@ In Lincolnshire during medieval times, a pimp plus a dik got you a bumfit. | Ale
 [On base-2] Alas! What was once hailed as a monument to monotheism ended in the bowels of a robot | Tobias Dantzig | Number, the Language of Science | 2025-08-09T14:39:03.208Z
 Far over the misty mountains cold / To dungeons deep and caverns old / We must away ere break of day, / To find our long-forgotten gold. | Thorin via J.R.R. Tolkien | The Hobbit | 2025-08-11T16:32:18.294Z
 The invention of probability was the root cause of the decline, over the last few centuries, of superstition and religion. | Alex Bellos | Alex's Adventures in Numberland | 2025-08-12T01:01:25.992Z
+If society was like a machine that produced a regular number of murderers, didn’t this indicate that murder was the fault of society and not the individual? | Alex Bellos on Adolphe Quetelet | Alex's Adventures in Numberland | 2025-08-12T02:58:32.101Z
