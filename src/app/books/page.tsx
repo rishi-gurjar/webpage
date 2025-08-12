@@ -37,7 +37,7 @@ export default async function BooksPage() {
 
       <section className="w-full max-w-4xl">
         {!books.length && (
-          <p className="text-sm text-gray-600">Rishi's computer is off :/</p>
+          <p className="text-sm text-gray-600">computer di Rishi lagi off :/</p>
         )}
         <ul>
           {sortedBooks.map((b, i) => (
