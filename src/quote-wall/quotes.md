@@ -46,3 +46,4 @@ The huger the mob, and the greater the apparent anarchy, the more perfect is [th
 When a tribal chief later presented [Francis Galton] with a young woman smeared in butter and red ochre in preparation for sex—Galton declined the offer, concerned she would smudge his white linen suit. | Alex Bellos | Alex's Adventures in Numberland | 2025-08-12T03:23:44.879Z
 There were many paths that led up into those mountains and many passes over them. But most of the paths were cheats and deceptions and led nowhere or to bad ends; and dangers. | J.R.R. Tolkien | The Hobbit | 2025-08-12T22:30:11.198Z
 This thing all things devours: / Birds, beasts, trees, flowers; / Gnaws iron, bites steel; / Grinds hard stones to meal; / Slays king, ruins town, / And beats high mountain down... Time! Time! | Gollum via via J.R.R. Tolkien | The Hobbit | 2025-08-12T23:26:18.131Z
+DON'T LEAVE THE PATH! | Gandalf via J.R.R. Tolkien | The Hobbit | 2025-08-13T02:14:42.560Z
