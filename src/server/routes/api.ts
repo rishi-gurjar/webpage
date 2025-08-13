@@ -206,7 +206,7 @@ router.get('/ping', (req: express.Request, res: express.Response) => {
 router.get('/books', async (_req: express.Request, res: express.Response) => {
     try {
         const books = await getBooksCached();
-        console.log(`[goodreads] /api/books served: ${books.length}`);
+        console.log(`/api/books served: ${books.length}`);
         res.json({ updatedAt: new Date().toISOString(), count: books.length, books });
     } catch (e) {
         console.error('Error fetching books:', e);

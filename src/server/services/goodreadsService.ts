@@ -74,7 +74,7 @@ export async function scrapeGoodreads(): Promise<GoodreadsBook[]> {
     const sel1 = $('table.tableList tr').length;
     const sel2 = $('table#books tr').length;
     const sel3 = $('tr.review, tr.bookalike').length;
-    console.log(`[goodreads] page ${currentPage} row counts -> tableList: ${sel1}, #books: ${sel2}, .review: ${sel3}, total picked: ${rows.length}`);
+    //console.log(`[goodreads] page ${currentPage} row counts -> tableList: ${sel1}, #books: ${sel2}, .review: ${sel3}, total picked: ${rows.length}`);
 
     const pageBooks: GoodreadsBook[] = [];
     rows.each((_, el) => {
@@ -101,7 +101,7 @@ export async function scrapeGoodreads(): Promise<GoodreadsBook[]> {
     });
 
     dedupeBooks(allBooks, pageBooks);
-    console.log(`[goodreads] page ${currentPage} -> parsed ${pageBooks.length}, total ${allBooks.length}`);
+    //console.log(`[goodreads] page ${currentPage} -> parsed ${pageBooks.length}, total ${allBooks.length}`);
 
     // Find next link
     const nextHref = (
@@ -122,7 +122,7 @@ export async function scrapeGoodreads(): Promise<GoodreadsBook[]> {
 
     // If we failed to parse any rows, or no new books were added, stop to avoid loops
     if (pageBooks.length === 0) {
-      console.log('[goodreads] no rows parsed on this page; stopping.');
+      //console.log('[goodreads] no rows parsed on this page; stopping.');
       break;
     }
 
@@ -131,7 +131,7 @@ export async function scrapeGoodreads(): Promise<GoodreadsBook[]> {
     currentPage += 1;
   }
 
-  console.log(`[goodreads] scraped books (all pages): ${allBooks.length}${allBooks.length ? ' | sample: ' + allBooks.slice(0, 3).map(b => b.title).join(' | ') : ''}`);
+  //console.log(`[goodreads] scraped books (all pages): ${allBooks.length}${allBooks.length ? ' | sample: ' + allBooks.slice(0, 3).map(b => b.title).join(' | ') : ''}`);
   return allBooks;
 }
 
@@ -143,7 +143,7 @@ export async function getBooksCached(): Promise<GoodreadsBook[]> {
   if (cache && Date.now() - cache.updatedAt < DAY_MS) return cache.books;
   const books = await scrapeGoodreads();
   cache = { books, updatedAt: Date.now() };
-  console.log(`[goodreads] cache updated: ${books.length} books at ${new Date(cache.updatedAt).toISOString()}`);
+  //console.log(`[goodreads] cache updated: ${books.length} books at ${new Date(cache.updatedAt).toISOString()}`);
   return books;
 }
 

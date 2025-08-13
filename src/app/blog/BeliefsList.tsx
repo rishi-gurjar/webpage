@@ -35,13 +35,13 @@ export function BeliefsList() {
         <li className="leading-snug">
           People trade{' '}
           <Link href="/blog/privacy-dissonance" className="underline hover:text-blue-700">privacy</Link>{' '}
-          for utility; build for revealed preferences.
+          for utility; build for revealed <Link href="/quotes" className="hover:italic hover:text-blue-700">preferences</Link>.
         </li>
         <li className="leading-snug">
           <Link href="/blog/free-will" className="underline hover:text-blue-700">Free will</Link>{' '}
           is mostly illusion; law maintains{' '}
           <Link href="/blog/the-interests-of-the-stronger" className="underline hover:text-blue-700">order</Link>
-          , not cosmic justice.
+          , not <Link href="/blog/gallery" className="hover:italic hover:text-blue-700">cosmic</Link> justice.
         </li>
         <li className="leading-snug">
           <Link href="/blog/path-to-agricultural-omniscience" className="underline hover:text-blue-700">Agriculture</Link>{' '}
