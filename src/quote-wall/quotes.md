@@ -47,3 +47,4 @@ When a tribal chief later presented [Francis Galton] with a young woman smeared 
 There were many paths that led up into those mountains and many passes over them. But most of the paths were cheats and deceptions and led nowhere or to bad ends; and dangers. | J.R.R. Tolkien | The Hobbit | 2025-08-12T22:30:11.198Z
 This thing all things devours: / Birds, beasts, trees, flowers; / Gnaws iron, bites steel; / Grinds hard stones to meal; / Slays king, ruins town, / And beats high mountain down... Time! Time! | Gollum via via J.R.R. Tolkien | The Hobbit | 2025-08-12T23:26:18.131Z
 DON'T LEAVE THE PATH! | Gandalf via J.R.R. Tolkien | The Hobbit | 2025-08-13T02:14:42.560Z
+Surely you don't disbelieve in prophecies, because you had a hand in bringing them about yourself? | Gandalf via J.R.R. Tolkien | The Hobbit | 2025-08-15T06:00:26.962Z
