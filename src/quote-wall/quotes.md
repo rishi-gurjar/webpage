@@ -48,3 +48,4 @@ There were many paths that led up into those mountains and many passes over them
 This thing all things devours: / Birds, beasts, trees, flowers; / Gnaws iron, bites steel; / Grinds hard stones to meal; / Slays king, ruins town, / And beats high mountain down... Time! Time! | Gollum via via J.R.R. Tolkien | The Hobbit | 2025-08-12T23:26:18.131Z
 DON'T LEAVE THE PATH! | Gandalf via J.R.R. Tolkien | The Hobbit | 2025-08-13T02:14:42.560Z
 Surely you don't disbelieve in prophecies, because you had a hand in bringing them about yourself? | Gandalf via J.R.R. Tolkien | The Hobbit | 2025-08-15T06:00:26.962Z
+[Christianity and Islam] owe their very existence to the Maccabees | Robert Charles | The Apocrypha and Pseudepigrapha of the Old Testament in English | 2025-08-16T17:40:22.024Z
