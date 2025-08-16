@@ -50,3 +50,4 @@ DON'T LEAVE THE PATH! | Gandalf via J.R.R. Tolkien | The Hobbit | 2025-08-13T02:
 Surely you don't disbelieve in prophecies, because you had a hand in bringing them about yourself? | Gandalf via J.R.R. Tolkien | The Hobbit | 2025-08-15T06:00:26.962Z
 [Christianity and Islam] owe their very existence to the Maccabees | Robert Charles | The Apocrypha and Pseudepigrapha of the Old Testament in English | 2025-08-16T17:40:22.024Z
 Saint Jerome was a man of many quarrels. | Bertrand Russell | The History of Western Philosophy | 2025-08-16T19:25:06.524Z
+A free curiosity has more power to make us learn things than a terrifying obligation | Augustine  of Hippo | The Confessions of Saint Augustine | 2025-08-16T19:42:56.848Z
