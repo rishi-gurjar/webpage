@@ -53,3 +53,4 @@ Saint Jerome was a man of many quarrels. | Bertrand Russell | The History of Wes
 A free curiosity has more power to make us learn things than a terrifying obligation | Augustine  of Hippo | The Confessions of Saint Augustine | 2025-08-16T19:42:56.848Z
 It is not we ourselves that sin, but that some other nature sins in us | Augustine of Hippo | The Confessions of Saint Augustine | 2025-08-16T19:54:29.163Z
 God is eternal, in the sense of being timeless; in God there is no before and after, but only an eternal present. | Augustine of Hippo via Bertrand Russell | The History of Western Philosophy | 2025-08-16T20:11:27.214Z
+Neither past nor future, but only the present, really is | Augustine of Hippo via Bertrand Russell | The History of Western Philosophy | 2025-08-16T20:13:01.325Z
