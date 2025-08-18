@@ -64,18 +64,18 @@ export default function Home() {
       </div>
 
       <div className="mt-4">
-        <h2 className="scroll-m-20 text-lg font-semibold tracking-tight text-gray-500">Rishi Gurjar</h2>
+        <h2 className="scroll-m-20 text-lg font-normal tracking-tight text-gray-500">Rishi Gurjar</h2>
         <div >
           <h4 className="text-gray-500 text-sm">SF Bay Area & Ithaca, NY</h4>
-          <h4 className="text-gray-500 text-sm">Email: x@y | x = rrg85, y = cornell.edu</h4>
+          <h4 className="text-gray-500 text-sm">x@y | x = rrg85, y = cornell.edu</h4>
         </div>
         <br />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
           <div>
-            <h2 className="leading-7 [&:not(:first-child)]:mt-1 text-gray-500 font-mono text-sm">SOCIALS</h2>
+            <h2 className="leading-7 [&:not(:first-child)]:mt-1 text-gray-500 font-mono text-sm">MISANTHROPING</h2>
             <div>
-              <a className="hover:text-blue-500 text-gray-500 text-sm" href="/blog"><h4>Beliefs</h4></a>
+              <a className="hover:text-blue-500 text-gray-500 text-sm" href="/blog"><h4>Blog</h4></a>
               <a className="hover:text-blue-500 text-gray-500 text-sm" href="https://www.linkedin.com/in/rishigurjar/" target="_blank" rel="noopener noreferrer"><h4>Linkedin</h4></a>
               <a className="hover:text-blue-500 text-gray-500 text-sm" href="https://x.com/rishi__gurjar" target="_blank" rel="noopener noreferrer"><h4>Twitter</h4></a>
               <a className="hover:text-blue-500 text-gray-500 text-sm" href="https://github.com/rishi-gurjar" target="_blank" rel="noopener noreferrer"><h4>GitHub</h4></a>
@@ -85,13 +85,13 @@ export default function Home() {
           </div>
 
           <div>
-            <h2 className="leading-7 [&:not(:first-child)]:mt-1 text-gray-500 font-mono text-sm">MAIN PROJECT</h2>
+            <h2 className="leading-7 [&:not(:first-child)]:mt-1 text-gray-500 font-mono text-sm">SELLING AVOCADOS</h2>
             <div className="pb-4">
               <a className="hover:text-green-500 text-gray-500 text-sm" href="https://verduslabs.com" target="_blank" rel="noopener noreferrer"><h4>Verdus Labs</h4></a>
             </div>
-            <h2 className="leading-7 [&:not(:first-child)]:mt-1 text-gray-500 font-mono text-sm">SIDE PROJECTS</h2>
+            <h2 className="leading-7 [&:not(:first-child)]:mt-1 text-gray-500 font-mono text-sm">EXPERIMENTS</h2>
             <div className="pb-4">
-              <a className="hover:text-green-500 text-gray-500 text-sm" href="https://rishigurjar.com/doom" target="_blank" rel="noopener noreferrer"><h4>DOOM</h4></a>
+              {/* <a className="hover:text-green-500 text-gray-500 text-sm" href="https://rishigurjar.com/doom" target="_blank" rel="noopener noreferrer"><h4>DOOM</h4></a> */}
               <a className="hover:text-green-500 text-gray-500 text-sm" href="https://rishigurjar.com/twirl" target="_blank" rel="noopener noreferrer"><h4>Twirl</h4></a>
               <a className="hover:text-green-500 text-gray-500 text-sm" href="https://rishigurjar.com/nudge" target="_blank" rel="noopener noreferrer"><h4>Nudge</h4></a>
               <a className="hover:text-green-500 text-gray-500 text-sm" href="https://cornelldatajournal.org" target="_blank" rel="noopener noreferrer"><h4>Data Journal</h4></a>
