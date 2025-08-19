@@ -57,3 +57,4 @@ Neither past nor future, but only the present, really is | Augustine of Hippo vi
 Do you know that you think? I do. | Augustine of Hippo | Soliloquia | 2025-08-16T20:19:57.678Z
 The most effective men of action are often intellectually second-rate. | Bertrand Russell | The History of Western Philosophy | 2025-08-17T01:37:51.268Z
 Frederick [II] thought of founding a new religion, in which he was to be the Messiah | Bertrand Russell | The History of Western Philosophy | 2025-08-19T03:39:47.369Z
+One day, as [Saint Francis of Assisi] was riding by a leper, a sudden impulse of pity led him to dismount and kiss the man. | Bertrand Russell | The History of Western Philosophy | 2025-08-19T03:56:32.942Z
