@@ -65,3 +65,4 @@ All armed prophets have conquered and unarmed ones failed. | Niccolo Machiavelli
 In 1499 [Erasmus] made his first visit to England, where he liked the fashion of kissing girls. | Bertrand Russell | The History of Western Philosophy | 2025-08-20T03:50:02.934Z
 Take a wife, a creature so harmless and silly, and yet so useful and convenient, as might mollify and make pliable the stiffness and morose humor of men | Folly via Erasmus | The Praise of Folly | 2025-08-20T03:56:31.792Z
 [Kepler, Copernicus, Galileo, and Newton] had two merits which are not necessarily found together: immense patience in observation, and great boldness in framing hypothesis | Bertrand Russell | The History of Western Philosophy | 2025-08-20T04:42:32.669Z
+[Francis Bacon] died of a chill caught while experimenting on refrigeration by stuffing a chicken full of snow. | Bertrand Russell | The History of Western Philosophy | 2025-08-20T05:33:23.070Z
