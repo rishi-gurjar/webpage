@@ -62,3 +62,4 @@ These authorities, [Roger Bacon] seems to think, suffice to prove that one shoul
 Very few Italians of the fifteenth century would have dared to hold an opinion for which no authority could be found either in antiquity or in the teaching of the Church. | Bertrand Russell | The History of Western Philosophy | 2025-08-20T01:37:08.584Z
 Every stable [social] system hitherto devised has hampered the development of exceptional artistic or intellectual merit. | Bertrand Russell | The History of Western Philosophy | 2025-08-20T02:26:07.856Z
 All armed prophets have conquered and unarmed ones failed. | Niccolo Machiavelli | The Prince | 2025-08-20T03:11:30.332Z
+In 1499 [Erasmus] made his first visit to England, where he liked the fashion of kissing girls. | Bertrand Russell | The History of Western Philosophy | 2025-08-20T03:50:02.934Z
