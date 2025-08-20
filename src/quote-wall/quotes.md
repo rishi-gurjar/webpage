@@ -59,3 +59,4 @@ The most effective men of action are often intellectually second-rate. | Bertran
 Frederick [II] thought of founding a new religion, in which he was to be the Messiah | Bertrand Russell | The History of Western Philosophy | 2025-08-19T03:39:47.369Z
 One day, as [Saint Francis of Assisi] was riding by a leper, a sudden impulse of pity led him to dismount and kiss the man. | Bertrand Russell | The History of Western Philosophy | 2025-08-19T03:56:32.942Z
 These authorities, [Roger Bacon] seems to think, suffice to prove that one should not respect authority | Bertrand Russell | The History of Western Philosophy | 2025-08-19T05:45:45.393Z
+Very few Italians of the fifteenth century would have dared to hold an opinion for which no authority could be found either in antiquity or in the teaching of the Church. | Bertrand Russell | The History of Western Philosophy | 2025-08-20T01:37:08.584Z
