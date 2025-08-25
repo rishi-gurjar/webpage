@@ -69,3 +69,4 @@ Take a wife, a creature so harmless and silly, and yet so useful and convenient,
 So much the greater is the triumph of faith in nevertheless believing. | Francis Bacon via Bertrand Russell | The History of Western Philosophy | 2025-08-20T05:37:30.289Z
 Thou shalt stop worrying and feeling guilty; thou shalt do whatever thou pleasest | John Conway | Mathematics: The mercurial mathematician | 2025-08-25T03:24:23.662Z
 Life is far too important to be taken seriously | Oscar Wilde | Lady Windermere's Fan | 2025-08-25T03:24:23.662Z
+No virtue which has its roots in fear is much to be admired. | Bertrand Russell | The History of Western Philosophy | 2025-08-25T18:09:20.031Z
