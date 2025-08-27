@@ -71,3 +71,4 @@ Thou shalt stop worrying and feeling guilty; thou shalt do whatever thou pleases
 Life is far too important to be taken seriously | Oscar Wilde | Lady Windermere's Fan | 2025-08-25T03:24:23.662Z
 No virtue which has its roots in fear is much to be admired. | Bertrand Russell | The History of Western Philosophy | 2025-08-25T18:09:20.031Z
 If you say why not bomb them tomorrow, I say why not today? If you say today at five o'clock, I say why not one o'clock? | John Von Neumann | LIFE Magazine (1956) | 2025-08-27T17:43:01.837Z
+Cavemen created gods, I see no reason why we shouldn't do the same. | (Pseudo) John Von Neumann via Benjamin Labatut | The Maniac | 2025-08-27T22:25:02.921Z
