@@ -8,6 +8,7 @@ interface Post {
   slug: string;
   title: string;
   date: string;
+  formattedDate: string;
   headerImage?: string;
 }
 
@@ -65,7 +66,7 @@ export function BlogList({ posts }: BlogListProps) {
               className="block"
             >
               <h2 className="font-['Young_Serif'] font-light text-gray-500 hover:text-black">{post.title}</h2>
-              <p className="text-gray-500 text-sm">{new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
+              <p className="text-gray-500 text-sm">{post.formattedDate}</p>
               <br />
             </Link>
           </li>

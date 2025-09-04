@@ -16,6 +16,7 @@ import contractImg from '/public/contract.png';
 import dictatorImg from '/public/dictator.png';
 import sabotageImg from '/public/sabotage.jpg';
 import { Metadata } from 'next';
+import { formatBlogDate } from '@/lib/dateUtils';
 import ernstImg from '/public/ernst.png';
 import napoleonImg from '/public/napoleon.png';
 import airImg from '/public/air.jpg';
@@ -292,7 +293,7 @@ export default async function BlogPost({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <main className="container grid flex flex-col items-center mt-[60px] lg:mt-[calc(100vh/5.5)] lg:w-[calc(100vw/3)] md:w-[calc(100vw/3)] md:px-0">
+      <main className="container flex flex-col mt-[60px] lg:mt-[calc(100vh/5.5)] lg:w-[calc(100vw/3)] md:w-[calc(100vw/3)] md:px-0">
         <PageTracker path={`/blog/${slug}`} />
         <Link href="/blog" className="self-start mb-4">← Back to blog</Link>
         {post.headerImage && (
@@ -328,7 +329,7 @@ export default async function BlogPost({ params }: Props) {
           </>
         )}
         <h1 className="text-2xl text-[24px] font-['Young_Serif']">{post.title}</h1>
-        <p>{new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
+        <p>{formatBlogDate(post.date)}</p>
         <br />
         <div className="blog-content" dangerouslySetInnerHTML={{ __html: contentHtml }} />
         <br />

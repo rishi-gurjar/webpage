@@ -2,6 +2,7 @@ import fs from 'fs/promises';
 import path from 'path';
 import matter from 'gray-matter';
 import { generateSlug } from './blog';
+import { formatBlogDate } from './dateUtils';
 
 export async function getPosts() {
   const blogDir = path.join(process.cwd(), 'src/blog-content');
@@ -23,6 +24,7 @@ export async function getPosts() {
         slug: generateSlug(data.title),
         title: data.title,
         date: data.date,
+        formattedDate: formatBlogDate(data.date),
         headerImage: data.headerImage,
       });
     } catch (error) {
