@@ -3,7 +3,6 @@ import cors from 'cors';
 import { PORT } from './config';
 import apiRoutes from './routes/api';
 import { setupBlogWatcher } from './watchers/blogWatcher';
-import { computeTotalSleep } from './services/v9Service';
 import dotenv from 'dotenv';
 import { scheduleDailyScrape } from './services/goodreadsService';
 
@@ -29,9 +28,6 @@ app.use('/api', apiRoutes);
     try {
         setupBlogWatcher();
         scheduleDailyScrape();
-        setInterval(async () => {
-            await computeTotalSleep();
-        }, 1000 * 60 * 60); // update sleep hours hourly
     } catch (error) {
         console.error("Error during startup:", error);
     }

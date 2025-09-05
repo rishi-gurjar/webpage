@@ -3,12 +3,6 @@ import { saveEmailToSheets, sendEmails } from '../services/emailService';
 import { generateResponse } from '../services/llmService';
 import { sheets } from '../config';
 import http from 'http';
-import { 
-    getTotalSleepTime, 
-    getMentalPhysCheck, 
-    getWorkouts,
-    getHydrated
-} from '../services/v9Service';
 import { createClient } from '@supabase/supabase-js';
 import { getBooksCached } from '../services/goodreadsService';
 const router = express.Router();
@@ -153,49 +147,6 @@ router.post('/validate-nudge-dash-password', async (req: any, res: any) => {
     return res.status(isValid ? 200 : 401).json({ success: isValid });
 });
 
-router.get('/sleep-time', async (req: express.Request, res: express.Response) => {
-    // log('/sleep-time')
-    try {
-        const sleepData = await getTotalSleepTime();
-        res.json(sleepData);
-    } catch (error) {
-        console.error('Error fetching sleep time:', error);
-        res.status(500).json({ error: 'Failed to fetch sleep data' });
-    }
-});
-
-router.get('/mentalphys-check', async (req: express.Request, res: express.Response) => {
-    // log('/mentalphys-check')
-    try {
-        const mentalData = await getMentalPhysCheck();
-        res.json(mentalData);
-    } catch (error) {
-        console.error('Error fetching sleep time:', error);
-        res.status(500).json({ error: 'Failed to fetch sleep data' });
-    }
-});
-
-router.get('/workouts', async (req: express.Request, res: express.Response) => {
-    // log('/workouts')
-    try {
-        const workoutData = await getWorkouts();
-        res.json(workoutData);
-    } catch (error) {
-        console.error('Error fetching sleep time:', error);
-        res.status(500).json({ error: 'Failed to fetch sleep data' });
-    }
-});
-
-router.get('/hydrated', async (req: express.Request, res: express.Response) => {
-    // log('/hydrated')
-    try {
-        const hydratedData = await getHydrated();
-        res.json(hydratedData);
-    } catch (error) {
-        console.error('Error fetching sleep time:', error);
-        res.status(500).json({ error: 'Failed to fetch sleep data' });
-    }
-});
 
 router.get('/ping', (req: express.Request, res: express.Response) => {
     console.log('Ping received from:', req.headers.origin);
