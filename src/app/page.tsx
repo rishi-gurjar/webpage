@@ -1,26 +1,27 @@
 "use client";
 
 import Image from "next/image"
-import tileImage from '/public/tile.png';
-import promImage from '/public/prom.jpg';
-import lamb from '/public/mysticlamb.png';
-import { AspectRatio } from "@/components/ui/aspect-ratio"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { PageTracker } from './blog/PageTracker';
+import { blogHeaderImagePaths } from "@/lib/blogHeaderImages";
 
 export default function Home() {
-  const [img, setImg] = useState(tileImage);
-  const [caption, setCaption] = useState("DALLE-2, 2022 AD");
+  const [imgIndex, setImgIndex] = useState(0);
+  const HEADER_HEIGHT_PX = 250;
+  const [shuffledPaths, setShuffledPaths] = useState<string[]>([]);
+  const [ready, setReady] = useState(false);
 
-  const handleMouseEnter = () => {
-    setImg(lamb);
-    setCaption("van Eyck, 1432 AD");
-  };
-
-  const handleMouseLeave = () => {
-    setImg(tileImage);
-    setCaption("DALLE-2, 2022 AD");
-  }
+  useEffect(() => {
+    if (blogHeaderImagePaths.length === 0) return;
+    const shuffled = [...blogHeaderImagePaths].sort(() => Math.random() - 0.5);
+    setShuffledPaths(shuffled);
+    setImgIndex(Math.floor(Math.random() * shuffled.length));
+    const intervalId = setInterval(() => {
+      setImgIndex((prev) => (prev + 1) % shuffled.length);
+    }, 300);
+    setReady(true);
+    return () => clearInterval(intervalId);
+  }, []);
 
   const personSchema = {
     '@context': 'https://schema.org',
@@ -49,18 +50,17 @@ export default function Home() {
   return (
     <main className="container grid flex flex-col items-center mt-[60px] lg:mt-[calc(100vh/5.5)] lg:w-[calc(100vw/3)] md:w-[calc(100vw/3)] md:px-0">
       <PageTracker path="/" />
-      <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-        <AspectRatio ratio={16 / 7.5}>
+      <div className="w-full mb-2 relative rounded-md overflow-hidden" style={{ height: HEADER_HEIGHT_PX }}>
+        {ready && (
           <Image
-            src={img}
+            src={shuffledPaths[imgIndex]}
             alt="Image"
-            className="rounded-md object-cover"
-            priority={true}
-            width={800}
-            height={375}
+            fill
+            className="object-cover"
+            priority
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 66vw, 800px"
           />
-          <h3 className="leading-7 text-right [&:not(:first-child)]:mt-1 text-gray-500 font-mono text-sm">{caption}</h3>
-        </AspectRatio>
+        )}
       </div>
 
       <div className="mt-4">
