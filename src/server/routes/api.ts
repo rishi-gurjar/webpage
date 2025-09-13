@@ -2,11 +2,10 @@ import express from 'express';
 import { saveEmailToSheets, sendEmails } from '../services/emailService';
 import { generateResponse } from '../services/llmService';
 import { sheets } from '../config';
-import http from 'http';
+import { fetchIpInfo } from '../services/ipInfoService';
 import { createClient } from '@supabase/supabase-js';
 import { getBooksCached } from '../services/goodreadsService';
 const router = express.Router();
-const ipstack_key = process.env.IP_STACK_KEY
 const supabaseUrl = process.env.SUPA_URL
 const supabaseKey = process.env.SUPA_KEY;
 
@@ -25,6 +24,8 @@ router.get('/subscribers', async (req, res) => {
     res.json({ count: currentValue });
 });
 
+// Uses service fetchIpInfo (ipwho.is/ipapi.co with puppeteer fallback)
+
 router.post('/track', async (req, res) => {
     const path = req.body;
     const timestamp = new Date().toLocaleString();
@@ -35,27 +36,8 @@ router.post('/track', async (req, res) => {
         'Unknown';
 
     let parsed_ip_data: any = {};
-    // Sending the request
     try {
-        // Convert the HTTP request to a Promise
-        const ipData = await new Promise((resolve, reject) => {
-            const options = {
-                hostname: 'api.ipstack.com',
-                path: `/${ip}?access_key=${ipstack_key}`,
-                method: 'GET'
-            };
-
-            const req2 = http.request(options, (res2) => {
-                let data = '';
-                res2.on('data', (chunk) => data += chunk);
-                res2.on('end', () => resolve(JSON.parse(data)));
-            });
-
-            req2.on('error', reject);
-            req2.end();
-        });
-
-        parsed_ip_data = ipData;
+        parsed_ip_data = await fetchIpInfo(ip);
     } catch (error) {
         console.error("Error fetching IP data:", error);
     }
@@ -64,7 +46,12 @@ router.post('/track', async (req, res) => {
     const referer = req.headers.referer || 'Direct';
     const device = userAgent.match(/\((.*?)\)/)?.[1]?.split(';')[0] || 'Unknown Device';
 
-    const locationStr = parsed_ip_data?.city ? `${parsed_ip_data.city}, ${parsed_ip_data.region_name}, ${parsed_ip_data.country_name} | ` : '';
+    const pieces = [] as string[];
+    if (parsed_ip_data?.city) pieces.push(parsed_ip_data.city);
+    if (parsed_ip_data?.region) pieces.push(parsed_ip_data.region);
+    if (parsed_ip_data?.country) pieces.push(parsed_ip_data.country);
+    if (parsed_ip_data?.isp) pieces.push(parsed_ip_data.isp);
+    const locationStr = pieces.length ? `${pieces.join(', ')} | ` : '';
     console.log(`${timestamp} | ${path} | ${ip} | ${locationStr}${device}`);
     res.status(200).send('OK');
 });

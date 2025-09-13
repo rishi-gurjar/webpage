@@ -50,7 +50,8 @@
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
     "three": "^0.174.0",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "puppeteer": "^22.15.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
