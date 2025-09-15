@@ -104,7 +104,6 @@ export async function fetchIpInfo(ip: string): Promise<IpInfo> {
   // Fallback: headless browser (puppeteer) to bypass interstitials
   // Lazy import so server can start without puppeteer present
   try {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const puppeteer = require('puppeteer');
     const browser = await puppeteer.launch({
       headless: 'new',
@@ -158,5 +157,3 @@ export async function fetchIpInfo(ip: string): Promise<IpInfo> {
     return {};
   }
 }
-
-

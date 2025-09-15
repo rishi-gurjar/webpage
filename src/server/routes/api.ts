@@ -156,58 +156,58 @@ router.get('/books', async (_req: express.Request, res: express.Response) => {
 router.get('/nudge/psych-profiles', async (req: any, res: any) => {
 
     try {
-                
+
         if (!supabaseUrl || !supabaseKey) {
             return res.status(500).json({ error: 'Supabase credentials not configured' });
         }
-        
+
         const supabase = createClient(supabaseUrl, supabaseKey);
-        
+
         const { data, error, count } = await supabase
             .from('psych_profiles')
             .select('*', { count: 'exact' });
-            
+
         if (error) {
             console.error('Supabase error:', error);
             throw error;
         }
-        
+
         res.json({ data, count });
     } catch (error) {
         console.error('Error fetching psych profiles:', error);
-        res.status(500).json({ 
-            error: 'Failed to fetch psych profiles', 
-            details: error instanceof Error ? error.message : String(error) 
+        res.status(500).json({
+            error: 'Failed to fetch psych profiles',
+            details: error instanceof Error ? error.message : String(error)
         });
     }
 });
 
 // Consolidate user growth and active users into a single endpoint
 router.get('/nudge/user-data', async (req: any, res: any) => {
-    try {        
-        
+    try {
+
         if (!supabaseUrl || !supabaseKey) {
             return res.status(500).json({ error: 'Supabase credentials not configured' });
         }
-        
+
         const supabase = createClient(supabaseUrl, supabaseKey);
-        
+
         // Get all user data in one request
         const { data, error } = await supabase
             .from('profiles')
             .select('id, created_at, updated_at');
-            
+
         if (error) {
             console.error('Supabase error:', error);
             throw error;
         }
-        
+
         res.json({ data });
     } catch (error) {
         console.error('Error fetching user data:', error);
-        res.status(500).json({ 
-            error: 'Failed to fetch user data', 
-            details: error instanceof Error ? error.message : String(error) 
+        res.status(500).json({
+            error: 'Failed to fetch user data',
+            details: error instanceof Error ? error.message : String(error)
         });
     }
 });
