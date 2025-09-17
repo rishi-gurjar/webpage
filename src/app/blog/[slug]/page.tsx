@@ -51,6 +51,7 @@ import trioImg from '/public/trio.png';
 import oligImg from '/public/olig.png';
 import chopImg from '/public/chop.png';
 import lessigImg from '/public/lessig.png';
+import consulImg from '/public/consul.png';
 
 // Create a mapping for your blog images
 const headerImages: { [key: string]: any } = {
@@ -94,6 +95,7 @@ const headerImages: { [key: string]: any } = {
   '/olig.png': oligImg,
   '/chop.png': chopImg,
   '/lessig.png': lessigImg,
+  '/consul.png': consulImg,
 };
 
 // Add this interface for better type safety
