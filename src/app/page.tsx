@@ -10,6 +10,7 @@ export default function Home() {
   const HEADER_HEIGHT_PX = 250;
   const [shuffledPaths, setShuffledPaths] = useState<string[]>([]);
   const [ready, setReady] = useState(false);
+  const [isTeenMode, setIsTeenMode] = useState(false);
 
   useEffect(() => {
     if (blogHeaderImagePaths.length === 0) return;
@@ -22,6 +23,25 @@ export default function Home() {
     setReady(true);
     return () => clearInterval(intervalId);
   }, []);
+
+  useEffect(() => {
+    const body = typeof document !== 'undefined' ? document.body : null;
+    const themeClassName = 'teen-2000s';
+    if (!body) return;
+    if (isTeenMode) {
+      body.classList.add(themeClassName);
+      // Assign a random hue for this session of teen mode
+      const randomHue = Math.floor(Math.random() * 360);
+      body.style.setProperty('--teen-hue', String(randomHue));
+    } else {
+      body.classList.remove(themeClassName);
+      body.style.removeProperty('--teen-hue');
+    }
+    return () => {
+      body.classList.remove(themeClassName);
+      body.style.removeProperty('--teen-hue');
+    };
+  }, [isTeenMode]);
 
   const personSchema = {
     '@context': 'https://schema.org',
@@ -50,7 +70,12 @@ export default function Home() {
   return (
     <main className="container grid flex flex-col items-center mt-[60px] lg:mt-[calc(100vh/5.5)] lg:w-[calc(100vw/3)] md:w-[calc(100vw/3)] md:px-0">
       <PageTracker path="/" />
-      <div className="w-full mb-2 relative rounded-md overflow-hidden" style={{ height: HEADER_HEIGHT_PX }}>
+      <div
+        className="w-full mb-2 relative rounded-md overflow-hidden cursor-pointer"
+        style={{ height: HEADER_HEIGHT_PX }}
+        onClick={() => setIsTeenMode((prev) => !prev)}
+        title="Toggle 2000s mode"
+      >
         {ready && (
           <Image
             src={shuffledPaths[imgIndex]}
@@ -66,7 +91,7 @@ export default function Home() {
       <div className="mt-4">
         <h2 className="scroll-m-20 text-lg font-normal tracking-tight text-gray-500">Rishi Gurjar</h2>
         <div >
-          <h4 className="text-gray-500 text-sm">SF Bay Area & Ithaca, NY</h4>
+          <h4 className="text-gray-500 text-sm keep-base-font">SF Bay Area & Ithaca, NY</h4>
           <h4 className="text-gray-500 text-sm">x@y | x = rrg85, y = cornell.edu</h4>
         </div>
         <br />
@@ -75,8 +100,8 @@ export default function Home() {
           <div>
             <h2 className="leading-7 [&:not(:first-child)]:mt-1 text-gray-500 font-mono text-sm">MISANTHROPING</h2>
             <div>
-              <a className="hover:text-blue-500 text-gray-500 text-sm" href="/blog"><h4>Blog</h4></a>
-              <a className="hover:text-blue-500 text-gray-500 text-sm" href="https://www.linkedin.com/in/rishigurjar/" target="_blank" rel="noopener noreferrer"><h4>Linkedin</h4></a>
+              <a className="hover:text-blue-500 text-gray-500 text-sm keep-base-font" href="/blog"><h4>Blog</h4></a>
+              <a className="hover:text-blue-500 text-gray-500 text-sm keep-base-font" href="https://www.linkedin.com/in/rishigurjar/" target="_blank" rel="noopener noreferrer"><h4>Linkedin</h4></a>
               <a className="hover:text-blue-500 text-gray-500 text-sm" href="https://x.com/rishi__gurjar" target="_blank" rel="noopener noreferrer"><h4>Twitter</h4></a>
               <a className="hover:text-blue-500 text-gray-500 text-sm" href="https://github.com/rishi-gurjar" target="_blank" rel="noopener noreferrer"><h4>GitHub</h4></a>
               <a className="hover:text-blue-500 text-gray-500 text-sm" href="https://unsplash.com/@rishigurjar/" target="_blank" rel="noopener noreferrer"><h4>Unsplash</h4></a>
@@ -90,7 +115,7 @@ export default function Home() {
               <a className="hover:text-green-500 text-gray-500 text-sm" href="https://verduslabs.com" target="_blank" rel="noopener noreferrer"><h4>Verdus Labs</h4></a>
             </div>
             <h2 className="leading-7 [&:not(:first-child)]:mt-1 text-gray-500 font-mono text-sm">EXPERIMENTS</h2>
-            <div className="pb-4">
+            <div className="pb-4 keep-base-font">
               {/* <a className="hover:text-green-500 text-gray-500 text-sm" href="https://rishigurjar.com/doom" target="_blank" rel="noopener noreferrer"><h4>DOOM</h4></a> */}
               <a className="hover:text-green-500 text-gray-500 text-sm" href="https://rishigurjar.com/twirl" target="_blank" rel="noopener noreferrer"><h4>Twirl</h4></a>
               <a className="hover:text-green-500 text-gray-500 text-sm" href="https://rishigurjar.com/nudge" target="_blank" rel="noopener noreferrer"><h4>Nudge</h4></a>
