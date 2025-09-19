@@ -82,3 +82,4 @@ My client is not in a hurry | Gaudí | idk | 2025-09-19T01:23:28.950Z
 After flattery usually comes deceit | Gaudí | idk | 2025-09-19T01:28:59.077Z
 Wasting time in Massachusetts was literally a criminal offense, listed in the law code, and several people were in fact prosecuted for it. | Scott Alexander | SSC Book Review: Albion’s Seed | 2025-09-19T20:26:02.688Z
 Idk | idk | idk | 2025-09-19T21:37:21.385Z
+Idk | idk | idk | 2025-09-19T21:38:03.660Z
