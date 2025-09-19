@@ -45,7 +45,9 @@ function parseQuotes(filePath: string): Quote[] {
     }
 }
 
-async function processQuotesNeedingMetadata(filePath: string, quotesNeedingMetadata: string[]): Promise<Quote[]> {
+const QUOTE_READY_RE = /^\s*([^|]+)\|([^|]+)\|([^|]+)\|\s*$/;
+
+async function processQuotesNeedingMetadata(filePath: string, lineIndices: number[]): Promise<Quote[]> {
     try {
         const timestamp = new Date().toISOString();
         
@@ -54,25 +56,17 @@ async function processQuotesNeedingMetadata(filePath: string, quotesNeedingMetad
         
         const processedQuotes: Quote[] = [];
         
-        // Find and update lines that end with "|" (ready for metadata)
-        const updatedLines = lines.map(line => {
-            if (quotesNeedingMetadata.includes(line)) {
-                // Remove the trailing "|" and add metadata
-                const cleanLine = line.slice(0, -1).trim();
-                const parts = cleanLine.split('|').map(part => part.trim());
-                
-                if (parts.length === 3) {
-                    const updatedLine = `${cleanLine} | ${timestamp}`;
-                    processedQuotes.push({
-                        text: parts[0],
-                        author: parts[1],
-                        source: parts[2],
-                        timestamp
-                    });
-                    return updatedLine;
-                }
-            }
-            return line;
+        // Update only the specific lines we detected as ready using a robust regex
+        const updatedLines = lines.map((line, idx) => {
+            if (!lineIndices.includes(idx)) return line;
+            const match = line.match(QUOTE_READY_RE);
+            if (!match) return line;
+            const text = match[1].trim();
+            const author = match[2].trim();
+            const source = match[3].trim();
+            const updatedLine = `${text} | ${author} | ${source} | ${timestamp}`;
+            processedQuotes.push({ text, author, source, timestamp });
+            return updatedLine;
         });
         
         fs.writeFileSync(filePath, updatedLines.join('\n'));
@@ -85,20 +79,21 @@ async function processQuotesNeedingMetadata(filePath: string, quotesNeedingMetad
     }
 }
 
-function findQuotesNeedingMetadata(filePath: string): string[] {
+function findQuotesNeedingMetadata(filePath: string): number[] {
     try {
         const fileContents = fs.readFileSync(filePath, 'utf8');
-        return fileContents
-            .split('\n')
-            .filter(line => {
-                const trimmed = line.trim();
-                // Look for lines that have exactly 3 parts + end with "|" (indicating ready for metadata)
-                if (trimmed.endsWith('|')) {
-                    const parts = trimmed.slice(0, -1).split('|').map(part => part.trim());
-                    return parts.length === 3 && parts.every(part => part.length > 0);
+        const lines = fileContents.split('\n');
+        const indices: number[] = [];
+        lines.forEach((line, idx) => {
+            const match = line.match(QUOTE_READY_RE);
+            if (match) {
+                const [_, a, b, c] = match;
+                if (a.trim().length > 0 && b.trim().length > 0 && c.trim().length > 0) {
+                    indices.push(idx);
                 }
-                return false;
-            });
+            }
+        });
+        return indices;
     } catch (error) {
         console.error('Error reading quotes file:', error);
         return [];
