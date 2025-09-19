@@ -79,3 +79,4 @@ I got home at last and crawled into bed next to my girlfriend. I told her I'd ha
 The greatest crimes in the world are not committed by people breaking the rules but by people following the rules. It's people who follow orders that drop bombs and massacre villages. As a precaution to ever committing major acts of evil it is our solemn duty never to do what we're told, this is the only way we can be sure. | Banksy | Wall and Piece | 2025-09-16T19:41:55.736Z
 Això dura més que les obres de la Sagrada Família”—“This is taking longer than building the Sagrada Família | Random Catalan person | streets of Barcelona | 
 My client is not in a hurry | Gaudí | idk | 2025-09-19T01:23:28.950Z
+After flattery usually comes deceit | Gaudí | idk | 2025-09-19T01:28:59.077Z
