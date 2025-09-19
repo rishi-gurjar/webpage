@@ -80,3 +80,4 @@ The greatest crimes in the world are not committed by people breaking the rules 
 Això dura més que les obres de la Sagrada Família”—“This is taking longer than building the Sagrada Família | Random Catalan person | streets of Barcelona | 
 My client is not in a hurry | Gaudí | idk | 2025-09-19T01:23:28.950Z
 After flattery usually comes deceit | Gaudí | idk | 2025-09-19T01:28:59.077Z
+Wasting time in Massachusetts was literally a criminal offense, listed in the law code, and several people were in fact prosecuted for it. | Scott Alexander | SSC Book Review: Albion’s Seed | 2025-09-19T20:26:02.688Z
