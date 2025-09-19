@@ -77,7 +77,8 @@ Thou wert the meekest man that ever ate in hall among the ladies; and thou wert 
 Stop being patient and start asking yourself, how do I accomplish my 10 year plan in 6 months? You will probably fail, but you will be a lot further ahead of the person who simply accepted it was going to take 10 years. | Peter Thiel | The Tim Ferriss Show | 2025-09-16T19:13:51.885Z
 I got home at last and crawled into bed next to my girlfriend. I told her I'd had an epiphany that night and she told me to stop taking that drug cos it's bad for your heart. | Banksy | Wall and Piece | 2025-09-16T19:31:59.053Z
 The greatest crimes in the world are not committed by people breaking the rules but by people following the rules. It's people who follow orders that drop bombs and massacre villages. As a precaution to ever committing major acts of evil it is our solemn duty never to do what we're told, this is the only way we can be sure. | Banksy | Wall and Piece | 2025-09-16T19:41:55.736Z
-Això dura més que les obres de la Sagrada Família”—“This is taking longer than building the Sagrada Família | Random Catalan person | streets of Barcelona | 
+Això dura més que les obres de la Sagrada Família”—“This is taking longer than building the Sagrada Família | Random Catalan person | streets of Barcelona | 2025-09-19T21:37:21.385Z
 My client is not in a hurry | Gaudí | idk | 2025-09-19T01:23:28.950Z
 After flattery usually comes deceit | Gaudí | idk | 2025-09-19T01:28:59.077Z
 Wasting time in Massachusetts was literally a criminal offense, listed in the law code, and several people were in fact prosecuted for it. | Scott Alexander | SSC Book Review: Albion’s Seed | 2025-09-19T20:26:02.688Z
+Idk | idk | idk | 2025-09-19T21:37:21.385Z
