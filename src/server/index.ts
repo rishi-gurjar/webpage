@@ -5,6 +5,7 @@ import apiRoutes from './routes/api';
 import { setupBlogWatcher } from './watchers/blogWatcher';
 import dotenv from 'dotenv';
 import { scheduleDailyScrape } from './services/goodreadsService';
+import { scheduleDailyFriendPicker } from './services/friendsService';
 
 dotenv.config(); // Load environment variables from .env file
 
@@ -28,6 +29,7 @@ app.use('/api', apiRoutes);
     try {
         setupBlogWatcher();
         scheduleDailyScrape();
+        scheduleDailyFriendPicker();
     } catch (error) {
         console.error("Error during startup:", error);
     }

@@ -5,6 +5,7 @@ import { sheets } from '../config';
 import { fetchIpInfo } from '../services/ipInfoService';
 import { createClient } from '@supabase/supabase-js';
 import { getBooksCached } from '../services/goodreadsService';
+import { getDailyFriend } from '../services/friendsService';
 const router = express.Router();
 const supabaseUrl = process.env.SUPA_URL
 const supabaseKey = process.env.SUPA_KEY;
@@ -100,6 +101,12 @@ router.post('/llm', async (req, res) => {
 
 router.get('/test', (req, res) => {
     res.json({ message: 'Express server is running!' });
+});
+
+// Daily friend pick
+router.get('/daily-friend', (_req, res) => {
+    const pick = getDailyFriend();
+    res.json(pick);
 });
 
 router.post('/validate-beacon-password', async (req: any, res: any) => {

@@ -66,7 +66,7 @@ export async function scrapeGoodreads(): Promise<GoodreadsBook[]> {
     const pageTitle = $('title').text();
     const authHint = $('form[action*="/user/sign_in"], #signInForm').length > 0 || /Sign in|Welcome back/i.test(html);
     if (authHint) {
-      console.warn(`[goodreads] page may require auth. title="${pageTitle}" url=${currentUrl}`);
+      //console.warn(`[goodreads] page may require auth. title="${pageTitle}" url=${currentUrl}`);
     }
 
     // Collect rows using multiple selectors
