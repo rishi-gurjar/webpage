@@ -84,3 +84,4 @@ Wasting time in Massachusetts was literally a criminal offense, listed in the la
 Nullius in verba; "take nobody's word for it" | motto of the Royal Society | Horace's Epistle | 2025-09-23T21:52:48.914Z
 'compassion without attachment,' a condition in which 'you can stay alive, in action, but be
 disengaged from desire for, and fear of, the fruits of your action' | Joseph Campbell via Edward Packard | idk | 2025-09-25T15:13:05.021Z
+A man strong in character hates no one, is angry with no one, envies no one, is indignant with no one, scorns no one, and is not at all proud | Spinoza | idk | 2025-09-25T15:14:23.034Z
