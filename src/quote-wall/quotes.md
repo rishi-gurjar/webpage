@@ -86,3 +86,4 @@ Nullius in verba; "take nobody's word for it" | motto of the Royal Society | Hor
 disengaged from desire for, and fear of, the fruits of your action' | Joseph Campbell via Edward Packard | idk | 2025-09-25T15:13:05.021Z
 A man strong in character hates no one, is angry with no one, envies no one, is indignant with no one, scorns no one, and is not at all proud | Spinoza | idk | 2025-09-25T15:29:45.756Z
 I look forward to oblivion. | Katharine Hepburn | idk | 2025-09-25T15:29:45.756Z
+Blah blah | Vansh | in bibibowl | 2025-09-28T18:15:08.101Z
