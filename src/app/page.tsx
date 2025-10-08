@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image"
-import React, { useEffect, useState } from 'react'
-import { PageTracker } from './blog/PageTracker';
+import Image from "next/image";
+import React, { useEffect, useState } from "react";
+import { PageTracker } from "./blog/PageTracker";
 import { blogHeaderImagePaths } from "@/lib/blogHeaderImages";
 
 export default function Home() {
@@ -25,46 +25,42 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    const body = typeof document !== 'undefined' ? document.body : null;
-    const themeClassName = 'teen-2000s';
+    const body = typeof document !== "undefined" ? document.body : null;
+    const themeClassName = "teen-2000s";
     if (!body) return;
     if (isTeenMode) {
       body.classList.add(themeClassName);
       // Assign a random hue for this session of teen mode
       const randomHue = Math.floor(Math.random() * 360);
-      body.style.setProperty('--teen-hue', String(randomHue));
+      body.style.setProperty("--teen-hue", String(randomHue));
     } else {
       body.classList.remove(themeClassName);
-      body.style.removeProperty('--teen-hue');
+      body.style.removeProperty("--teen-hue");
     }
     return () => {
       body.classList.remove(themeClassName);
-      body.style.removeProperty('--teen-hue');
+      body.style.removeProperty("--teen-hue");
     };
   }, [isTeenMode]);
 
   const personSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Person',
-    name: 'Rishi Gurjar',
-    url: 'https://rishigurjar.com',
-    jobTitle: 'Student',
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Rishi Gurjar",
+    url: "https://rishigurjar.com",
+    jobTitle: "Student",
     alumniOf: [
       {
-        '@type': 'CollegeOrUniversity',
-        name: 'Cornell University'
-      }
+        "@type": "CollegeOrUniversity",
+        name: "Cornell University",
+      },
     ],
     sameAs: [
-      'https://github.com/rishi-gurjar',
-      'https://www.linkedin.com/in/rishigurjar/',
-      'https://x.com/rishi__gurjar',
+      "https://github.com/rishi-gurjar",
+      "https://www.linkedin.com/in/rishigurjar/",
+      "https://x.com/rishi__gurjar",
     ],
-    knowsAbout: [
-      'Software Engineering',
-      'Design',
-      'Ecology',
-    ]
+    knowsAbout: ["Software Engineering", "Design", "Ecology"],
   };
 
   return (
@@ -89,26 +85,83 @@ export default function Home() {
       </div>
 
       <div className="mt-4">
-        <h2 className="scroll-m-20 text-lg font-normal tracking-tight text-gray-500">Rishi Gurjar</h2>
-        <div >
-          <h4 className="text-gray-500 text-sm keep-base-font">SF Bay Area & Ithaca, NY</h4>
-          <h4 className="text-gray-500 text-sm">x@y | x = rrg85, y = cornell.edu</h4>
+        <h2 className="scroll-m-20 text-lg font-normal tracking-tight text-gray-500">
+          Rishi Gurjar
+        </h2>
+        <div>
+          <h4 className="text-gray-500 text-sm keep-base-font">
+            SF Bay Area &amp; Ithaca, NY
+          </h4>
+          <h4 className="text-gray-500 text-sm">
+            x@y | x = rrg85, y = cornell.edu
+          </h4>
         </div>
         <br />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
           <div>
             <h2 className="leading-5 [&:not(:first-child)]:mt-0.5 text-gray-500 text-sm">
-              I'm at <a className="hover:text-blue-500 text-gray-500 text-sm underline" href="https://verduslabs.com" target="_blank" rel="noopener noreferrer">Verdus</a> building closed-loop autonomous agricultural systems
+              I&apos;m at{" "}
+              <a
+                className="hover:text-blue-500 text-gray-500 text-sm underline"
+                href="https://verduslabs.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Verdus
+              </a>{" "}
+              building closed-loop autonomous agricultural systems
             </h2>
-            <h2 className="leading-7 [&:not(:first-child)]:mt-1 text-gray-500 font-mono text-sm">MISANTHROPING</h2>
+            <h2 className="leading-7 [&:not(:first-child)]:mt-1 text-gray-500 font-mono text-sm">
+              MISANTHROPING
+            </h2>
             <div>
-              <a className="hover:text-blue-500 text-gray-500 text-sm keep-base-font" href="/blog"><h4>Blog</h4></a>
-              <a className="hover:text-blue-500 text-gray-500 text-sm keep-base-font" href="https://www.linkedin.com/in/rishigurjar/" target="_blank" rel="noopener noreferrer"><h4>Linkedin</h4></a>
-              <a className="hover:text-blue-500 text-gray-500 text-sm" href="https://x.com/rishi__gurjar" target="_blank" rel="noopener noreferrer"><h4>Twitter</h4></a>
-              <a className="hover:text-blue-500 text-gray-500 text-sm" href="https://github.com/rishi-gurjar" target="_blank" rel="noopener noreferrer"><h4>GitHub</h4></a>
-              <a className="hover:text-green-500 text-gray-500 text-sm" href="https://armada.build/" target="_blank" rel="noopener noreferrer"><h4>Armada</h4></a>
-              <a className="hover:text-green-500 text-gray-500 text-sm" href="https://beyondterra.org" target="_blank" rel="noopener noreferrer"><h4>Beyond Terra</h4></a>
+              <a
+                className="hover:text-blue-500 text-gray-500 text-sm keep-base-font"
+                href="/blog"
+              >
+                <h4>Blog</h4>
+              </a>
+              <a
+                className="hover:text-blue-500 text-gray-500 text-sm keep-base-font"
+                href="https://www.linkedin.com/in/rishigurjar/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <h4>Linkedin</h4>
+              </a>
+              <a
+                className="hover:text-blue-500 text-gray-500 text-sm"
+                href="https://x.com/rishi__gurjar"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <h4>Twitter</h4>
+              </a>
+              <a
+                className="hover:text-blue-500 text-gray-500 text-sm"
+                href="https://github.com/rishi-gurjar"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <h4>GitHub</h4>
+              </a>
+              <a
+                className="hover:text-green-500 text-gray-500 text-sm"
+                href="https://armada.build/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <h4>Armada</h4>
+              </a>
+              <a
+                className="hover:text-green-500 text-gray-500 text-sm"
+                href="https://beyondterra.org"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <h4>Beyond Terra</h4>
+              </a>
               {/* <a className="hover:text-blue-500 text-gray-500 text-sm" href="https://unsplash.com/@rishigurjar/" target="_blank" rel="noopener noreferrer"><h4>Unsplash</h4></a> */}
               {/* <a className="hover:text-blue-500 text-gray-500 text-sm" href="https://www.goodreads.com/user/show/143258693-rishi-gurjar" target="_blank" rel="noopener noreferrer"><h4>Goodreads</h4></a> */}
             </div>
@@ -116,11 +169,12 @@ export default function Home() {
 
           <div>
             <div className="pb-4">
-            <p className="text-gray-500 text-sm font-mono">
-              "One of the schools of Tlön goes so far as to negate time: it reasons that the present is indefinite, that the future has no reality other than as a present hope, that the past has no reality other than as a present memory"
-            </p>
-            <p className="text-gray-500 text-sm">— Jorge Luis Borges, <i>Tlön, Uqbar, Orbis Tertius</i></p>
-
+              <p className="text-gray-500 text-sm font-mono">
+                &quot;One of the schools of Tlön goes so far as to negate time: it reasons that the present is indefinite, that the future has no reality other than as a present hope, that the past has no reality other than as a present memory&quot;
+              </p>
+              <p className="text-gray-500 text-sm">
+                &mdash; Jorge Luis Borges, <i>Tlön, Uqbar, Orbis Tertius</i>
+              </p>
             </div>
             {/* <h2 className="leading-7 [&:not(:first-child)]:mt-1 text-gray-500 font-mono text-sm">EXPERIMENTS</h2> */}
             <div className="pb-4 keep-base-font">
