@@ -11,6 +11,7 @@ export default function Home() {
   const [shuffledPaths, setShuffledPaths] = useState<string[]>([]);
   const [ready, setReady] = useState(false);
   const [isTeenMode, setIsTeenMode] = useState(false);
+  const [hoveredFriend, setHoveredFriend] = useState<{ name: string; url: string } | null>(null);
 
   useEffect(() => {
     if (blogHeaderImagePaths.length === 0) return;
@@ -42,6 +43,25 @@ export default function Home() {
       body.style.removeProperty("--teen-hue");
     };
   }, [isTeenMode]);
+
+  const friends = [
+    {
+      name: "Rohan",
+      url: "https://rohankumar.co"
+    },
+    {
+      name: "Ronald",
+      url: "https://ronaldleung.co"
+    },
+    {
+      name: "Simon",
+      url: "https://simonilincev.com/"
+    },
+    {
+      name: "Will",
+      url: "https://willmrosenthal.com/"
+    }
+  ];
 
   const personSchema = {
     "@context": "https://schema.org",
@@ -101,29 +121,29 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
           <div>
             <h2 className="leading-5 [&:not(:first-child)]:mt-0.5 text-gray-500 text-sm">
-              I&apos;m at{" "}
+              On leave from Cornell / building {" "}
               <a
                 className="hover:text-blue-500 text-gray-500 text-sm underline"
                 href="https://verduslabs.com"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Verdus
+                closed-loop autonomous
               </a>{" "}
-              building closed-loop autonomous agricultural systems
+              agricultural systems
             </h2>
             <h2 className="leading-7 [&:not(:first-child)]:mt-1 text-gray-500 font-mono text-sm">
               MISANTHROPING
             </h2>
             <div>
               <a
-                className="hover:text-blue-500 text-gray-500 text-sm keep-base-font"
+                className="hover:text-blue-500 text-gray-500 text-sm"
                 href="/blog"
               >
                 <h4>Blog</h4>
               </a>
               <a
-                className="hover:text-blue-500 text-gray-500 text-sm keep-base-font"
+                className="hover:text-blue-500 text-gray-500 text-sm"
                 href="https://www.linkedin.com/in/rishigurjar/"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -169,10 +189,10 @@ export default function Home() {
 
           <div>
             <div className="pb-4">
-              <p className="text-gray-500 text-sm font-mono">
+              <p className="text-gray-500 text-sm font-mono keep-base-font">
                 &quot;One of the schools of Tlön goes so far as to negate time: it reasons that the present is indefinite, that the future has no reality other than as a present hope, that the past has no reality other than as a present memory&quot;
               </p>
-              <p className="text-gray-500 text-sm">
+              <p className="text-gray-500 text-sm keep-base-font">
                 &mdash; Jorge Luis Borges, <i>Tlön, Uqbar, Orbis Tertius</i>
               </p>
             </div>
@@ -206,6 +226,27 @@ export default function Home() {
             allow="clipboard-write; encrypted-media; fullscreen; picture-in-picture"
           />
         </div> */}
+        <div className="text-gray-500 text-sm font-mono text-center keep-base-font">
+          {hoveredFriend ? "Check out " : "Check out my "}
+          <a
+            className="underline cursor-pointer"
+            href={hoveredFriend ? hoveredFriend.url : undefined}
+            target={hoveredFriend ? "_blank" : undefined}
+            rel={hoveredFriend ? "noopener noreferrer" : undefined}
+            onMouseEnter={() => {
+              const pick = friends[Math.floor(Math.random() * friends.length)];
+              setHoveredFriend(pick);
+            }}
+            onMouseLeave={() => setHoveredFriend(null)}
+            onClick={(e) => {
+              if (!hoveredFriend) {
+                e.preventDefault();
+              }
+            }}
+          >
+            {hoveredFriend ? hoveredFriend.name : "friends"}
+          </a>
+        </div>
       </div>
 
       <script

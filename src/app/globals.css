@@ -131,8 +131,9 @@
     .teen-2000s h6 {
       font-family: 'Jacquard 24', serif !important;
     }
-    /* Opt-out utility: keep base font on specific elements */
-    .teen-2000s .keep-base-font {
+    /* Opt-out utility: keep base font on specific elements (and their children) */
+    .teen-2000s .keep-base-font,
+    .teen-2000s .keep-base-font * {
       font-family: inherit !important;
       font-size: 1rem !important;
     }
@@ -212,5 +213,12 @@
   }
   .markdown th {
     @apply bg-gray-100 font-bold;
+  }
+}
+
+@layer utilities {
+  /* Utility to apply the Jacquard 24 display font */
+  .font-jacquard-24 {
+    font-family: 'Jacquard 24', serif !important;
   }
 }
