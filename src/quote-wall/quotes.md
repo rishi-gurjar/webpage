@@ -1,4 +1,4 @@
-bera little philosophy inclineth man's mind to atheism; but depth in philosophy bringeth men's minds about to religion | Francis Bacon | The Essays: Of Atheism | 2025-07-23T19:45:36.701Z
+abera little philosophy inclineth man's mind to atheism; but depth in philosophy bringeth men's minds about to religion | Francis Bacon | The Essays: Of Atheism | 2025-07-23T19:45:36.701Z
 …just as Columbus did, before his wonderful voyage across the Atlantic Ocean, when he gave the reasons for his confidence that he could find new lands and continents beyond those known already; reasons which, although rejected at first, were later proved by experiment, and became the causes and starting points of great things | Francis Bacon | Aphorism 92, Book I of Novum Organum | 2025-07-23T20:12:36.701Z
 If the truth shall kill them, let them die | Ayn Rand paraphrasing Kant | Judgment Day: My Years with Ayn Rand | 2025-07-23T20:19:36.701Z
 To be is to do | Kant (misattributed), ancient maxim attributed to Socrates | | 2025-07-23T20:22:36.701Z
@@ -86,4 +86,4 @@ Nullius in verba; "take nobody's word for it" | motto of the Royal Society | Hor
 disengaged from desire for, and fear of, the fruits of your action' | Joseph Campbell via Edward Packard | idk | 2025-09-25T15:13:05.021Z
 A man strong in character hates no one, is angry with no one, envies no one, is indignant with no one, scorns no one, and is not at all proud | Spinoza | idk | 2025-09-25T15:29:45.756Z
 I look forward to oblivion. | Katharine Hepburn | idk | 2025-09-25T15:29:45.756Z
-Blah blah | Vansh | in bibibowl | 2025-09-28T18:15:08.101Z
+But if you look for a companion, be careful in choosing! And be careful of what you say, even to your closest friends! The enemy has many spies and many ways of hearing. | Gandalf to Frodo | The Lord of the Rings | 2025-10-09T17:00:51.300Z
