@@ -87,5 +87,4 @@ disengaged from desire for, and fear of, the fruits of your action' | Joseph Cam
 A man strong in character hates no one, is angry with no one, envies no one, is indignant with no one, scorns no one, and is not at all proud | Spinoza | idk | 2025-09-25T15:29:45.756Z
 I look forward to oblivion. | Katharine Hepburn | idk | 2025-09-25T15:29:45.756Z
 But if you look for a companion, be careful in choosing! And be careful of what you say, even to your closest friends! The enemy has many spies and many ways of hearing. | Gandalf to Frodo | The Lord of the Rings | 2025-10-09T17:00:51.300Z
-Others dwelt here before hobbits were; and others will dwell here again when hobbits are no more. | Gildor | The Lord of the Rings | 2025-10-10T05:36:34.597Z
-Short cuts make long delays | Pippin | 
+Others dwelt here before hobbits were; and others will dwell here again when hobbits are no more. | Gildor | The Lord of the Rings | 2025-10-10T05:36:56.572Z
