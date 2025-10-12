@@ -121,16 +121,18 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
           <div>
             <h2 className="leading-5 [&:not(:first-child)]:mt-0.5 text-gray-500 text-sm">
-              On leave from Cornell / building {" "}
+              On leave from Cornell to deal {" "}
               <a
                 className="hover:text-blue-500 text-gray-500 text-sm underline"
                 href="https://verduslabs.com"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                closed-loop autonomous
-              </a>{" "}
-              agricultural systems
+               avocados
+              </a>
+            </h2>
+            <h2 className="leading-5 [&:not(:first-child)]:mt-0.5 text-gray-500 text-sm"> 
+              Among my interests are landscape design and self-replicating systems 
             </h2>
             <h2 className="leading-7 [&:not(:first-child)]:mt-1 text-gray-500 font-mono text-sm">
               MISANTHROPING
