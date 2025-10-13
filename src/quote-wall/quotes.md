@@ -90,3 +90,4 @@ But if you look for a companion, be careful in choosing! And be careful of what 
 Others dwelt here before hobbits were; and others will dwell here again when hobbits are no more. | Gildor | The Lord of the Rings | 2025-10-10T05:37:12.076Z
 Short cuts make long delays | Pippin | The Lord of the Rings | 2025-10-10T05:37:28.243Z
 But it seems to me now clear which is the road that we must take. The westward road seems easiest. Therefore it must be shunned. It will be watched. Too often the Elves have fled that way. Now at this last we must take a hard road, a road unforeseen. | Elrond | The Lord of the Rings | 2025-10-13T20:49:52.263Z
+‘I will take the Ring,’ he said, ‘though I do not know the way.’ | Frodo | The Lord of the Rings | 2025-10-13T21:03:03.209Z
