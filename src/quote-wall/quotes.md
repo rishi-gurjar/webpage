@@ -92,3 +92,4 @@ Short cuts make long delays | Pippin | The Lord of the Rings | 2025-10-10T05:37:
 But it seems to me now clear which is the road that we must take. The westward road seems easiest. Therefore it must be shunned. It will be watched. Too often the Elves have fled that way. Now at this last we must take a hard road, a road unforeseen. | Elrond | The Lord of the Rings | 2025-10-13T20:49:52.263Z
 ‘I will take the Ring,’ he said, ‘though I do not know the way.’ | Frodo | The Lord of the Rings | 2025-10-13T21:03:03.209Z
 Do not trouble your hearts overmuch with thought of the road tonight. Maybe the paths that you each shall tread are already laid before your feet, though you do not see them. | Galadriel | The Lord of the Rings | 2025-10-15T05:51:54.615Z
+Bankers are smart enough to be greedy but not smart enough to be useful | Chamath Palihapitiya | Chamath Palihapitiya - how we put Facebook on the path to 1 billion users YouTube | 2025-10-16T18:21:37.744Z
