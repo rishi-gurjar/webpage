@@ -132,7 +132,7 @@ export default function Home() {
               </a>
             </h2>
             <h2 className="leading-5 [&:not(:first-child)]:mt-0.5 text-gray-500 text-sm"> 
-              I like landscape design and self-replicating systems 
+              I like landscape, constitution, and self-replicating system design
             </h2>
             <h2 className="leading-7 [&:not(:first-child)]:mt-1 text-gray-500 font-mono text-sm">
               MISANTHROPING
