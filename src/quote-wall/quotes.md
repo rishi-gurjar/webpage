@@ -94,3 +94,4 @@ But it seems to me now clear which is the road that we must take. The westward r
 Do not trouble your hearts overmuch with thought of the road tonight. Maybe the paths that you each shall tread are already laid before your feet, though you do not see them. | Galadriel | The Lord of the Rings | 2025-10-15T05:51:54.615Z
 Bankers are smart enough to be greedy but not smart enough to be useful | Chamath Palihapitiya | Chamath Palihapitiya - how we put Facebook on the path to 1 billion users YouTube | 2025-10-16T18:21:37.744Z
 Always tell us the bad news promptly. It is only the good news that can wait. | Saying at Berkshire Hathaway | The Psychology of Human Misjudgement | 2025-10-21T17:48:49.223Z
+Learn how to ignore the examples from others when they are wrong, because few skills are more worth having | Charlie Munger | The Psychology of Human Misjudgement | 2025-10-21T18:38:26.100Z
