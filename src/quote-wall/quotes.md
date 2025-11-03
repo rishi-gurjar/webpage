@@ -97,3 +97,4 @@ Always tell us the bad news promptly. It is only the good news that can wait. | 
 Learn how to ignore the examples from others when they are wrong, because few skills are more worth having | Charlie Munger | The Psychology of Human Misjudgement | 2025-10-21T18:38:26.100Z
 A small leak will sink a great ship | Ben Franklin | idk | 2025-10-21T18:44:56.787Z
 You had to tell who was to do what, where, when, and why | Carl Braun via Munger | The Psychology of Human Misjudgement | 2025-10-21T19:31:35.795Z
+Either you acknowledge reality and use it to your benefit, or it will automatically work against you. | Robert Ringer | idk | 2025-11-03T23:34:41.629Z
