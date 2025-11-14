@@ -98,3 +98,4 @@ Learn how to ignore the examples from others when they are wrong, because few sk
 A small leak will sink a great ship | Ben Franklin | idk | 2025-10-21T18:44:56.787Z
 You had to tell who was to do what, where, when, and why | Carl Braun via Munger | The Psychology of Human Misjudgement | 2025-10-21T19:31:35.795Z
 Either you acknowledge reality and use it to your benefit, or it will automatically work against you. | Robert Ringer | idk | 2025-11-03T23:34:41.629Z
+the sole test of the validity of any idea is experiment | Feynman | Lectures, Physics I | 2025-11-14T16:44:57.854Z
