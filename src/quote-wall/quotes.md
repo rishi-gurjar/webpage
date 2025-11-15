@@ -99,3 +99,4 @@ A small leak will sink a great ship | Ben Franklin | idk | 2025-10-21T18:44:56.7
 You had to tell who was to do what, where, when, and why | Carl Braun via Munger | The Psychology of Human Misjudgement | 2025-10-21T19:31:35.795Z
 Either you acknowledge reality and use it to your benefit, or it will automatically work against you. | Robert Ringer | idk | 2025-11-03T23:34:41.629Z
 the sole test of the validity of any idea is experiment | Feynman | Lectures, Physics I | 2025-11-14T16:44:57.854Z
+Some changes are more difficult to describe than the motion of a point on a solid object, for example the speed of drift of a cloud that is drifting very slowly, but rapidly forming or evaporating, or the change of a woman’s mind. | Feynman | Lectures, Physics I | 2025-11-15T17:25:26.599Z
