@@ -106,3 +106,4 @@ The syllogism is made up of propositions, propositions of words, and words are m
 By the sword we seek peace, but peace only under liberty | Massachussetts state motto | idk | 2025-12-10T22:47:46.829Z
 What is true of one apple may not be true of another apple; thus more can be said about a single apple than about all the apples in the world | idk | https://www.readthesequences.com/Whats-A-Bias-Again | 2025-12-14T17:29:36.626Z
 Difficulties vanish when faced boldy | Wienis | Foundation 1 | 2025-12-31T01:08:44.622Z
+it is the chief characteristic of the religion of science, that it works | narrator | Foundation 1 | 2025-12-31T01:39:25.350Z
