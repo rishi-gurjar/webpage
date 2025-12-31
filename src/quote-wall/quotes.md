@@ -1,4 +1,4 @@
-abera little philosophy inclineth man's mind to atheism; but depth in philosophy bringeth men's minds about to religion | Francis Bacon | The Essays: Of Atheism | 2025-07-23T19:45:36.701Z
+a little philosophy inclineth man's mind to atheism; but depth in philosophy bringeth men's minds about to religion | Francis Bacon | The Essays: Of Atheism | 2025-07-23T19:45:36.701Z
 …just as Columbus did, before his wonderful voyage across the Atlantic Ocean, when he gave the reasons for his confidence that he could find new lands and continents beyond those known already; reasons which, although rejected at first, were later proved by experiment, and became the causes and starting points of great things | Francis Bacon | Aphorism 92, Book I of Novum Organum | 2025-07-23T20:12:36.701Z
 If the truth shall kill them, let them die | Ayn Rand paraphrasing Kant | Judgment Day: My Years with Ayn Rand | 2025-07-23T20:19:36.701Z
 To be is to do | Kant (misattributed), ancient maxim attributed to Socrates | | 2025-07-23T20:22:36.701Z
@@ -105,3 +105,4 @@ All these people thought of was death and the dead. They conceived of a literal 
 The syllogism is made up of propositions, propositions of words, and words are markers of notions. Thus if the notions themselves (and this is the heart of the matter) are confused, and recklessly abstracted from things, nothing built on them is sound. The only hope therefore lies in true Induction. | Francis Bacon | Novum Organum | 2025-12-09T17:30:25.996Z
 By the sword we seek peace, but peace only under liberty | Massachussetts state motto | idk | 2025-12-10T22:47:46.829Z
 What is true of one apple may not be true of another apple; thus more can be said about a single apple than about all the apples in the world | idk | https://www.readthesequences.com/Whats-A-Bias-Again | 2025-12-14T17:29:36.626Z
+Difficulties vanish when faced boldy | Wienis | Foundation 1 | 2025-12-31T01:08:44.622Z
