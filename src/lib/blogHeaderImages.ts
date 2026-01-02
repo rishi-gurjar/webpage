@@ -38,5 +38,13 @@ export const blogHeaderImagePaths: string[] = [
   '/trio.png',
   '/olig.png',
   '/chop.png',
+  '/lessig.png',
+  '/consul.png',
+  '/beer.png',
+  '/tom.png',
+  '/edison.png',
+  '/smoker.png',
+  '/helene.png',
+  '/schiz.png',
 ];
 
