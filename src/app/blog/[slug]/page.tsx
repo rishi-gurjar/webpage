@@ -57,6 +57,7 @@ import tomImg from '/public/tom.png';
 import edisonImg from '/public/edison.png';
 import smokerImg from '/public/smoker.png';
 import heleneImg from '/public/helene.png';
+import schizImg from '/public/schiz.png';
 
 // Create a mapping for your blog images
 const headerImages: { [key: string]: any } = {
@@ -106,6 +107,7 @@ const headerImages: { [key: string]: any } = {
   '/edison.png': edisonImg,
   '/smoker.png': smokerImg,
   '/helene.png': heleneImg,
+  '/schiz.png': schizImg,
 };
 
 // Add this interface for better type safety
