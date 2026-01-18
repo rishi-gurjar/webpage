@@ -121,14 +121,14 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
           <div>
             <h2 className="leading-5 [&:not(:first-child)]:mt-0.5 text-gray-500 text-sm">
-              On leave from Cornell to deal {" "}
+              On leave from Cornell to {" "}
               <a
                 className="hover:text-blue-500 text-gray-500 text-sm underline"
                 href="https://verduslabs.com"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-               avocados
+               hack nature
               </a>
             </h2>
             <h2 className="leading-5 [&:not(:first-child)]:mt-0.5 text-gray-500 text-sm"> 
