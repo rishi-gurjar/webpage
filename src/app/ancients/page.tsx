@@ -8,6 +8,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { API_URL } from '@/lib/api'
 
 interface Philosopher {
   name: string;
@@ -115,10 +116,6 @@ function Test() {
           sender: msg.sender,
           text: msg.text
         }));
-
-        const API_URL = process.env.NODE_ENV === 'production'
-            ? 'https://0cd56de0fdd8.ngrok-free.app'
-            : 'http://localhost:3001';
 
         const response = await fetch(`${API_URL}/api/llm`, {
           method: 'POST',

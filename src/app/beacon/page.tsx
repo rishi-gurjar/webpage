@@ -12,6 +12,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { TrendingUp } from "lucide-react"
+import { API_URL } from '@/lib/api'
 
 import {
     CartesianGrid,
@@ -57,10 +58,6 @@ const chartConfig = {
 } satisfies ChartConfig
 
 export default function BeaconPage() {
-    const API_URL = process.env.NODE_ENV === 'production'
-        ? 'https://0cd56de0fdd8.ngrok-free.app'
-        : 'http://localhost:3001';
-
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [password, setPassword] = useState("")
     const [isLoading, setIsLoading] = useState(false)

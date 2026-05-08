@@ -1,8 +1,6 @@
 'use client'
 
-const API_URL = process.env.NODE_ENV === 'production'
-    ? 'https://0cd56de0fdd8.ngrok-free.app'
-    : 'http://localhost:3001';
+import { API_URL } from '@/lib/api';
 
 export async function trackPageView(path: string) {
     try {
