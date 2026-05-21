@@ -3,6 +3,7 @@ import path from 'path';
 import matter from 'gray-matter';
 import { remark } from 'remark';
 import html from 'remark-html';
+import remarkGfm from 'remark-gfm';
 import { notFound } from 'next/navigation';
 import './blogPost.css';
 import Link from 'next/link';
@@ -59,6 +60,7 @@ import smokerImg from '/public/smoker.png';
 import heleneImg from '/public/helene.png';
 import schizImg from '/public/schiz.png';
 import boschImg from '/public/bosch.png';
+import mcqueenImg from '/public/mcqueen.png';
 
 // Create a mapping for your blog images
 const headerImages: { [key: string]: any } = {
@@ -110,6 +112,7 @@ const headerImages: { [key: string]: any } = {
   '/helene.png': heleneImg,
   '/schiz.png': schizImg,
   '/bosch.png': boschImg,
+  '/mcqueen.png': mcqueenImg,
 };
 
 // Add this interface for better type safety
@@ -276,9 +279,13 @@ export default async function BlogPost({ params }: Props) {
   
   // Process the Markdown content
   const processedContent = await remark()
-    .use(html)
+    .use(remarkGfm)
+    .use(html, { sanitize: false })
     .process(contentWithFixedPaths);
-  const contentHtml = processedContent.toString();
+  let contentHtml = processedContent.toString();
+
+  // Convert X^Y patterns to superscript (e.g. 10^36 -> 10<sup>36</sup>)
+  contentHtml = contentHtml.replace(/(\d+)\^(\d+)/g, '$1<sup>$2</sup>');
 
   // Add JSON-LD structured data
   const jsonLd = {
