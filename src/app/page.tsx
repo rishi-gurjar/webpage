@@ -4,6 +4,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { PageTracker } from "./blog/PageTracker";
 import { blogHeaderImagePaths } from "@/lib/blogHeaderImages";
+import { GothicText } from "@/components/GothicText";
 
 export default function Home() {
   const [imgIndex, setImgIndex] = useState(0);
@@ -84,6 +85,7 @@ export default function Home() {
   };
 
   return (
+    <GothicText>
     <main className="container grid flex flex-col items-center mt-[60px] lg:mt-[calc(100vh/5.5)] lg:w-[calc(100vw/3)] md:w-[calc(100vw/3)] md:px-0">
       <PageTracker path="/" />
       <div
@@ -256,5 +258,6 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
       />
     </main>
+    </GothicText>
   );
 }
