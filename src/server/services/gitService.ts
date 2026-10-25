@@ -20,11 +20,14 @@ async function retry<T>(
 }
 
 export async function commitAndPushToGit(filePath: string): Promise<void> {
-    try {
-        const fileName = path.basename(filePath);
+    const fileName = path.basename(filePath);
+    await commitAndPushFile(filePath, `Add new blog post: ${fileName}`);
+}
 
+export async function commitAndPushFile(filePath: string, message: string): Promise<void> {
+    try {
         await execAsync(`git add "${filePath}"`);
-        await execAsync(`git commit -m "Add new blog post: ${fileName}"`);
+        await execAsync(`git commit -m "${message}"`);
 
         await retry(async () => {
             try {

@@ -9,7 +9,8 @@
     "lint": "next lint",
     "postinstall": "cp -r node_modules/@xenova/transformers/dist/ort-wasm.wasm public/",
     "server": "ts-node --project src/server/tsconfig.json src/server/index.ts",
-    "watch-blog": "ts-node src/server/blogWatcher.ts"
+    "watch-blog": "ts-node --project src/server/tsconfig.json src/server/watchBlog.ts",
+    "publish-post": "ts-node --project src/server/tsconfig.json src/server/publishCli.ts"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.0.1",

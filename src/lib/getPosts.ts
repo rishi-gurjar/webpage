@@ -20,6 +20,7 @@ export async function getPosts() {
       
       const fileContents = await fs.readFile(filePath, 'utf8');
       const { data } = matter(fileContents);
+      if (data.private === true) continue;
       posts.push({
         slug: generateSlug(data.title),
         title: data.title,

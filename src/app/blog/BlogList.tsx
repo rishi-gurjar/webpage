@@ -10,13 +10,15 @@ interface Post {
   date: string;
   formattedDate: string;
   headerImage?: string;
+  isPrivate?: boolean;
 }
 
 interface BlogListProps {
   posts: Post[];
+  unlocked?: boolean;
 }
 
-export function BlogList({ posts }: BlogListProps) {
+export function BlogList({ posts, unlocked }: BlogListProps) {
   const [hoveredPost, setHoveredPost] = useState<string | null>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isLargeScreen, setIsLargeScreen] = useState(false);
@@ -57,16 +59,22 @@ export function BlogList({ posts }: BlogListProps) {
   return (
     <>
       <ul>
-        {posts.map((post) => (
-          <li key={post.slug}>
+        {posts.map((post, i) => (
+          <li
+            key={post.slug}
+            className={post.isPrivate ? 'private-post-enter ml-6' : undefined}
+            style={post.isPrivate ? { animationDelay: `${400 + i * 90}ms` } : undefined}
+          >
             <Link 
-              href={`/blog/${post.slug}`}
+              href={post.isPrivate ? `/blog/private/${post.slug}` : `/blog/${post.slug}`}
               onMouseEnter={() => handleMouseEnter(post.slug)}
               onMouseLeave={handleMouseLeave}
               className="block"
             >
-              <h2 className="font-['Young_Serif'] font-light text-gray-500 hover:text-black">{post.title}</h2>
-              <p className="text-gray-500 text-sm">{post.formattedDate}</p>
+              <h2 className={`font-['Young_Serif'] font-light ${
+                unlocked ? 'text-white/90 hover:text-white' : 'text-gray-500 hover:text-black'
+              }`}>{post.title}</h2>
+              <p className={`${unlocked ? 'text-white/70' : 'text-gray-500'} text-sm`}>{post.formattedDate}</p>
               <br />
             </Link>
           </li>

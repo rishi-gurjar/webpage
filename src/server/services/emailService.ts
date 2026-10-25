@@ -4,7 +4,7 @@ import matter from 'gray-matter';
 import fs from 'fs';
 import path from 'path';
 import { generateEmailMessage } from './llmService';
-import { askForConfirmation } from '../watchers/blogWatcher';
+import { askForConfirmation } from './publishPost';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 

@@ -222,3 +222,33 @@
     font-family: 'Jacquard 24', serif !important;
   }
 }
+/* Unlocked (private) mode: everything on the red page reads white */
+.blog-unlocked,
+.blog-unlocked .text-gray-500,
+.blog-unlocked .text-blue-300,
+.blog-unlocked a {
+  color: #fff;
+}
+.blog-unlocked a:hover {
+  color: #fff;
+}
+/* keep the email input readable — white text on white field is invisible */
+.blog-unlocked input.text-gray-500 {
+  color: rgb(107 114 128);
+}
+.blog-unlocked .blog-content {
+  color: #fff;
+}
+.blog-unlocked .blog-content code {
+  color: rgb(55 65 81);
+}
+
+/* private posts pop in, staggered, after the bg has turned red */
+@keyframes blog-private-pop {
+  0%   { opacity: 0; transform: scale(.92) translateY(6px); }
+  60%  { opacity: 1; transform: scale(1.02) translateY(-1px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+.private-post-enter {
+  animation: blog-private-pop .5s cubic-bezier(.2,.8,.3,1.2) both;
+}

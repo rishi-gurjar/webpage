@@ -13,13 +13,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
         const filePath = path.join(blogDir, filename)
         const fileContents = fs.readFileSync(filePath, 'utf8')
         const { data } = matter(fileContents)
+        if (data.private === true) return null
         return {
             url: `https://rishigurjar.com/blog/${generateSlug(data.title)}`,
             lastModified: new Date(data.date),
             changeFrequency: 'monthly' as const,
             priority: 0.8
         }
-    })
+    }).filter((p): p is NonNullable<typeof p> => p !== null)
 
     // Add other important pages
     const pages = [

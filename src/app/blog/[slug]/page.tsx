@@ -182,6 +182,7 @@ async function getPost(slug: string): Promise<BlogPost | null> {
     const fileContents = fs.readFileSync(filePath, 'utf8');
     const { data, content } = matter(fileContents);
 
+    if (data.private === true) continue;
     if (generateSlug(data.title) === slug) {
       return {
         slug,
@@ -211,10 +212,12 @@ export async function generateStaticParams() {
       const filePath = path.join(blogDir, filename);
       const fileContents = fs.readFileSync(filePath, 'utf8');
       const { data } = matter(fileContents);
+      if (data.private === true) return null;
       return {
         slug: generateSlug(data.title),
       };
-    });
+    })
+    .filter((p): p is { slug: string } => p !== null);
 }
 
 // Add this function to process image paths before markdown processing
@@ -242,6 +245,8 @@ export default async function BlogPost({ params }: Props) {
       const fileContents = fs.readFileSync(filePath, 'utf8');
       const { data, content } = matter(fileContents);
 
+      if (data.private === true) return null;
+
       // Updated content cleaning to better handle markdown links
       const clean_content = content
         .replace(/\\\n/g, '\n\n')
@@ -262,6 +267,7 @@ export default async function BlogPost({ params }: Props) {
         imageLink: data.imageLink,
       };
     })
+    .filter((p): p is NonNullable<typeof p> => p !== null)
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   // Find the current post index

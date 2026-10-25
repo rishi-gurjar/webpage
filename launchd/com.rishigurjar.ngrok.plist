@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.rishigurjar.ngrok</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/zsh</string>
+        <string>-lc</string>
+        <string>exec /Users/rishigurjar/.nvm/versions/node/v21.7.0/bin/ngrok http --url=capital-seriously-ghoul.ngrok-free.app --config /Users/rishigurjar/.ngrok2/ngrok.yml 3000</string>
+    </array>
+    <key>WorkingDirectory</key>
+    <string>/Users/rishigurjar/Documents/GitHub/webpage</string>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+    <key>ThrottleInterval</key>
+    <integer>10</integer>
+    <key>StandardOutPath</key>
+    <string>/Users/rishigurjar/Library/Logs/ngrok.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/rishigurjar/Library/Logs/ngrok.err.log</string>
+</dict>
+</plist>

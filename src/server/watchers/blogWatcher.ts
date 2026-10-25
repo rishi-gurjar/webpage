@@ -1,11 +1,19 @@
 import chokidar from 'chokidar';
 import { BLOG_DIR } from '../config';
-import { commitAndPushToGit, commitImageFile } from '../services/gitService';
-import { sendEmails } from '../services/emailService';
+import {
+    runPublishFlow,
+    runPrivateFlow,
+    askForConfirmation,
+    ensureGitignored,
+    isGitTracked,
+    isIgnoredByGit,
+    hasUncommittedGitignore,
+} from '../services/publishPost';
+import { commitAndPushToGit } from '../services/gitService';
+import { exec } from 'child_process';
 import matter from 'gray-matter';
 import path from 'path';
 import fs from 'fs';
-import readline from 'readline';
 
 // Removed previous quotes tracking - now we detect quotes ready for metadata by the trailing "|"
 
@@ -22,7 +30,7 @@ function parseQuotes(filePath: string): Quote[] {
     try {
         const fileContents = fs.readFileSync(filePath, 'utf8');
         const quotes: Quote[] = [];
-        
+
         fileContents
             .split('\n')
             .filter(line => line.trim() && line.includes('|'))
@@ -37,7 +45,7 @@ function parseQuotes(filePath: string): Quote[] {
                     });
                 }
             });
-            
+
         return quotes;
     } catch (error) {
         console.error('Error reading quotes file:', error);
@@ -50,12 +58,12 @@ const QUOTE_READY_RE = /^\s*([^|]+)\|([^|]+)\|([^|]+)\|\s*$/;
 async function processQuotesNeedingMetadata(filePath: string, lineIndices: number[]): Promise<Quote[]> {
     try {
         const timestamp = new Date().toISOString();
-        
+
         const fileContents = fs.readFileSync(filePath, 'utf8');
         const lines = fileContents.split('\n');
-        
+
         const processedQuotes: Quote[] = [];
-        
+
         // Update only the specific lines we detected as ready using a robust regex
         const updatedLines = lines.map((line, idx) => {
             if (!lineIndices.includes(idx)) return line;
@@ -68,10 +76,10 @@ async function processQuotesNeedingMetadata(filePath: string, lineIndices: numbe
             processedQuotes.push({ text, author, source, timestamp });
             return updatedLine;
         });
-        
+
         fs.writeFileSync(filePath, updatedLines.join('\n'));
         console.log('✓ Added timestamp metadata to quotes');
-        
+
         return processedQuotes;
     } catch (error) {
         console.error('Error processing quotes metadata:', error);
@@ -111,21 +119,6 @@ function displayQuote(quote: Quote): void {
     console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
 }
 
-// Create readline interface
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-
-export async function askForConfirmation(message: string, allowReprompt: boolean = false): Promise<string> {
-    return new Promise((resolve) => {
-        const options = allowReprompt ? '(y/n/r)' : '(y/n)';
-        rl.question(`${message} ${options}: `, (answer) => {
-            resolve(answer.toLowerCase());
-        });
-    });
-}
-
 function hasTodaysDate(filePath: string): boolean {
     const fileContent = fs.readFileSync(filePath, 'utf-8');
     const { data } = matter(fileContent);
@@ -141,65 +134,36 @@ function hasTodaysDate(filePath: string): boolean {
     return postDate.getTime() === today.getTime();
 }
 
-function findMatchingImage(headerImage: string, publicDir: string): string | null {
-    const imageName = path.basename(headerImage.startsWith('/') ? headerImage.slice(1) : headerImage);
-    const imageNameWithoutExt = path.parse(imageName).name;
-    
-    // Look for any matching image with common extensions
-    const extensions = ['.png', '.jpg', '.jpeg', '.gif'];
-    for (const ext of extensions) {
-        const possiblePath = path.join(publicDir, `${imageNameWithoutExt}${ext}`);
-        if (fs.existsSync(possiblePath)) {
-            return possiblePath;
-        }
-    }
-    return null;
+function repoRel(p: string): string {
+    return path.relative(process.cwd(), p).split(path.sep).join('/');
 }
 
-async function updateHeaderImagesInPage(imagePath: string) {
-    const pageFilePath = path.join(process.cwd(), 'src/app/blog/[slug]/page.tsx');
-    let content = fs.readFileSync(pageFilePath, 'utf8');
-    
-    const imageName = path.basename(imagePath);
-    const imageNameWithoutExt = path.parse(imageName).name;
-    
-    // Check if image is already in the imports or headerImages
-    if (content.includes(`/${imageName}'`)) {
-        console.log('✓ Image already registered in page.tsx');
-        return;
-    }
-
-    try {
-        // Find the last image import
-        const lastImportIndex = content.lastIndexOf("import") 
-        const importEndIndex = content.indexOf('\n', lastImportIndex);
-        
-        // Add new import
-        const newImport = `import ${imageNameWithoutExt}Img from '/public/${imageName}';\n`;
-        content = content.slice(0, importEndIndex + 1) + newImport + content.slice(importEndIndex + 1);
-
-        // Find headerImages object
-        const headerImagesStart = content.indexOf('const headerImages');
-        const headerImagesEnd = content.indexOf('};', headerImagesStart);
-        
-        // Add new entry to headerImages
-        const newEntry = `  '/${imageName}': ${imageNameWithoutExt}Img,\n`;
-        content = content.slice(0, headerImagesEnd) + newEntry + content.slice(headerImagesEnd);
-
-        // Write changes back to file
-        fs.writeFileSync(pageFilePath, content);
-        console.log('✓ Added image to page.tsx imports and headerImages');
-    } catch (error) {
-        console.error('Error updating page.tsx:', error);
-    }
+// Open a real Terminal window running the interactive flow — used when the
+// server runs headless as a LaunchAgent and has no TTY for prompts.
+function popTerminal(filePath: string, isPrivate: boolean) {
+    const repo = process.cwd();
+    const escaped = filePath.replace(/'/g, "'\\''");
+    const flag = isPrivate ? '--private ' : '';
+    const cmd = `cd ${repo} && npm run publish-post -- ${flag}'${escaped}'`;
+    const script =
+        `osascript -e 'tell application "Terminal" to do script "${cmd.replace(/"/g, '\\"')}"' ` +
+        `-e 'tell application "Terminal" to activate'`;
+    exec(script, (err) => {
+        if (err) {
+            console.error('Failed to open Terminal for publish prompt:', err);
+            console.log(`To run manually: npm run publish-post -- ${flag}"${filePath}"`);
+        } else {
+            console.log(`Opened Terminal publish prompt for ${path.basename(filePath)}`);
+        }
+    });
 }
 
 export function setupBlogWatcher() {
     const publicDir = path.join(process.cwd(), 'public');
     const quotesFile = path.join(process.cwd(), 'src/quote-wall/quotes.md');
-    
+
     // Quotes watcher will detect quotes ending with "|" for metadata processing
-    
+
     const watcher = chokidar.watch([BLOG_DIR, publicDir, quotesFile], {
         ignored: /(^|[\/\\])\../,
         persistent: true,
@@ -210,74 +174,74 @@ export function setupBlogWatcher() {
     });
 
     watcher.on('add', async (filePath: string) => {
-        // Handle markdown files
-        if (path.extname(filePath) === '.md' && hasTodaysDate(filePath)) {
-            console.log('New blog post detected:', path.basename(filePath));
-            
-            // Check for matching header image
-            const fileContent = fs.readFileSync(filePath, 'utf8');
-            const { data } = matter(fileContent);
-            
-            let matchingImagePath: string | null = null;
-            
-            if (data.headerImage) {
-                matchingImagePath = findMatchingImage(data.headerImage, publicDir);
-                
-                if (matchingImagePath) {
-                    console.log(`✓ Matching header image found: ${path.basename(matchingImagePath)}`);
-                    await updateHeaderImagesInPage(matchingImagePath);
-                } else {
-                    console.log(`⚠ No matching image found for: ${data.headerImage}`);
-                }
+        // Handle markdown files under blog-content only
+        if (path.extname(filePath) !== '.md' || !filePath.startsWith(BLOG_DIR)) return;
+
+        const { data } = matter(fs.readFileSync(filePath, 'utf8'));
+
+        // Private posts: gitignore immediately (protection first), then only
+        // ask about pushing the .gitignore update — never commit the post, never email.
+        if (data.private === true) {
+            const changed = await ensureGitignored(filePath);
+            console.log(`🔒 Private post detected — gitignored: ${path.basename(filePath)}`);
+            if (process.stdin.isTTY) {
+                await runPrivateFlow(filePath);
+            } else if (changed || await hasUncommittedGitignore()) {
+                popTerminal(filePath, true);
             }
+            return;
+        }
 
-            const shouldProceed = await askForConfirmation(
-                `Do you want to commit and push to main "${path.basename(filePath)}"?`
-            );
+        if (!hasTodaysDate(filePath)) return;
 
-            if (shouldProceed === 'y' || shouldProceed === 'yes') {
-                try {
-                    // If we found a matching image, commit it first
-                    if (matchingImagePath) {
-                        await commitImageFile(matchingImagePath);
-                    }
+        // Daemon restarts re-fire 'add' for existing files — skip already-published posts
+        if (await isGitTracked(repoRel(filePath))) {
+            console.log('Already published, skipping prompt:', path.basename(filePath));
+            return;
+        }
 
-                    // Then commit the blog post
-                    await commitAndPushToGit(filePath);
-                    console.log('Git operations completed successfully');
-
-                } catch (error) {
-                    console.error('Error processing new blog post:', error);
-                }
-                const shouldProceed2 = await askForConfirmation(
-                    `Do you want to generate the email "${path.basename(filePath)}"?`
-                );
-
-                if (shouldProceed2 === 'y') {
-                    await sendEmails(filePath);
-                }
-            } else {
-                console.log('Blog post processing cancelled');
-            }
+        if (process.stdin.isTTY) {
+            await runPublishFlow(filePath);
+        } else {
+            popTerminal(filePath, false);
         }
     });
 
     watcher.on('change', async (filePath: string) => {
+        // A blog post gaining/losing the private flag after creation
+        if (path.extname(filePath) === '.md' && filePath.startsWith(BLOG_DIR)) {
+            const { data } = matter(fs.readFileSync(filePath, 'utf8'));
+            if (data.private === true) {
+                const changed = await ensureGitignored(filePath);
+                console.log(`🔒 ${path.basename(filePath)} marked private — gitignored`);
+                if (changed) {
+                    if (process.stdin.isTTY) {
+                        await runPrivateFlow(filePath);
+                    } else {
+                        popTerminal(filePath, true);
+                    }
+                }
+            } else if (await isIgnoredByGit(repoRel(filePath))) {
+                console.log(`⚠ ${path.basename(filePath)} is no longer private — remove it from .gitignore to publish`);
+            }
+            return;
+        }
+
         // Handle changes to quotes.md
         if (path.basename(filePath) === 'quotes.md') {
             console.log('Quotes file changed:', path.basename(filePath));
-            
+
             const quotesNeedingMetadata = findQuotesNeedingMetadata(filePath);
-            
+
             if (quotesNeedingMetadata.length > 0) {
                 console.log(`Found ${quotesNeedingMetadata.length} quote(s) ready for metadata...`);
-                
+
                 // Process quotes that end with "|" and add metadata
                 const processedQuotes = await processQuotesNeedingMetadata(filePath, quotesNeedingMetadata);
-                
+
                 for (const processedQuote of processedQuotes) {
                     displayQuote(processedQuote);
-                    
+
                     const shouldProceed = await askForConfirmation(
                         `Do you want to commit and push this quote to git?`
                     );

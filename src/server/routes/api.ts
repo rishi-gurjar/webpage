@@ -6,6 +6,9 @@ import { fetchIpInfo } from '../services/ipInfoService';
 import { createClient } from '@supabase/supabase-js';
 import { getBooksCached } from '../services/goodreadsService';
 import { getDailyFriend } from '../services/friendsService';
+import { getPrivatePostsMeta, getPrivatePost } from '../services/privatePostsService';
+import path from 'path';
+import fs from 'fs';
 const router = express.Router();
 const supabaseUrl = process.env.SUPA_URL
 const supabaseKey = process.env.SUPA_KEY;
@@ -217,6 +220,50 @@ router.get('/nudge/user-data', async (req: any, res: any) => {
             details: error instanceof Error ? error.message : String(error)
         });
     }
+});
+
+// Private posts (frontmatter `private: true`) — served only from this local machine
+router.get('/private-posts', (_req, res) => {
+    try {
+        const posts = getPrivatePostsMeta();
+        console.log(`/api/private-posts served: ${posts.length}`);
+        res.json(posts);
+    } catch (e) {
+        console.error('Error fetching private posts:', e);
+        res.status(500).json({ error: 'Failed to fetch private posts' });
+    }
+});
+
+router.get('/private-posts/:slug', (req, res) => {
+    try {
+        const post = getPrivatePost(req.params.slug);
+        if (!post) {
+            res.status(404).json({ error: 'Not found' });
+            return;
+        }
+        console.log(`/api/private-posts/${req.params.slug} served`);
+        res.json(post);
+    } catch (e) {
+        console.error('Error fetching private post:', e);
+        res.status(500).json({ error: 'Failed to fetch private post' });
+    }
+});
+
+// Images referenced by private posts — files live under public/ but are gitignored
+router.get('/private-image', (req, res) => {
+    const p = typeof req.query.p === 'string' ? req.query.p : '';
+    const publicDir = path.join(process.cwd(), 'public');
+    const resolved = path.resolve(publicDir, decodeURIComponent(p).replace(/^\/+/, ''));
+
+    if (!resolved.startsWith(publicDir + path.sep)) {
+        res.status(400).json({ error: 'Invalid path' });
+        return;
+    }
+    if (!fs.existsSync(resolved) || !fs.statSync(resolved).isFile()) {
+        res.status(404).json({ error: 'Not found' });
+        return;
+    }
+    res.sendFile(resolved);
 });
 
 export default router; 
