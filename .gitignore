@@ -52,3 +52,5 @@ blog-purgatory
 models
 # Private blog posts
 src/blog-content/999.md
+public/secret-test.png
+public/blog-images/secret-inline.png
