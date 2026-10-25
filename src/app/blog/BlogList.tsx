@@ -66,7 +66,7 @@ export function BlogList({ posts, unlocked }: BlogListProps) {
             style={post.isPrivate ? { animationDelay: `${400 + i * 90}ms` } : undefined}
           >
             <Link 
-              href={post.isPrivate ? `/blog/private/${post.slug}` : `/blog/${post.slug}`}
+              href={post.isPrivate ? `/blog/private#${post.slug}` : `/blog/${post.slug}`}
               onMouseEnter={() => handleMouseEnter(post.slug)}
               onMouseLeave={handleMouseLeave}
               className="block"

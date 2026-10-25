@@ -7,7 +7,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { API_URL } from '@/lib/api';
 import { formatBlogDate } from '@/lib/dateUtils';
-import { PageTracker } from '../../PageTracker';
+import { PageTracker } from '../PageTracker';
 
 interface PrivatePostData {
   slug: string;
@@ -62,12 +62,20 @@ function PrivateImg({ src, alt, className }: { src?: string; alt?: string; class
   return <img src={url} alt={alt || ''} className={className} />;
 }
 
-export function PrivatePost({ slug }: { slug: string }) {
+// Slug comes from the URL hash (/blog/private#my-post) — the site is statically
+// exported so dynamic routes don't exist; the hash never reaches the server.
+export function PrivatePost() {
   const router = useRouter();
+  const [slug, setSlug] = useState<string | null>(null);
   const [post, setPost] = useState<PrivatePostData | null>(null);
   const [failed, setFailed] = useState(false);
 
   useEffect(() => {
+    setSlug(decodeURIComponent(window.location.hash.slice(1)));
+  }, []);
+
+  useEffect(() => {
+    if (!slug) return;
     if (!sessionStorage.getItem('blog_private_unlocked')) {
       router.replace('/blog');
       return;
@@ -85,7 +93,7 @@ export function PrivatePost({ slug }: { slug: string }) {
 
   return (
     <div className="min-h-screen bg-white">
-      <PageTracker path={`/blog/private/${slug}`} />
+      {slug && <PageTracker path={`/blog/private/${slug}`} />}
       <main className="container flex flex-col mt-[60px] lg:mt-[calc(100vh/5.5)] lg:w-[calc(100vw/3)] md:w-[calc(100vw/3)] md:px-0">
         <Link href="/blog" className="self-start mb-4">← Back to blog</Link>
         {failed && <p>Rishi&apos;s computer is off :(</p>}
