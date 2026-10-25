@@ -50,3 +50,5 @@ blog-441622-f450efc783d0.json
 /app/blog-purgatory/**/*
 blog-purgatory
 models
+# Private blog posts
+src/blog-content/999.md
