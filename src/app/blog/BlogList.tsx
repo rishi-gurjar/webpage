@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { PrivateImg } from './PrivateImg';
 
 interface Post {
   slug: string;
@@ -91,13 +92,23 @@ export function BlogList({ posts, unlocked }: BlogListProps) {
           }}
         >
           <div className="bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden">
-            <Image
-              src={hoveredPostData.headerImage}
-              width={400}
-              height={300}
-              alt={hoveredPostData.title}
-              className="object-cover"
-            />
+            {hoveredPostData.isPrivate ? (
+              <div className="w-[400px] h-[300px]">
+                <PrivateImg
+                  src={hoveredPostData.headerImage}
+                  alt={hoveredPostData.title}
+                  className="object-cover w-full h-full"
+                />
+              </div>
+            ) : (
+              <Image
+                src={hoveredPostData.headerImage}
+                width={400}
+                height={300}
+                alt={hoveredPostData.title}
+                className="object-cover"
+              />
+            )}
           </div>
         </div>
       )}

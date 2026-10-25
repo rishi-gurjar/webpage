@@ -8,6 +8,7 @@ import { PageTracker } from './PageTracker';
 import { BlogList } from './BlogList';
 import { API_URL } from '@/lib/api';
 import { formatBlogDate } from '@/lib/dateUtils';
+import { warmPrivatePosts } from '@/lib/privatePosts';
 
 interface Post {
   slug: string;
@@ -41,11 +42,14 @@ export function BlogLanding({ posts }: { posts: Post[] }) {
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data: Post[] = await res.json();
-      setPrivatePosts(data.map(p => ({
+      const mapped = data.map(p => ({
         ...p,
         isPrivate: true,
         formattedDate: formatBlogDate(p.date),
-      })));
+      }));
+      setPrivatePosts(mapped);
+      // background-warm post content + images so they open instantly
+      warmPrivatePosts(mapped);
     } catch {
       setOffline(true);
     }

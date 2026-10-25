@@ -5,62 +5,10 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { API_URL } from '@/lib/api';
 import { formatBlogDate } from '@/lib/dateUtils';
+import { fetchPrivatePost, PrivatePostData } from '@/lib/privatePosts';
+import { PrivateImg } from '../PrivateImg';
 import { PageTracker } from '../PageTracker';
-
-interface PrivatePostData {
-  slug: string;
-  title: string;
-  date: string;
-  headerImage?: string;
-  imageAuthor?: string;
-  imageLink?: string;
-  content: string;
-}
-
-// Local asset paths (/x.png, /blog-images/x.png) are served by the local server
-function toPrivateImageUrl(src: string): string {
-  return `${API_URL}/api/private-image?p=${encodeURIComponent(src.replace(/^\/+/, ''))}`;
-}
-
-// <img> can't send ngrok-skip-browser-warning, so images are fetched as blobs
-// (which bypasses the interstitial) and rendered via object URLs.
-function PrivateImg({ src, alt, className }: { src?: string; alt?: string; className?: string }) {
-  const [url, setUrl] = useState<string | null>(null);
-  const [failed, setFailed] = useState(false);
-
-  useEffect(() => {
-    if (!src) return;
-    if (/^https?:/i.test(src)) {
-      setUrl(src);
-      return;
-    }
-    let objUrl: string | null = null;
-    let cancelled = false;
-    fetch(toPrivateImageUrl(src), {
-      headers: { 'ngrok-skip-browser-warning': 'true' },
-    })
-      .then(res => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return res.blob();
-      })
-      .then(blob => {
-        if (cancelled) return;
-        objUrl = URL.createObjectURL(blob);
-        setUrl(objUrl);
-      })
-      .catch(() => setFailed(true));
-    return () => {
-      cancelled = true;
-      if (objUrl) URL.revokeObjectURL(objUrl);
-    };
-  }, [src]);
-
-  if (failed || !url) return null;
-  // eslint-disable-next-line @next/next/no-img-element
-  return <img src={url} alt={alt || ''} className={className} />;
-}
 
 // Slug comes from the URL hash (/blog/private#my-post) — the site is statically
 // exported so dynamic routes don't exist; the hash never reaches the server.
@@ -80,13 +28,7 @@ export function PrivatePost() {
       router.replace('/blog');
       return;
     }
-    fetch(`${API_URL}/api/private-posts/${slug}`, {
-      headers: { 'ngrok-skip-browser-warning': 'true' },
-    })
-      .then(res => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return res.json();
-      })
+    fetchPrivatePost(slug)
       .then(setPost)
       .catch(() => setFailed(true));
   }, [slug, router]);
