@@ -54,3 +54,6 @@ models
 src/blog-content/999.md
 public/secret-test.png
 public/blog-images/secret-inline.png
+src/blog-content/76.md
+public/syd.jpeg
+public/blog-images/rover.png
