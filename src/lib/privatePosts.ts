@@ -26,6 +26,10 @@ export function fetchPrivatePost(slug: string): Promise<PrivatePostData> {
       .then(res => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json();
+      })
+      .catch(err => {
+        postCache.delete(slug);
+        throw err;
       });
     postCache.set(slug, p);
   }
@@ -44,7 +48,11 @@ export function prefetchImage(src: string): Promise<string> {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.blob();
       })
-      .then(blob => URL.createObjectURL(blob));
+      .then(blob => URL.createObjectURL(blob))
+      .catch(err => {
+        imageCache.delete(key);
+        throw err;
+      });
     imageCache.set(key, p);
   }
   return p;

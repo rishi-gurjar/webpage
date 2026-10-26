@@ -19,7 +19,10 @@ export function PrivatePost() {
   const [failed, setFailed] = useState(false);
 
   useEffect(() => {
-    setSlug(decodeURIComponent(window.location.hash.slice(1)));
+    const read = () => setSlug(decodeURIComponent(window.location.hash.slice(1)));
+    read();
+    window.addEventListener('hashchange', read);
+    return () => window.removeEventListener('hashchange', read);
   }, []);
 
   useEffect(() => {
@@ -28,9 +31,13 @@ export function PrivatePost() {
       router.replace('/blog');
       return;
     }
+    let cancelled = false;
+    setPost(null);
+    setFailed(false);
     fetchPrivatePost(slug)
-      .then(setPost)
-      .catch(() => setFailed(true));
+      .then(p => { if (!cancelled) setPost(p); })
+      .catch(() => { if (!cancelled) setFailed(true); });
+    return () => { cancelled = true; };
   }, [slug, router]);
 
   return (
@@ -39,6 +46,7 @@ export function PrivatePost() {
       <main className="container flex flex-col mt-[60px] lg:mt-[calc(100vh/5.5)] lg:w-[calc(100vw/3)] md:w-[calc(100vw/3)] md:px-0">
         <Link href="/blog" className="self-start mb-4">← Back to blog</Link>
         {failed && <p>Rishi&apos;s computer is off :(</p>}
+        {!post && !failed && slug && <p className="text-gray-400">Loading…</p>}
         {post && (
           <>
             {post.headerImage && (
