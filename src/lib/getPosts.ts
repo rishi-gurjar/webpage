@@ -1,7 +1,7 @@
 import fs from 'fs/promises';
 import path from 'path';
 import matter from 'gray-matter';
-import { generateSlug } from './blog';
+import { generateSlug, isPrivatePost } from './blog';
 import { formatBlogDate } from './dateUtils';
 
 export async function getPosts() {
@@ -20,7 +20,7 @@ export async function getPosts() {
       
       const fileContents = await fs.readFile(filePath, 'utf8');
       const { data } = matter(fileContents);
-      if (data.private === true) continue;
+      if (isPrivatePost(data)) continue;
       posts.push({
         slug: generateSlug(data.title),
         title: data.title,

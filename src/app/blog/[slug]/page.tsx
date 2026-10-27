@@ -7,7 +7,7 @@ import remarkGfm from 'remark-gfm';
 import { notFound } from 'next/navigation';
 import './blogPost.css';
 import Link from 'next/link';
-import { generateSlug } from '@/lib/blog';
+import { generateSlug, isPrivatePost } from '@/lib/blog';
 import { PageTracker } from '../PageTracker';
 import Image from 'next/image';
 import privacyImg from '/public/privacy_img.png';
@@ -184,7 +184,7 @@ async function getPost(slug: string): Promise<BlogPost | null> {
     const fileContents = fs.readFileSync(filePath, 'utf8');
     const { data, content } = matter(fileContents);
 
-    if (data.private === true) continue;
+    if (isPrivatePost(data)) continue;
     if (generateSlug(data.title) === slug) {
       return {
         slug,
@@ -214,7 +214,7 @@ export async function generateStaticParams() {
       const filePath = path.join(blogDir, filename);
       const fileContents = fs.readFileSync(filePath, 'utf8');
       const { data } = matter(fileContents);
-      if (data.private === true) return null;
+      if (isPrivatePost(data)) return null;
       return {
         slug: generateSlug(data.title),
       };
@@ -247,7 +247,7 @@ export default async function BlogPost({ params }: Props) {
       const fileContents = fs.readFileSync(filePath, 'utf8');
       const { data, content } = matter(fileContents);
 
-      if (data.private === true) return null;
+      if (isPrivatePost(data)) return null;
 
       // Updated content cleaning to better handle markdown links
       const clean_content = content

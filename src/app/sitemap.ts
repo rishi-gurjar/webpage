@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
-import { generateSlug } from '@/lib/blog'
+import { generateSlug, isPrivatePost } from '@/lib/blog'
 
 export default function sitemap(): MetadataRoute.Sitemap {
     // Get all blog posts
@@ -13,7 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         const filePath = path.join(blogDir, filename)
         const fileContents = fs.readFileSync(filePath, 'utf8')
         const { data } = matter(fileContents)
-        if (data.private === true) return null
+        if (isPrivatePost(data)) return null
         return {
             url: `https://rishigurjar.com/blog/${generateSlug(data.title)}`,
             lastModified: new Date(data.date),

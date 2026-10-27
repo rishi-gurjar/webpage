@@ -7,4 +7,10 @@ export function generateSlug(title: string): string {
     .replace(/-+/g, '-')           // Replace multiple hyphens with single hyphen
     .trim()                        // Remove leading/trailing spaces
     .replace(/^-+|-+$/g, '');      // Remove leading/trailing hyphens
-} 
+}
+
+// Accepts boolean `true` and string forms ("true", "True") — YAML parses
+// unquoted `private: true` as a boolean, quoted values arrive as strings.
+export function isPrivatePost(data: { [key: string]: any }): boolean {
+  return String(data.private).toLowerCase() === 'true';
+}

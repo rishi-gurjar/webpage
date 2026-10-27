@@ -38,7 +38,7 @@ function listPrivateFiles(): string[] {
         try {
             if (!fs.statSync(filePath).isFile()) return false;
             const { data } = matter(fs.readFileSync(filePath, 'utf8'));
-            return data.private === true;
+            return String(data.private).toLowerCase() === 'true';
         } catch {
             return false;
         }

@@ -181,7 +181,7 @@ export function setupBlogWatcher() {
 
         // Private posts: gitignore immediately (protection first), then only
         // ask about pushing the .gitignore update — never commit the post, never email.
-        if (data.private === true) {
+        if (String(data.private).toLowerCase() === 'true') {
             const changed = await ensureGitignored(filePath);
             console.log(`🔒 Private post detected — gitignored: ${path.basename(filePath)}`);
             if (process.stdin.isTTY) {
@@ -211,7 +211,7 @@ export function setupBlogWatcher() {
         // A blog post gaining/losing the private flag after creation
         if (path.extname(filePath) === '.md' && filePath.startsWith(BLOG_DIR)) {
             const { data } = matter(fs.readFileSync(filePath, 'utf8'));
-            if (data.private === true) {
+            if (String(data.private).toLowerCase() === 'true') {
                 const changed = await ensureGitignored(filePath);
                 console.log(`🔒 ${path.basename(filePath)} marked private — gitignored`);
                 if (changed) {
