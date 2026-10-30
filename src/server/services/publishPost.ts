@@ -1,4 +1,5 @@
 import fs from 'fs';
+import os from 'os';
 import path from 'path';
 import matter from 'gray-matter';
 import readline from 'readline';
@@ -227,6 +228,65 @@ export async function hasUncommittedGitignore(): Promise<boolean> {
     }
 }
 
+// Backup: copy the post + its un-committed (private) images into a local clone
+// of the `privateblogs` repo and push — private posts never enter the public
+// repo, so this keeps them safe.
+const PRIVATEBLOGS_DIR = process.env.PRIVATEBLOGS_DIR
+    || path.join(os.homedir(), 'Documents/GitHub/privateblogs');
+const PRIVATEBLOGS_REPO = 'rishi-gurjar/privateblogs';
+
+export async function backupPrivatePost(mdFilePath: string): Promise<void> {
+    if (!fs.existsSync(path.join(PRIVATEBLOGS_DIR, '.git'))) {
+        console.log(`Cloning ${PRIVATEBLOGS_REPO} into ${PRIVATEBLOGS_DIR}…`);
+        try {
+            await execAsync(`gh repo clone ${PRIVATEBLOGS_REPO} "${PRIVATEBLOGS_DIR}"`);
+        } catch (e) {
+            console.error('Could not clone privateblogs (set PRIVATEBLOGS_DIR to a local clone):', e);
+            return;
+        }
+    }
+
+    const copies: string[] = [path.basename(mdFilePath)];
+    fs.copyFileSync(mdFilePath, path.join(PRIVATEBLOGS_DIR, path.basename(mdFilePath)));
+
+    // Referenced images get copied only if not committed to the public repo —
+    // tracked images are already backed up there.
+    const { data, content } = matter(fs.readFileSync(mdFilePath, 'utf8'));
+    const publicDir = path.join(process.cwd(), 'public');
+    const refs: string[] = [];
+    if (typeof data.headerImage === 'string') refs.push(data.headerImage);
+    const imgRe = /!\[[^\]]*\]\((\/[^)\s]+)\)/g;
+    let m: RegExpExecArray | null;
+    while ((m = imgRe.exec(content)) !== null) refs.push(m[1]);
+    for (const ref of refs) {
+        const rel = ref.replace(/^\/+/, '');
+        for (const cand of [path.join(publicDir, rel), path.join(publicDir, 'blog-images', rel)]) {
+            if (!fs.existsSync(cand)) continue;
+            const candRel = repoRel(cand);
+            if (await isGitTracked(candRel)) break;
+            const dest = path.join(PRIVATEBLOGS_DIR, candRel);
+            fs.mkdirSync(path.dirname(dest), { recursive: true });
+            fs.copyFileSync(cand, dest);
+            copies.push(candRel);
+            break;
+        }
+    }
+
+    try {
+        await execAsync(`git -C "${PRIVATEBLOGS_DIR}" add -A`);
+        const { stdout: status } = await execAsync(`git -C "${PRIVATEBLOGS_DIR}" status --porcelain`);
+        if (!status.trim()) {
+            console.log('privateblogs already up to date');
+            return;
+        }
+        await execAsync(`git -C "${PRIVATEBLOGS_DIR}" commit -m "Back up ${path.basename(mdFilePath)}"`);
+        await execAsync(`git -C "${PRIVATEBLOGS_DIR}" push`);
+        console.log(`✓ Backed up to privateblogs: ${copies.join(', ')}`);
+    } catch (e) {
+        console.error('Backup to privateblogs failed:', e);
+    }
+}
+
 // Private flow: post is already gitignored — only ask whether to push that
 // update. No commit of the post, no email.
 export async function runPrivateFlow(filePath: string): Promise<void> {
@@ -251,5 +311,12 @@ export async function runPrivateFlow(filePath: string): Promise<void> {
         }
     } else {
         console.log('Skipped — .gitignore changes remain uncommitted');
+    }
+
+    const shouldBackup = await askForConfirmation(
+        `Back up "${path.basename(filePath)}" to privateblogs?`
+    );
+    if (shouldBackup === 'y' || shouldBackup === 'yes') {
+        await backupPrivatePost(filePath);
     }
 }

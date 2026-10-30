@@ -7,6 +7,7 @@ const nextConfig = {
   env: {
     NEXT_PUBLIC_API_URL: 'https://capital-seriously-ghoul.ngrok-free.app',
   },
+  // images: { unoptimized: true },
 };
 
 export default nextConfig;

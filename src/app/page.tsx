@@ -154,14 +154,14 @@ export default function Home() {
               >
                 <h4>Linkedin</h4>
               </a>
-              <a
+{/*              <a
                 className="hover:text-blue-500 text-gray-500 text-sm"
                 href="https://x.com/rishi__gurjar"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <h4>Twitter</h4>
-              </a>
+              </a>*/}
               <a
                 className="hover:text-blue-500 text-gray-500 text-sm"
                 href="https://github.com/rishi-gurjar"
@@ -171,20 +171,12 @@ export default function Home() {
                 <h4>GitHub</h4>
               </a>
               <a
-                className="hover:text-green-500 text-gray-500 text-sm"
-                href="https://armada.build/"
+                className="hover:text-blue-500 text-gray-500 text-sm"
+                href="https://www.goodreads.com/user/show/143258693-rishi-gurjar"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <h4>Armada</h4>
-              </a>
-              <a
-                className="hover:text-green-500 text-gray-500 text-sm"
-                href="https://beyondterra.org"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <h4>Beyond Terra</h4>
+                <h4>Goodreads</h4>
               </a>
               {/* <a className="hover:text-blue-500 text-gray-500 text-sm" href="https://unsplash.com/@rishigurjar/" target="_blank" rel="noopener noreferrer"><h4>Unsplash</h4></a> */}
               {/* <a className="hover:text-blue-500 text-gray-500 text-sm" href="https://www.goodreads.com/user/show/143258693-rishi-gurjar" target="_blank" rel="noopener noreferrer"><h4>Goodreads</h4></a> */}
